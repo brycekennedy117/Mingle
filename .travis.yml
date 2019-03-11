@@ -8,6 +8,7 @@ branches:
     - master
 
 script:
+  - cd match-making/
   - php artisan -serve
 
 notifications:
