@@ -8,7 +8,7 @@ branches:
     - master
 
 script:
-  - php -v
+  - php artisan -serve
 
 notifications:
   email: false
