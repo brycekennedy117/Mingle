@@ -8,7 +8,8 @@ branches:
     - master
 
 script:
-  - php -v
+  - cd match-making/
+  - ./install-composer
 
 notifications:
   email: false
