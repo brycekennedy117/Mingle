@@ -24,3 +24,4 @@ deploy:
   env: e-mqnttunuyj
   on:
     repo: brycekennedy117/PP1-Matchmaking
+  skip_cleanup: true
