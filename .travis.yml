@@ -6,7 +6,6 @@ branches:
   - master
 script:
 - cd match-making/
-- "./install-composer"
 notifications:
   email: false
 env:
@@ -20,8 +19,10 @@ deploy:
   secret_access_key:
     secure: bvtIC2M/MJ35lOGV3cqDXCW0JBvvqmD/Cpy9vjSlpkN6NbbEE5xIskgq29Pjdu0aS1u8/Gg/T7Io8Fw+bELjo3cruvBlACAoRNIJqK8zP4AvhkNc3+wpX77hh1+u8mApxAgUI0tppcZFbBQDZQsOPLjAHE4m/btwnRDjoQSQKsoKHXTU3eKn7N1/q8oDaDU3/YDIcIwhsJmwWHr+5H9wxzoWOCfPAwJqY0oLr/Mq11AMNFQ/nR4vWAQXtMrTz0QaKzRx0MertqAOUoAjOuszxbZhyxfDW+81SD1Ww1aJIixqcGHCX7b9wGIscj/cAiN2LsXXwGhgF14L3M1a28nfARRY+80sk/dS46ogP80hM9roTZVZyF4d+k874jbdIdb9Jn21pk3D7hxDwMS8jFG5zgr6Ku/7qtmBtXsUJg8HKyTPnL+wI6o+ApXoY6Fuez37W06kkNusyQ3Ys7Z9IsT4OgRQ1AbUXvSoxAVcCw4WkXEMwvungSzeWZHKElenaZfQ3MYl6sPCiTDNidFEpS5r36NpVQvg6rALspvnoDqZSN1GfM92dIUxa/EvHw6/B6ONEteuopBQCo6Azr+AiciknoJ79zuFCG9nLNwETqmfbuDw++LBA+9+IjeXrBjimFTWM1vai2B6OKY0MqiXu8iSN9I82FWdRNCrInwe/q9itW4=
   region: us-east-1
-  app: Mingle
-  env: e-mqnttunuyj
+  app: Mingle 2019
+  env: e-ejbxzmxt6g
   on:
     repo: brycekennedy117/PP1-Matchmaking
   skip_cleanup: true
+  bucket_name:
+  bucket_path:
