@@ -21,7 +21,7 @@ deploy:
   access_key_id: AKIAI7EF2HVYMWALYQAQ
   secret_access_key:
     secure: EmEKQ30VHeBuhe9qIFvKsMSAq2lZQqDmUfyjsgC2+RX4swHMRf0w6BJK+78kBGFOPgGr5T4zeeUAq/ge4R5jwPaou+WL2/546vC8Rm94s/VnShrjujqV8y6+2rOzqviF32qRlbLK3s+uV7XfCVREupVSEw1N4fA+t4YbcrElllUaYMhfc/elml1z/oeDE1luVEYiCJwE9GCO862QJS7Vcxmg9Pr0HgNvHjqpde6itd8Cumnv7mMwrQRPahQjuP/s1GdEmx7gh+K+hRak3Yp/ejDEmCt1hOxyYgsHstf3GOwIAGzLFgVP48lPLwOrRtWou9sKExZcgv9H4Zf99wr+Fyf9kmZbHbydaZUF1HwCJ4rwroa2VA3CIhxL3+uHOjWGo8yfbh0f39+HDjS9csr/q2v3dUfIpo7HeOcxe4c/MBn6+bCmeQS4TrHz962+MXeN2H90ZaIJ51/F40WCcGgSESY/NCt+s18obuMc2WsQbkKWiAxen8lXFK4WqE0DNQkU64R8RZtbK9hd56GHojuLAqWwy+9x84L9lL2AtZKXDZ78xwevmvDVebtn4n/+BPmVl9Q+e7MYgen1U4g33GOZH8Vr6aPNN91q3nDoSq8OBidSmA8GdtObdVACoqy4eUjZSXeGLfy/vLwE3yazrEu2ZmMpX/7y2QQ39qw98HHwcIM=
-  region: us-east-1
+  region: us-east-2
   app: Mingle 2019
   env: e-ejbxzmxt6g
   bucket_name: elasticbeanstalk-us-east-2-112626369674
