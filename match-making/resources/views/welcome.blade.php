@@ -93,6 +93,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                     <div>{{env('DB_HOST', '127.0.0.1')}}</div>
+                    <a href="https://laravel.com/docs">Links Go Here</a>
                 </div>
             </div>
         </div>
