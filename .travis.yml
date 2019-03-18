@@ -5,7 +5,8 @@ branches:
   only:
   - master
 script:
-- cd match-making/
+  - ls
+  - cd match-making/
 notifications:
   email: false
 env:
@@ -15,14 +16,12 @@ env:
   - secure: zjF9qjBZrQESH0DJrKOfehVn4qZ5wOpXw6Xm4bdaWDu2QGlv0tFSVkMZuX6Zjsnz7O1TI9F7LJNQMCQj3+Uoff10vlI6Q+WH8M5mivukW48gNhoGuW21NfxNfAHj7zNQXVPqeOGHrnPpp7MEWqqKC/PAhKTh897/h6YBO1OTGfifqD8k7CB9cS6q1e4+I/TNgpMRrXE2Ih6W/0rOtIjDyAkAoSeF+Y/lQvCVZmH7bEpe5KWi4jyP9IFFFynKL3TaCTg0nIU9Ty9+HHVDpckjwKQJLIkzuhuLFu1ysmdLk8Kw/TNBl5oU56kpEtkl7uGGG02QhzAcmmt+wfiaJc+HV7UMPrwhXE9EcneWUb49wQHN+DfyHsxhiYyYp0bqXIhWrjI+EkWTBLRZkLAUHNI4q+jK7Ej5YC28NUXkJfGtWJ/pbsxGGC/kgQi+mAsqXo9U5bIMUU7hCRbbmavE+LaWg0f+TsgEyqyaVATMMv1NQdzco3q5Ba5LAyr/bSwZIS0zcmszXdp2WDq9I/PAudvNy5b4LKm2N4EJhiqHFnJrfmhBolOEGtzcK2UFHy26ESPaMZpYeFOQnzsGcUFdzjn9zZxxXsvhOc43EvZkYHc73Ps3Hyz3ZHlheXCMabwmizuTLyaNj9pSEU7tVheq4MhrNoWAQ9TlVkVIWWOzhdgFhkY=
 deploy:
   provider: elasticbeanstalk
-  access_key_id: AKIAIVX3OZEQTQR5XRVQ
+  access_key_id: AKIAI7EF2HVYMWALYQAQ
   secret_access_key:
-    secure: bvtIC2M/MJ35lOGV3cqDXCW0JBvvqmD/Cpy9vjSlpkN6NbbEE5xIskgq29Pjdu0aS1u8/Gg/T7Io8Fw+bELjo3cruvBlACAoRNIJqK8zP4AvhkNc3+wpX77hh1+u8mApxAgUI0tppcZFbBQDZQsOPLjAHE4m/btwnRDjoQSQKsoKHXTU3eKn7N1/q8oDaDU3/YDIcIwhsJmwWHr+5H9wxzoWOCfPAwJqY0oLr/Mq11AMNFQ/nR4vWAQXtMrTz0QaKzRx0MertqAOUoAjOuszxbZhyxfDW+81SD1Ww1aJIixqcGHCX7b9wGIscj/cAiN2LsXXwGhgF14L3M1a28nfARRY+80sk/dS46ogP80hM9roTZVZyF4d+k874jbdIdb9Jn21pk3D7hxDwMS8jFG5zgr6Ku/7qtmBtXsUJg8HKyTPnL+wI6o+ApXoY6Fuez37W06kkNusyQ3Ys7Z9IsT4OgRQ1AbUXvSoxAVcCw4WkXEMwvungSzeWZHKElenaZfQ3MYl6sPCiTDNidFEpS5r36NpVQvg6rALspvnoDqZSN1GfM92dIUxa/EvHw6/B6ONEteuopBQCo6Azr+AiciknoJ79zuFCG9nLNwETqmfbuDw++LBA+9+IjeXrBjimFTWM1vai2B6OKY0MqiXu8iSN9I82FWdRNCrInwe/q9itW4=
+    secure: EmEKQ30VHeBuhe9qIFvKsMSAq2lZQqDmUfyjsgC2+RX4swHMRf0w6BJK+78kBGFOPgGr5T4zeeUAq/ge4R5jwPaou+WL2/546vC8Rm94s/VnShrjujqV8y6+2rOzqviF32qRlbLK3s+uV7XfCVREupVSEw1N4fA+t4YbcrElllUaYMhfc/elml1z/oeDE1luVEYiCJwE9GCO862QJS7Vcxmg9Pr0HgNvHjqpde6itd8Cumnv7mMwrQRPahQjuP/s1GdEmx7gh+K+hRak3Yp/ejDEmCt1hOxyYgsHstf3GOwIAGzLFgVP48lPLwOrRtWou9sKExZcgv9H4Zf99wr+Fyf9kmZbHbydaZUF1HwCJ4rwroa2VA3CIhxL3+uHOjWGo8yfbh0f39+HDjS9csr/q2v3dUfIpo7HeOcxe4c/MBn6+bCmeQS4TrHz962+MXeN2H90ZaIJ51/F40WCcGgSESY/NCt+s18obuMc2WsQbkKWiAxen8lXFK4WqE0DNQkU64R8RZtbK9hd56GHojuLAqWwy+9x84L9lL2AtZKXDZ78xwevmvDVebtn4n/+BPmVl9Q+e7MYgen1U4g33GOZH8Vr6aPNN91q3nDoSq8OBidSmA8GdtObdVACoqy4eUjZSXeGLfy/vLwE3yazrEu2ZmMpX/7y2QQ39qw98HHwcIM=
   region: us-east-1
   app: Mingle 2019
   env: e-ejbxzmxt6g
   on:
     repo: brycekennedy117/PP1-Matchmaking
   skip_cleanup: true
-  bucket_name:
-  bucket_path:
