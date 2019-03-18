@@ -8,11 +8,12 @@ notifications:
   email: false
 before_script:
   - cd match-making
+  - composer self-update
+  - composer install
   - php composer.phar global require phpunit/phpunit
   - php composer.phar global require phpunit/dbunit
   - export PATH=~/.composer/vendor/bin:$PATH
-  - composer self-update
-  - composer install
+
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
