@@ -26,7 +26,7 @@ deploy:
     secure: xZjxQZxq+OFgg24hDMuQf9sU1BZOiybw5aHHDY3Ki+FXahVj80xnrtyPApR79S77OX53PmlY7A2+H7wf33y4ylh6OtwBoOxt+6fw5sYLcU04JDsYI8EY3ofbMs8YI+QUruhegSVg5fp18M+hVMjESdqyl5LbYwTAGNmsyZrOs0fElOrcBlonzfBZjUb+RyPCvDKw1a++/41W9AGO8xe99LzQh7wLAOzxt+8l1TPPCJenfZ6Q7xYbLtEVBaAP5vnx0IgjFE0H3NNdNswkrEjX4Kbo6jgovt45eDBjduPgZkFsxH8ADC0kfhGrY77i0NKu5aA96PrUzqJCjP1Yoxp8+qrpS8OIlGs6QhziGQLwJtidIxhDLHaYi8KVy/X8rAwfx2E9IwX3EPUTi27aCcR5+uQGibuugbPQ8ZOjjH/5O0xThN+gG6+dAb7Cp1Mqxe3tdQYcALuf7ZbSUfcHYT1MR3ej3I1PHtQzddtcKPdRGIFV35plfByfUsLhdXIPWL/pN/t3grvj8Nf4qrEMa3n7fbrO/Oo77R/XhmYcxizIdvZJynzo3yM7bnl2ZslsdLRJAzCCbbj7/4pcV0L7Qvkyenxtkb5IirFHnvJwGgmUBD7WqhnIrKZ9JTuT7lPiBhHwK9GUqJfV9n/cSgTyJ3HNhis26lInQRM8eo+EZ6xa1Dc=
   region: us-east-2
   app: Mingle 2019
-  env: e-ejbxzmxt6g
+  env: mingle-pp-2019
   on:
     repo: brycekennedy117/PP1-Matchmaking
   bucket_name: elasticbeanstalk-us-east-2-112626369674
