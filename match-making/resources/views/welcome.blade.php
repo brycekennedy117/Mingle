@@ -92,6 +92,7 @@
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <div>{{env('DB_HOST', '127.0.0.1')}}</div>
                 </div>
             </div>
         </div>
