@@ -29,3 +29,5 @@ deploy:
   env: e-ejbxzmxt6g
   on:
     repo: brycekennedy117/PP1-Matchmaking
+  bucket_name: elasticbeanstalk-us-east-2-112626369674
+  bucket_path: Mingle 2019/
