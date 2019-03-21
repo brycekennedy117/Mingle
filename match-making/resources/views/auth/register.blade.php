@@ -3,10 +3,10 @@
 @section('content')
 
 <?php
-$jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?q=langwarrin";
-$json = file_get_contents($jsonurl);
-$arr = json_decode($json, true);
-echo $arr[0]["postcode"];
+    $jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?q=langwarrin";
+    $json = file_get_contents($jsonurl);
+    $arr = json_decode($json, true);
+    echo $arr[0]["postcode"];
 ?>
 
 <div class="container">

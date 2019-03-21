@@ -77,6 +77,11 @@
       <path value="$PROJECT_DIR$/match-making/vendor/psr/simple-cache" />
       <path value="$PROJECT_DIR$/match-making/vendor/psr/log" />
       <path value="$PROJECT_DIR$/match-making/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/match-making/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/match-making/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/match-making/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/match-making/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/match-making/vendor/doctrine/cache" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
