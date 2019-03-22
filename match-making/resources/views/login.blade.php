@@ -88,7 +88,7 @@
                         <input type="password" name="password" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="login" class="btn btn-primary" value="Login" />
+                        <input type="submit" name="login" class="" value="Login" />
                     </div>
                     <div>
                         <span><a href="#">Forgot password?</a></span>
