@@ -93,7 +93,7 @@
                     <div>
                         <span><a href="#">Forgot password?</a></span>
                     </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
