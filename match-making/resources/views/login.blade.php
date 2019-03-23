@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Mingle.login</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -61,39 +61,39 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .box{
+                width:600px;
+                margin:0 auto;
+                border:1px solid #ccc;
+            }
         </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+    <body
 
             <div class="content">
                 <div class="title m-b-md">
                     Mingle
                 </div>
+                <div class="container box">
+                    <h3 align="center">Login</h3><br/>
 
-                <div class="links">
-                    <a href="login">Link Here</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <div>{{env('DB_HOST', '127.0.0.1')}}</div>
-                    <a href="https://laravel.com/docs">This is where links would go</a>
+                    <form method="post" action="">
+                    <div class="form-group">
+                        <label>Enter Username</label>
+                        <input type="user" name="user" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Password</label>
+                        <input type="password" name="password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="login" class="" value="Login" />
+                    </div>
+                    <div>
+                        <span><a href="#">Forgot password?</a></span>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
