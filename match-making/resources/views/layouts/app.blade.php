@@ -18,6 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link ref="stylesheet" href="\css\bootstrap.css"/>
+    <link ref="stylesheet" href="\css\bootstrap.min.css"/>
+    <link ref="stylesheet" href="\css\bootstrap-theme.css"/>
+    <link ref="stylesheet" href="\css\bootstrap-theme.min.css"/>
+    <script src="/js/jquery-2.2.4.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
     <div id="app">
