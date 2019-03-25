@@ -2,13 +2,6 @@
 
 @section('content')
 
-<?php
-    $jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?q=langwarrin";
-    $json = file_get_contents($jsonurl);
-    $arr = json_decode($json, true);
-    echo $arr[0]["postcode"];
-?>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -51,7 +44,7 @@
                             <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="text" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" value="{{ old('date_of_birth') }}" required autofocus>
+                                <input id="date_of_birth" type="text" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" value="{{ old('date_of_birth') }}" pattern="^\d?(\d\/)\d?(\d\/)\d?(\d)$" required autofocus>
 
                                 @if ($errors->has('date_of_birth'))
                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +58,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ old('gender') }}" required autofocus>
+                                <input id="gender" type="text" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ old('gender') }}" pattern="Male|Female" required autofocus>
 
                                 @if ($errors->has('gender'))
                                     <span class="invalid-feedback" role="alert">
@@ -79,7 +72,7 @@
                             <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
 
                             <div class="col-md-6">
-                                <input id="postcode" type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus>
+                                <input id="postcode" type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" pattern="\d{4}" required autofocus>
 
                                 @if ($errors->has('postcode'))
                                     <span class="invalid-feedback" role="alert">
@@ -119,6 +112,11 @@
                             </div>
                         </div>
                     </form>
+                    <a href="/" >
+                        <button class="btn btn-danger float-right" id="back-button">
+                            Back
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

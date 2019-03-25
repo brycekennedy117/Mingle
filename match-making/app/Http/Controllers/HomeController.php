@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?postcode=3910";
+        $json = file_get_contents($jsonurl);
+        $arr = json_decode($json, true);
+        return view('home')->with('jsonurl', $jsonurl);
     }
 }
