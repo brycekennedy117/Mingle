@@ -24,3 +24,18 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->afterMaking(App\User::class, function ($user, $faker) {
+    $id = $user['id'];
+    $email = $user['email'];
+
+
+    $attr = factory(App\MingleLibrary\Models\UserAttributes::class)->make(['user_id' => $email,
+        'gender' => $faker->randomElement($array = array ('M', 'F')),
+        'interested_in' => $faker->randomElement($array = array ('M', 'F'))
+    ]);
+
+    $user->save();
+});
+
+
