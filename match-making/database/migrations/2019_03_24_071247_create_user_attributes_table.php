@@ -25,6 +25,7 @@ class CreateUserAttributesTable extends Migration
             $table->double('longitude');
             $table->integer('postcode');
             $table->string('suburb');
+            $table->date('date_of_birth');
             $table->enum('gender', ['M', 'F']);
             $table->enum('interested_in', ['M', 'F', 'MF']);
             $table->timestamps();
