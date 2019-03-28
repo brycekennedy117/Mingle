@@ -1,35 +1,3 @@
-<?php
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\MingleLibrary\MatchMaker as Matchmaker;
-use App\MingleLibrary\Models\UserAttributes as UserAttributes;
-use App\User as User;
-use Illuminate\Support\Facades\Hash;
-use Faker\Generator;
-
-//$users = factory(App\User::class, 500)->make();
-//$users = factory(App\User::class, 20)->make();
-//echo json_encode($users);
-$password = 'password';
-$credentials = ['email' => 'nbuckridge@example.org', 'password'=> $password];
-//echo "\nUser";
-Auth::loginUsingId(1);
-$user = Auth::user();
-$email =  $user['email'];
-$attr = UserAttributes::all()->where('user_id',$email)->first();
-$mm = new MatchMaker();
-$result = $mm->getPotentialMatches($attr);
-
-echo "<br/><br/>";
-echo json_encode($result);
-
-//echo json_encode(Auth::user()->getAuthIdentifier());
-//$attr = UserAttributes::all()->where('user_id', Auth::user()->getAuthIdentifier());
-//echo json_encode($attr);
-//echo $attr[0];
-
-?>
 
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
