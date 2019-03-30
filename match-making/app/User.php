@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public $primaryKey = 'id';
+
     use Notifiable;
 
     /**
@@ -36,4 +38,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Attributes() {
+        return $this->hasOne('App\MingleLibrary\Models\UserAttributes');
+    }
+
 }
