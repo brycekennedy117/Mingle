@@ -132,20 +132,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="postcode" type="number" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000">
-
-                                    @if ($errors->has('postcode'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('postcode') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                                 <div class="col-md-6">
