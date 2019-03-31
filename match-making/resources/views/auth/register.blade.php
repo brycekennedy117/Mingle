@@ -41,48 +41,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="date_of_birth" type="text" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" value="{{ old('date_of_birth') }}" pattern="^\d?(\d\/)\d?(\d\/)\d?(\d)$" required autofocus>
-
-                                @if ($errors->has('date_of_birth'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('date_of_birth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ old('gender') }}" pattern="Male|Female" required autofocus>
-
-                                @if ($errors->has('gender'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('gender') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="postcode" type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" pattern="\d{4}" required autofocus>
-
-                                @if ($errors->has('postcode'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('postcode') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
