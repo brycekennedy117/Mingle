@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,9 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?postcode=3910";
+        $postcode = Auth::user()->postcode;
+        $jsonurl = "http://v0.postcodeapi.com.au/suburbs.json?postcode=" . $postcode;
         $json = file_get_contents($jsonurl);
         $arr = json_decode($json, true);
-        return view('home')->with('jsonurl', $jsonurl);
+        return view('home');
     }
 }

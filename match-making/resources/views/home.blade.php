@@ -14,7 +14,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{$jsonurl}}
                     You are logged in!
                 </div>
             </div>
