@@ -9,10 +9,10 @@ class MatchController extends Controller
 {
 
 
-    public function match()
+    public function index()
     {
         $name = Auth::user()->name;
 
-        return view('matchpage', ['name' => $name]);
+        return view('matches', ['name' => $name]);
     }
 }
