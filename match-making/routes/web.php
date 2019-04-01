@@ -11,11 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('matchpage');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/matchpage', 'HomeController@index')->name('matchpage');
+//Route::get('dashboard', "DashboardController@index")->name('dashboard');
+$router->group(['middleware' => 'auth'], function() {
+    Route::get('/dashboard', 'DashboardController@index');
+});
+
+$router->group(['middleware' => 'guest'], function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
