@@ -21,7 +21,7 @@
                             <div>
                                 <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" alt="match"/>
                                 <info value="description">
-
+                                    Campbell Brobbel
                                 </info>
                             </div>
                             <button class="btn btn-lg btn-primary btn-block" href="">Send message</button>
