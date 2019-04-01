@@ -15,8 +15,8 @@
                         @endif
                         <div>
                             <div>
-                                <h2 class="" value="name"></h2>
-                                <h2 value="age"></h2>
+                                <h2 class="" value="name">Andrew</h2>
+                                <h2 value="age">21</h2>
                             </div>
                             <div>
                                 <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" alt="match"/>
