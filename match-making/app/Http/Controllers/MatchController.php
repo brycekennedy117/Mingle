@@ -15,4 +15,5 @@ class MatchController extends Controller
 
         return view('matches', ['name' => $name]);
     }
+
 }
