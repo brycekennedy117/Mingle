@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -69,6 +70,11 @@
                             </div>
                         </div>
                     </form>
+                    <a href="/" >
+                        <button class="btn btn-danger float-right" id="back-button">
+                            Back
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

@@ -11,23 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('dashboard', "DashboardController@index")->name('dashboard');
+$router->group(['middleware' => 'auth'], function() {
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/attributes', 'AttributesController@index')->name('attributes');
+    Route::get('/matches', 'MatchController@index')->name('matches');
+});
 
-Route::get('profile',[
-    'middleware' => 'auth',
-    'uses' => 'UserController@profile'
-]);
-
-Route::get('edit-profile',[
-    'middleware' => 'auth',
-    'uses' => 'UserController@edit-profile'
-]);
-
-
-Route::post('/profile/change-password','UserController@changePassword')->name('changePassword');
+$router->group(['middleware' => 'guest'], function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
