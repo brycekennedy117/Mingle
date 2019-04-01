@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/attributes', 'AttributesController@index')->name('attributes');
+
+Route::post('/attributes', 'AttributesController@store')->name('store_attributes');

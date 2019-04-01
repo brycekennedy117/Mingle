@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
 
 class AttributesController extends Controller
@@ -14,5 +16,24 @@ class AttributesController extends Controller
     public function index()
     {
         return view('attributes');
+    }
+
+    public function store(Request $request)
+    {
+        return UserAttributes::create([
+            'user_id' => Auth::user()->id,
+            'openness' => $request['openness'],
+            'conscientiousness' => $request['conscientiousness'],
+            'extraversion' => $request['extraversion'],
+            'agreeableness' => $request['agreeableness'],
+            'neuroticism' => $request['neuroticism'],
+            'postcode' => $request['postcode'],
+            'suburb' => $request['suburb'],
+            'date_of_birth' => $request['date_of_birth'],
+            'gender' => $request['gender'],
+            'interested_in' => $request['interested_in'],
+            'latitude' => $request['latitude'],
+            'longitude' => $request['longitude']
+        ]);
     }
 }

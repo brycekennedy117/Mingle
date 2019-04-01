@@ -93,7 +93,7 @@
                                 <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="postcode" type="number" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000">
+                                    <input id="postcode" type="number" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^\d{4}$" min="1000" max="9999">
 
                                     @if ($errors->has('postcode'))
                                         <span class="invalid-feedback" role="alert">
@@ -165,6 +165,9 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <input type="hidden" name="longitude" id="longitude" value="20.0">
+                            <input type="hidden" name="latitude" id="latitude" value="20.0">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
