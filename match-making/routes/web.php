@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('matchpage');
+    return view('login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/matchpage', 'HomeController@index')->name('matchpage');
+Route::get('/matchpage', 'HomeController@match')->name('matchpage');
