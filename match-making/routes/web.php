@@ -23,3 +23,11 @@ Route::get('profile',[
     'middleware' => 'auth',
     'uses' => 'UserController@profile'
 ]);
+
+Route::get('edit-profile',[
+    'middleware' => 'auth',
+    'uses' => 'UserController@edit-profile'
+]);
+
+
+Route::post('/profile/change-password','UserController@changePassword')->name('changePassword');
