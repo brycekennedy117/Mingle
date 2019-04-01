@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/matchpage', 'HomeController@match')->name('matchpage');
+Route::get('/matchpage', 'MatchController@match')->name('matchpage');
