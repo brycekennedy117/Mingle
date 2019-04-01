@@ -15,8 +15,8 @@
                         @endif
                         <div>
                             <div>
-                                <h2 class="" value="name">{{$name}}</h2>
-                                <h2 value="age">{{$age}}</h2>
+                                <h2 class="" value="name">Andrew</h2>
+                                <h2 value="age">21</h2>
                             </div>
                             <div>
                                 <img src="" alt="match"/>
