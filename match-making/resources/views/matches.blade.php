@@ -39,9 +39,22 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
-                                            <div class="p-3 d-flex justify-content-center align-items-center">
-                                                <div>
+                                            <div class="p-3 d-flex justify-content-between align-items-center">
+                                                <div class="p-1">
                                                     <button type="button" class="btn btn-primary">Message</button>
+                                                </div>
+
+                                                <div class="p-1">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Dropdown button
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#">Action</a>
+                                                            <a class="dropdown-item" href="#">Another action</a>
+                                                            <a class="dropdown-item" href="#">Something else here</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
