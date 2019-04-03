@@ -23,7 +23,9 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/attributes', 'AttributesController@index')->name('attributes');
     Route::get('/matches', 'MatchController@index')->name('matches');
     Route::get('/campbell', 'MatchController@profile')->name('campbell');
+    Route::get('/profile', 'UserController@index');
     Route::post('/attributes', 'AttributesController@store')->name('store_attributes');
+
 });
 
 $router->group(['middleware' => 'guest'], function() {
