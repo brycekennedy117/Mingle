@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Postcode;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
@@ -35,5 +36,12 @@ class AttributesController extends Controller
             'latitude' => $request['latitude'],
             'longitude' => $request['longitude']
         ]);
+    }
+
+    public function suburbs() {
+//        $postcode = $request['postcode'];
+//        $suburbs = Postcode::all()->where('postcode', $postcode);
+//        return $suburbs;
+        return json_encode(["Hello you cunt"]);
     }
 }

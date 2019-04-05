@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="container">
+    <script type="text/javascript" src="/js/attributes.js"></script>
+    <div class="container" onclick="testFunction()">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -93,8 +93,18 @@
                                 <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="postcode" type="number" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^\d{4}$" min="1000" max="9999">
+                                    <input id="postcode"
+                                           type="string" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
+                                           name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
+                                           min="1000" max="9999"
+                                            onkeyup="getSuburbsForPostcode(this)">
+                                    <div class="card" id="suburb-container table-hover">
+                                        <table class="table table-condensed table-hover mb-0">
+                                            <tbody  id="suburb-table">
 
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     @if ($errors->has('postcode'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('postcode') }}</strong>
