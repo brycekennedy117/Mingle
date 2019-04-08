@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Mingle</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -13,7 +13,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-image: url("https://media-api.xogrp.com/images/8f111626-128e-49a9-921a-c9fd21551435~rs_1536.h");
+                background-size: cover;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -23,6 +24,21 @@
 
             .full-height {
                 height: 100vh;
+            }
+
+            .classname a:hover {
+                color: black;
+            }
+
+            .font {
+                font-size:30px;
+                width:200px;
+                height: 50px;
+                background-color: magenta;
+                padding: 15px;
+                text-align: center;
+                line-height: 50px;
+
             }
 
             .flex-center {
@@ -46,7 +62,12 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 94px;
+
+            }
+
+            .description{
+                font-size:30px;
             }
 
             .links > a {
@@ -59,6 +80,15 @@
                 text-transform: uppercase;
             }
 
+            .links1 > a {
+                color: #f55247;
+                padding: 0 25px;
+                font-size: 30px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+
+
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -66,35 +96,25 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+                <div class="top-right links classname">
+                    <a href="login">Login</a>
+                    <a href="register">Register</a>
+                    <a href="help">Help</a>
+                    <a href="contact">Contact Us</a>
                 </div>
-            @endif
-
+        <div class="container">
             <div class="content">
                 <div class="title m-b-md">
                     Mingle
                 </div>
 
-                <div class="links">
-                    <a href="login">Link Here</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <div>{{env('DB_HOST', '127.0.0.1')}}</div>
-                    <a href="https://laravel.com/docs">This is where links would go</a>
+                <div class="description alert-primary">
+                    Making it easy, meeting singles
+                </div>
+
+                <div class="links1 classname text-danger">
+                    <a href='login'>♡Let's meet up♡</a>
                 </div>
             </div>
         </div>
