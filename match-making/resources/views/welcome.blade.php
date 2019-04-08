@@ -98,6 +98,8 @@
         <div class="flex-center position-ref full-height">
 
                 <div class="top-right links classname">
+                    <a href="login">Login</a>
+                    <a href="register">Register</a>
                     <a href="#">Help</a>
                     <a href="#">Contact Us</a>
                 </div>
