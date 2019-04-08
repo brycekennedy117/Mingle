@@ -28,20 +28,16 @@ class AttributesController extends Controller
             'extraversion' => $request['extraversion'],
             'agreeableness' => $request['agreeableness'],
             'neuroticism' => $request['neuroticism'],
-            'postcode' => $request['postcode'],
-            'suburb' => $request['suburb'],
+            'postcode' => (int)$request['postcode-id'],
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
-            'latitude' => $request['latitude'],
-            'longitude' => $request['longitude']
         ]);
     }
 
-    public function suburbs() {
-//        $postcode = $request['postcode'];
-//        $suburbs = Postcode::all()->where('postcode', $postcode);
-//        return $suburbs;
-        return json_encode(["Hello you cunt"]);
+    public function suburbs(Request $request) {
+        $postcode = $request['postcode'];
+        $suburbs = Postcode::all()->where('postcode', $postcode);
+        return $suburbs;
     }
 }
