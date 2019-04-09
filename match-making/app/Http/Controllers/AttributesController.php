@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class AttributesController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
-    }*/
+    }
 
     public function index()
     {
@@ -20,13 +20,13 @@ class AttributesController extends Controller
 
     public function store(Request $request)
     {
-        return UserAttributes::create([
+        UserAttributes::create([
             'user_id' => Auth::user()->id,
-            'openness' => $request['openness'],
-            'conscientiousness' => $request['conscientiousness'],
-            'extraversion' => $request['extraversion'],
-            'agreeableness' => $request['agreeableness'],
-            'neuroticism' => $request['neuroticism'],
+            'openness' => $request['openness']/10,
+            'conscientiousness' => $request['conscientiousness']/10,
+            'extraversion' => $request['extraversion']/10,
+            'agreeableness' => $request['agreeableness']/10,
+            'neuroticism' => $request['neuroticism']/10,
             'postcode' => $request['postcode'],
             'suburb' => $request['suburb'],
             'date_of_birth' => $request['date_of_birth'],
@@ -35,5 +35,6 @@ class AttributesController extends Controller
             'latitude' => $request['latitude'],
             'longitude' => $request['longitude']
         ]);
+        return view('dashboard');
     }
 }
