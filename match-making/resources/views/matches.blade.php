@@ -26,7 +26,8 @@
                         <div class="container">
 
                             @if(count($matches) > 0)
-                                @foreach($matches as $users)
+                                @foreach($matches as $match)
+
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-center align-items-center">
@@ -35,8 +36,9 @@
                                                      width="100px"/>
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
-                                                <div class="container-fluid"><h4>{{$matchedUsers}}</h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">Hello Message</p></div>
+                                                <div class="container-fluid"><h4></h4></div><br>
+                                                <div class="container-fluid"><p class="font-italic">{{$match['user_id']}}</p></div>
+                                                <div class="container-fluid"><p>Location {{$match['suburb']}}</p></div><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
