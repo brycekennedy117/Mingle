@@ -1,5 +1,5 @@
 <!doctype html>
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
     <div class="d-flex flex-column align-items-center">
