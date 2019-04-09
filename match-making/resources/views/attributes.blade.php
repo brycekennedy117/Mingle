@@ -22,7 +22,13 @@
                                 <label for="openness" class="col-md-4 col-form-label text-md-right">{{ __('Openness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10">
+                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10" list="ticks">
+                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <datalist id="ticks">
+                                        <option value="1">
+                                        <option value="5">
+                                        <option value="10">
+                                    </datalist>
 
                                     @if ($errors->has('openness'))
                                         <span class="invalid-feedback" role="alert">
@@ -36,7 +42,8 @@
                                 <label for="conscientiousness" class="col-md-4 col-form-label text-md-right">{{ __('Conscientiousness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10">
+                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10" list="ticks">
+                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
 
                                     @if ($errors->has('conscientiousness'))
                                         <span class="invalid-feedback" role="alert">
@@ -50,7 +57,8 @@
                                 <label for="extraversion" class="col-md-4 col-form-label text-md-right">{{ __('Extraversion') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10">
+                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10" list="ticks">
+                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
 
                                 @if ($errors->has('extraversion'))
                                         <span class="invalid-feedback" role="alert">
@@ -64,8 +72,8 @@
                                 <label for="agreeableness" class="col-md-4 col-form-label text-md-right">{{ __('Agreeableness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10">
-
+                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10" list="ticks">
+                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
 
                                 @if ($errors->has('agreeableness'))
                                         <span class="invalid-feedback" role="alert">
@@ -79,7 +87,8 @@
                                 <label for="neuroticism" class="col-md-4 col-form-label text-md-right">{{ __('Neuroticism') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10">
+                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10" list="ticks">
+                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
 
                                 @if ($errors->has('neuroticism'))
                                         <span class="invalid-feedback" role="alert">
