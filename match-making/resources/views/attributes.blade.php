@@ -22,20 +22,7 @@
                                 <label for="openness" class="col-md-4 col-form-label text-md-right">{{ __('Openness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10" list="tickmarks">
-                                    <datalist id="tickmarks">
-                                        <option value="1" label="10%">
-                                        <option value="2">
-                                        <option value="3">
-                                        <option value="4">
-                                        <option value="5" label="50%">
-                                        <option value="6">
-                                        <option value="7">
-                                        <option value="8">
-                                        <option value="9">
-                                        <option value="10" label="100%">
-                                    </datalist>
-                                    You are <span id="openness-value">neither open nor closed</span>.
+                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10">
 
                                     @if ($errors->has('openness'))
                                         <span class="invalid-feedback" role="alert">
@@ -49,8 +36,7 @@
                                 <label for="conscientiousness" class="col-md-4 col-form-label text-md-right">{{ __('Conscientiousness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10" list="tickmarks">
-                                    You are <span id="conscientiousness-value">neither conscientious nor casual</span>.
+                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10">
 
                                     @if ($errors->has('conscientiousness'))
                                         <span class="invalid-feedback" role="alert">
@@ -64,8 +50,7 @@
                                 <label for="extraversion" class="col-md-4 col-form-label text-md-right">{{ __('Extraversion') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10" list="tickmarks">
-                                    You are <span id="extraversion-value">neither an extravert nor an introvert</span>.
+                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10">
 
                                 @if ($errors->has('extraversion'))
                                         <span class="invalid-feedback" role="alert">
@@ -79,8 +64,7 @@
                                 <label for="agreeableness" class="col-md-4 col-form-label text-md-right">{{ __('Agreeableness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10" list="tickmarks">
-                                    You are <span id="agreeableness-value">neither agreeable nor disagreeable</span>.
+                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10">
 
 
                                 @if ($errors->has('agreeableness'))
@@ -95,8 +79,7 @@
                                 <label for="neuroticism" class="col-md-4 col-form-label text-md-right">{{ __('Neuroticism') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10" list="tickmarks">
-                                    You are <span id="neuroticism-value">neither neurotic nor stable</span>.
+                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10">
 
                                 @if ($errors->has('neuroticism'))
                                         <span class="invalid-feedback" role="alert">
