@@ -24,11 +24,10 @@ class MatchController extends Controller
 
     public function profile(User $user)
     {
-        echo $user;
         return view('campbell');
     }
 
-    public function getUserData()
+    public function matches()
     {
         $userID = Auth::user()->id;
 
