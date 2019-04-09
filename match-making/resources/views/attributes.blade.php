@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <script type="text/javascript" src="/js/attributes.js"></script>
-    <div class="container">
+    <div class="container" onload="hideSuburbTableContainer()">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -16,7 +15,7 @@
                     </p>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('attributes') }}">
+                        <form method="POST" id="attribute-form" action="{{ route('attributes') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -111,8 +110,23 @@
                                 <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="postcode" type="number" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^\d{4}$" min="1000" max="9999">
+                                    <div class="d-flex flex-row">
+                                    <input id="postcode"
+                                           type="string" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
+                                           name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
+                                           min="1000" max="9999"
+                                            onkeyup="getSuburbsForPostcode(this)">
+                                    <button onclick="editPostcodeButtonClicked()" id="postcode-edit" type="button" class="btn btn-default" aria-label="Left Align">
+                                        <img src="/svg/si-glyph-edit.svg" width="20px"></img>
+                                    </button>
+                                    </div>
+                                    <div class="card table-hover" id="suburb-container">
+                                        <table class="table table-condensed table-hover mb-0">
+                                            <tbody  id="suburb-table">
 
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     @if ($errors->has('postcode'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('postcode') }}</strong>
@@ -125,7 +139,7 @@
                                 <label for="suburb" class="col-md-4 col-form-label text-md-right">{{ __('Suburb') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="suburb" type="text" class="form-control{{ $errors->has('suburb') ? ' is-invalid' : '' }}" name="suburb" value="{{ old('suburb') }}" required autofocus placeholder="Melbourne">
+                                    <input id="suburb" type="text" class="form-control{{ $errors->has('suburb') ? ' is-invalid' : '' }}" name="suburb" readonly required autofocus placeholder="Melbourne">
 
                                     @if ($errors->has('suburb'))
                                         <span class="invalid-feedback" role="alert">

@@ -1,3 +1,4 @@
 *
 !public/
 !.gitignore
+!postcode_light.csv
