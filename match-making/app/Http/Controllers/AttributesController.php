@@ -35,4 +35,10 @@ class AttributesController extends Controller
         ]);
         return view('dashboard');
     }
+
+    public function suburbs(Request $request) {
+        $postcode = $request['postcode'];
+        $suburbs = Postcode::all()->where('postcode', $postcode);
+        return $suburbs;
+    }
 }
