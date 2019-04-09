@@ -21,7 +21,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $attributes = UserAttributes::find(Auth::user()->id);
+        $attributes = Auth::user()->Attributes;
         if ($attributes != null) {
             return view('dashboard');
         }
