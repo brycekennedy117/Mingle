@@ -23,7 +23,29 @@
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
                             <tr>
-
+                                <th>Name:</th>
+                                <td>{{$name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Date of birth</th>
+                                <td>{{$user[0]->date_of_birth}}</td>
+                            </tr>
+                            <tr>
+                                <th>Postcode</th>
+                                <td>{{$user[0]->postcode}}</td>
+                            </tr>
+                            <tr>
+                                <th>Suburb</th>
+                                <td>{{$user[0]->suburb}}</td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td>{{$user[0]->gender}}</td>
+                            </tr>
+                            <tr>
+                                <th>Interested in</th>
+                                <td>{{$user[0]->interested_in}}</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
