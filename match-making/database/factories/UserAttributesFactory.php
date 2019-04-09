@@ -3,8 +3,11 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker $faker) {
+    $int= mt_rand(1262055681,1262055681);
+    $date = date("Y-m-d H:i:s",$int);
+
     return [
-        'user_id' => "johndoe@hotmail.com",
+        'user_id' => 1,
         'openness' => $faker->randomFloat(2,0,1),
         'conscientiousness' => $faker->randomFloat(2,0,1),
         'extraversion' => $faker->randomFloat(2,0,1),
@@ -12,8 +15,7 @@ $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker
         'neuroticism' => $faker->randomFloat(2,0,1),
         'gender' => 'M',
         'interested_in' => 'F',
-        'latitude' => $faker->randomFloat(2,-37.81, -37.82),
-        'longitude' => $faker->randomFloat(2,144.90, 144.96),
+        'date_of_birth' => $faker->date("Y-m-d H:i:s"),
         'postcode' => $faker->randomNumber(4, true)
     ];
 });

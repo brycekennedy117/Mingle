@@ -46,7 +46,10 @@ class User extends Authenticatable
     }
     public function matches(){
 
-        return $this->hasMany('App\MingleLibrary\Models\Matches');
+        return $this->hasMany('App\MingleLibrary\Models\Matches', 'user_id_1');
+    }
 
+    public function getID() {
+        return $this->id;
     }
 }
