@@ -15,7 +15,7 @@ class CreateUserAttributesTable extends Migration
     {
         Schema::create('user_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id')->unique();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->double('openness');
             $table->double('conscientiousness');
             $table->double('extraversion');

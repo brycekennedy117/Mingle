@@ -30,21 +30,19 @@ class MatchController extends Controller
 
     public function getUserData()
     {
-        $userID = Auth::user()->email;
+        $userID = Auth::user()->id;
 
         $matches1 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_1', $userID)->all();
         $matches2 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_2', $userID)->all();
         $attributesArray = array();
-
         foreach($matches1 as $match) {
-            $attributes = UserAttributes::all()->where('user_id', $match->user_id_2)->all();
-            $attributesArray = array_merge($attributes, $attributesArray);
+            $attributes = $match->user2->Attributes;
+            array_push($attributesArray, $attributes);
         }
         foreach($matches2 as $match) {
-            $attributes = UserAttributes::all()->where('user_id', $match->user_id_1)->all();
-            $attributesArray = array_merge($attributes, $attributesArray);
+            $attributes = $match->user1->Attributes;
+            array_push($attributesArray, $attributes);
         }
-
         return view('matches')->with('matches', $attributesArray);
     }
 }
