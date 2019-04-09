@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Match;
+use App\MingleLibrary\MatchMaker;
+use App\MingleLibrary\Models\UserAttributes;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class MatchController extends Controller
 {
@@ -13,11 +18,33 @@ class MatchController extends Controller
     {
         $name = Auth::user()->name;
 
-        return view('matches', ['name' => $name]);
+        $matches = Match::all();
+        return view('matches', ['name' => $name])->with('matches', $matches);
     }
 
-    public function profile()
+    public function profile(User $user)
     {
+        echo $user;
         return view('campbell');
+    }
+
+    public function getUserData()
+    {
+        $userID = Auth::user()->email;
+
+        $matches1 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_1', $userID)->all();
+        $matches2 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_2', $userID)->all();
+        $attributesArray = array();
+
+        foreach($matches1 as $match) {
+            $attributes = UserAttributes::all()->where('user_id', $match->user_id_2)->all();
+            $attributesArray = array_merge($attributes, $attributesArray);
+        }
+        foreach($matches2 as $match) {
+            $attributes = UserAttributes::all()->where('user_id', $match->user_id_1)->all();
+            $attributesArray = array_merge($attributes, $attributesArray);
+        }
+
+        return view('matches')->with('matches', $attributesArray);
     }
 }
