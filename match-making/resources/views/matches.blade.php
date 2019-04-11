@@ -26,7 +26,7 @@
                         <div class="container">
 
                             @if(count($matches) > 0)
-                                @foreach($matches as $UserAttributes)
+                                @foreach($matches as $userAttributes)
 
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
@@ -37,9 +37,9 @@
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
                                                 <div class="container-fluid"><h4></h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">{{$paginatedMatches->postcodeObject->suburb}}</p></div>
+                                                <div class="container-fluid"><p class="font-italic">{{$userAttributes->postcodeObject->suburb}}</p></div>
                                                 <div class="container-fluid"><p>Location </p></div><br>
-                                                <div class="container-fluid"><h4>{{$UserAttributes->user->name}}</h4></div><br>
+                                                <div class="container-fluid"><h4>{{$userAttributes->user->name}}</h4></div><br>
                                                 <div class="container-fluid"><p class="font-italic"></p></div>
                                                 <div class="container-fluid"><p></p></div><br>
                                             </div>
