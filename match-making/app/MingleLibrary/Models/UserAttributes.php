@@ -22,12 +22,11 @@ class UserAttributes extends Model
 
     public $primaryKey = 'id';
 
-    public $user_id = 'user_id';
     public $timestamps = true;
 
     public function user() {
 
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\MingleLibrary\Models\Postcode');
     }
 
 

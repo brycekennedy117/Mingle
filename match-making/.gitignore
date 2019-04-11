@@ -10,7 +10,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.idea/
+./idea
+.env.testing
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -20,17 +20,54 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Matched people</div>
+                    <div class="card-header">Matches</div>
 
                     <div class="card-body">
                         <div class="container">
 
-                            <table class='table table-condensed table-hover'>
-                                <tr><th>Firstname</th><th>Lastname</th><th>Age</th></tr>
-                                <tr class="table-row" data-href="{{route('campbell')}}"><td>Campbell</td><td>Brobell</td><td>20+</td></tr>
-                                <tr class="table-row" data-href="#"><td>Andrew</td><td>Alvaro</td><td>21</td></tr>
-                            </table>
+                            @if(count($matches) > 0)
+                                @foreach($matches as $match)
 
+                                    <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
+                                        <div class="d-flex justify-content-start">
+                                            <div class="p-3 d-flex justify-content-center align-items-center">
+                                                <img src="https://www.guidedogsvictoria.com.au/wp-content/themes/default/static/img/puppy.png"
+                                                     class="rounded-circle img-thumbnail"
+                                                     width="100px"/>
+                                            </div>
+                                            <div class="p3 d-flex justify-content-center align-items-center flex-column">
+                                                <div class="container-fluid"><h4></h4></div><br>
+                                                <div class="container-fluid"><p class="font-italic">{{$match['user_id']}}</p></div>
+                                                <div class="container-fluid"><p>Location {{$match['suburb']}}</p></div><br>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-start">
+                                            <div class="p-3 d-flex justify-content-between align-items-center">
+                                                <div class="p-1">
+                                                    <button type="button" class="btn btn-primary">Message</button>
+                                                </div>
+
+                                                <div class="p-1">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Option
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#">View profile</a>
+                                                            <a class="dropdown-item" href="#">Remove</a>
+                                                            <a class="dropdown-item" href="#">Block</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                @else
+                                <div class="row justify-content-center">
+                                    You have no matches!
+                                </div>
+                            @endif
                         </div>
                     </div>
 

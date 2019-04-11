@@ -7,6 +7,7 @@
  */
 
 namespace App\MingleLibrary;
+use App\MingleLibrary\Models\Postcode;
 use App\MingleLibrary\Models\UserAttributes as UserAttributes;
 
 class MatchMaker
@@ -21,14 +22,16 @@ class MatchMaker
      * Returns a list of UserAttribute objects who are likely good matches with a user.
      */
     function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1) {
+
+        $postcode = Postcode::all()->where('postcode', $attr['postcode']);
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
         $extraversion = $attr['extraversion'];
         $agreeableness = $attr['agreeableness'];
         $neuroticism = $attr['neuroticism'];
         $rawWhereString = "round((abs(openness - $openness) + abs(conscientiousness - $conscientiousness) + abs(extraversion - $extraversion) + abs(agreeableness - $agreeableness) + abs(neuroticism - $neuroticism)) / 5,2) ";
-        $latitude = $attr['latitude'];
-        $longitude = $attr['longitude'];
+        $latitude = $postcode['latitude'];
+        $longitude = $postcode['longitude'];
 
         $orderByRaw = "";
         foreach ($orderBy as $key=>$item) {

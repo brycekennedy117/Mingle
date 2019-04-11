@@ -16,8 +16,10 @@ class CreateMatchesTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('user_id_1');
-            $table->string('user_id_2');
+            $table->unsignedBigInteger('user_id_1');
+            $table->unsignedBigInteger('user_id_2');
+            $table->foreign(    'user_id_1')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id_2')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

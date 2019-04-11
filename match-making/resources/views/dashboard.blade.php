@@ -3,11 +3,11 @@
 @section('content')
 
 
-    <div class="container text-center">
+    <div class="container text-center col-md-auto">
         <div class="row justify-content-center">
             <div class="col-md-auto">
                 <div class="card">
-                    <div class="card-header font-weight-bold font">Mingles near you</div>
+                    <div class="card-header font-weight-bold font">Mingles♥ near you</div>
 
                     <div class="container">
                     <div class="row justify-content-center">
