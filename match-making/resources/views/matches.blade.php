@@ -37,7 +37,7 @@
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
                                                 <div class="container-fluid"><h4></h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">{{$paginatedMatches->user->name}}</p><p>21</p></div>
+                                                <div class="container-fluid"><p class="font-italic">{{$paginatedMatches->postcodeObject->suburb}}</p></div>
                                                 <div class="container-fluid"><p>Location </p></div><br>
                                             </div>
                                         </div>
