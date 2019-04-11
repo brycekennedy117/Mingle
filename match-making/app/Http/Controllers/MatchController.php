@@ -59,25 +59,16 @@ class MatchController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $itemCollection = collect($attributesArray);
         $perPage = 10;
-        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $currentPageItems = $itemCollection
+            ->slice(($currentPage * $perPage) - $perPage, $perPage)
+            ->all();
         $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-        $paginatedMatches->setPath($request->url());
-
+        $paginatedMatches
+            ->setPath($request->url());
 
         echo json_encode($paginatedMatches);
 
         //Get user
-
-
-
-
-
-
-
-
-
-
-
 
         $name = Users::all(['id','name'])
             ->where('user_id', $attributesArray)
