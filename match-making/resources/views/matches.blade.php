@@ -26,7 +26,7 @@
                         <div class="container">
 
                             @if(count($matches) > 0)
-                                @foreach($matches as $paginatedItems)
+                                @foreach($matches as $paginatedMatches)
 
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
@@ -37,7 +37,7 @@
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
                                                 <div class="container-fluid"><h4></h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">{{$paginatedItems->id}}</p><p>21</p></div>
+                                                <div class="container-fluid"><p class="font-italic">{{$paginatedMatches->id}}</p><p>21</p></div>
                                                 <div class="container-fluid"><p>Location </p></div><br>
                                             </div>
                                         </div>

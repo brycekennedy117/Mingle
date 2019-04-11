@@ -60,13 +60,13 @@ class MatchController extends Controller
         $itemCollection = collect($attributesArray);
         $perPage = 10;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-        $paginatedItems->setPath($request->url());
+        $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $paginatedMatches->setPath($request->url());
 
 
-        echo json_encode($paginatedItems);
+        echo json_encode($paginatedMatches);
 
-
+        //Get user
 
 
 
@@ -113,6 +113,6 @@ class MatchController extends Controller
         #echo json_encode($name);
 
 
-        return view('matches', ['name' => $name], ['items' => $paginatedItems])->with('matches', $paginatedItems);
+        return view('matches', ['name' => $name], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
     }
 }
