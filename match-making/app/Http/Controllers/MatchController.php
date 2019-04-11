@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\MingleLibrary\Models\Users;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -66,44 +65,7 @@ class MatchController extends Controller
         $paginatedMatches
             ->setPath($request->url());
 
-        echo json_encode($paginatedMatches);
 
-        //Get user
-
-        $name = Users::all(['id','name'])
-            ->where('user_id', $attributesArray)
-            ->all();
-        #echo'<pre>';
-        #foreach ($getname $names) {
-         #   $skilledEmployees = $attributesArray->whereHas('id', function ($q) use ($names) {
-          #      $q->where('id', $names);
-           # });
-        #}
-        $names = Users::with('id')
-            ->with('name')
-            ->where('id','=',$attributesArray)
-            ->get();
-
-       # $names2 = Users::join('id', function($join)
-        #{
-         #   $join->on('users.id', '=', 'user.player_one')
-          #      ->orOn('players.id', '=', 'matches.player_two');
-        #})
-         #   ->join('levels', 'levels.id', '=', 'matches.level_id')
-          ## ->get()->toArray();
-
-        #echo json_encode($name);
-        #$name = DB::table('users')
-         #   ->where($attributesArray, 'users.')
-          #  ->select('users.name')
-           # ->get();
-
-
-        #echo json_encode($name);
-        #print_r($name);
-        #echo json_encode($name);
-
-
-        return view('matches', ['name' => $name], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+        return view('matches', ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
     }
 }
