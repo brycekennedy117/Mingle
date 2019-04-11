@@ -61,11 +61,10 @@ class MatchController extends Controller
         $currentPageItems = $itemCollection
             ->slice(($currentPage * $perPage) - $perPage, $perPage)
             ->all();
-        $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-        $paginatedMatches
+        $UserAttributes = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $UserAttributes
             ->setPath($request->url());
 
-
-        return view('matches', ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+        return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
     }
 }

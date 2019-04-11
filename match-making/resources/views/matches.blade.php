@@ -26,7 +26,7 @@
                         <div class="container">
 
                             @if(count($matches) > 0)
-                                @foreach($matches as $paginatedMatches)
+                                @foreach($matches as $UserAttributes)
 
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
@@ -39,6 +39,9 @@
                                                 <div class="container-fluid"><h4></h4></div><br>
                                                 <div class="container-fluid"><p class="font-italic">{{$paginatedMatches->postcodeObject->suburb}}</p></div>
                                                 <div class="container-fluid"><p>Location </p></div><br>
+                                                <div class="container-fluid"><h4>{{$UserAttributes->user->name}}</h4></div><br>
+                                                <div class="container-fluid"><p class="font-italic"></p></div>
+                                                <div class="container-fluid"><p></p></div><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
@@ -68,11 +71,9 @@
                                     You have no matches!
                                 </div>
                             @endif
-
                         </div>
-                        <p class="container"> {{ $items->links() }}</p>
                     </div>
-
+                    <div class="row justify-content-center">{{ $items->links() }}</div>
                 </div>
             </div>
         </div>
