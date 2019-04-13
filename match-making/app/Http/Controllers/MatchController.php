@@ -6,8 +6,12 @@ use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\MatchMaker;
 use App\MingleLibrary\Models\UserAttributes;
 use App\User;
+use Faker\Test\Provider\Collection;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class MatchController extends Controller
@@ -27,13 +31,20 @@ class MatchController extends Controller
         return view('campbell');
     }
 
-    public function matches()
+    public function matches(Request $request)
     {
-        $userID = Auth::user()->id;
+        $userID = Auth::user()
+            ->id;
 
-        $matches1 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_1', $userID)->all();
-        $matches2 = Match::all(['user_id_2', 'user_id_1'])->where('user_id_2', $userID)->all();
+        $matches1 = Match::all(['user_id_2', 'user_id_1'])
+            ->where('user_id_1', $userID)->all();
+
+        $matches2 = Match::all(['user_id_2', 'user_id_1'])
+            ->where('user_id_2', $userID)->all();
+
+
         $attributesArray = array();
+
         foreach($matches1 as $match) {
             $attributes = $match->user2->Attributes;
             array_push($attributesArray, $attributes);
@@ -42,6 +53,18 @@ class MatchController extends Controller
             $attributes = $match->user1->Attributes;
             array_push($attributesArray, $attributes);
         }
-        return view('matches')->with('matches', $attributesArray);
+
+        //Paginate match page
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $itemCollection = collect($attributesArray);
+        $perPage = 10;
+        $currentPageItems = $itemCollection
+            ->slice(($currentPage * $perPage) - $perPage, $perPage)
+            ->all();
+        $UserAttributes = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $UserAttributes
+            ->setPath($request->url());
+
+        return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
     }
 }
