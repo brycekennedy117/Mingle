@@ -23,7 +23,7 @@ class MatchMaker
      */
     function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1) {
 
-        $postcode = Postcode::all()->where('postcode', $attr['postcode']);
+        $postcode = Postcode::all()->where('id', $attr['postcode']);
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
         $extraversion = $attr['extraversion'];
