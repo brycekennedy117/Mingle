@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 //User attributes model
 use app\User;
 use app\MingleLibrary\Models\UserAttributes;
-
+use App\MingleLibrary\MatchMaker;
 class UserController extends Controller
 {
 
@@ -16,7 +16,6 @@ class UserController extends Controller
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
-
         return view('profile', ['name' => $name])->with('user',$userDetails);
 
     }
