@@ -69,7 +69,7 @@ class MatchController extends Controller
         $UserAttributes
             ->setPath($request->url());
 
-        $attributes = UserAttributes::find(Auth::user()->id);
+        $attributes = Auth::user()->Attributes;
         if ($attributes != null) {
             return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
         }

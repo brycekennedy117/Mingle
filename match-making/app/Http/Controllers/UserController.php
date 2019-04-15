@@ -25,11 +25,14 @@ class UserController extends Controller
 
     }
 
-    public function edit($id) {
-        $userDetails = User::find($id)->Attributes()->get();
+    public function edit() {
+        $name = Auth::user()->name;
+        $userId = Auth::id();
+        $userDetails = User::find($userId)->Attributes()->get();
+        return view('/editprofile', ['name' => $name])->with('user', $userDetails);
     }
 
-    public function update() {
+    public function update(Request $request, $id) {
 
     }
 
@@ -51,8 +54,10 @@ class UserController extends Controller
         ]);
 
         //Change Password
+        $attributes = Auth::user()->Attributes;
         $user = Auth::user();
         $user->password = bcrypt($request->get('change-password'));
+        $attributes->postcode = $request->get('postcode');
         $user->save();
 
         return redirect()->back()->with("success","Password changed successfully.");
