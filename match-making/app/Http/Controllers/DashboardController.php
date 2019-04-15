@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\MingleLibrary\MatchMaker;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -26,5 +28,18 @@ class DashboardController extends Controller
             return view('dashboard');
         }
         return view('attributes');
+    }
+
+    public function viewMatches()
+    {
+        $userId = Auth::id();
+        $userDetails = User::find($userId)->Attributes;
+        $matchMaker = new MatchMaker();
+        $attributes = $matchMaker->getPotentialMatches($userDetails);
+        foreach ($attributes as $user)  {
+            $user->name = User::find($user->user_id)->name;
+        }
+
+        return view('dashboard')->with('attributes',$attributes);
     }
 }
