@@ -25,18 +25,17 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->afterMaking(App\User::class, function ($user, $faker) {
+$factory->afterCreating(App\User::class, function ($user, $faker) {
     $email = $user['email'];
     $user->save();
-
     $id = $user->getID();
-
     $attr = factory(App\MingleLibrary\Models\UserAttributes::class)->make(['user_id' => $id,
         'gender' => $faker->randomElement($array = array ('M', 'F')),
         'interested_in' => $faker->randomElement($array = array ('M', 'F'))
     ]);
+});
 
-//    $user->save();
+$factory->afterMaking(App\User::class, function ($user, $faker) {
 });
 
 
