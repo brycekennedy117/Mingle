@@ -87,6 +87,7 @@
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
+            }
 
 
             .m-b-md {

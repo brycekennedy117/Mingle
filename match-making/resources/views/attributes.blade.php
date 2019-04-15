@@ -104,7 +104,7 @@
                                 <div class="col-md-6">
                                     <div class="d-flex flex-row">
                                     <input id="postcode"
-                                           type="string" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
+                                           type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
                                            name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
                                            min="1000" max="9999"
                                             onkeyup="getSuburbsForPostcode(this)">
