@@ -37,7 +37,6 @@ class DashboardController extends Controller
         if ($userDetails == null) {
             return redirect('/attributes');
         }
-        return json_encode($userDetails);
 
         $matchMaker = new MatchMaker();
         $attributes = $matchMaker->getPotentialMatches($userDetails);
