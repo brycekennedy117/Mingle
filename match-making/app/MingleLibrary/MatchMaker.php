@@ -22,8 +22,7 @@ class MatchMaker
      * Returns a list of UserAttribute objects who are likely good matches with a user.
      */
     function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1) {
-
-        $postcode = Postcode::all()->where('postcode', $attr['postcode']);
+        $postcode = $attr->postcodeObject;
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
         $extraversion = $attr['extraversion'];
@@ -37,12 +36,13 @@ class MatchMaker
         foreach ($orderBy as $key=>$item) {
             $orderByRaw = "$orderByRaw$item";
         }
+
         $distanceString = "round(1.60934 * 2 * 3961 * asin(sqrt(pow(sin(radians(($latitude - latitude)/2)),2) + cos(radians($latitude)) * cos(radians(latitude)) * pow(sin(radians(($longitude-longitude)/2)),2))),2)";
-        $attributes =  UserAttributes::where('user_id','!=', $attr['user_id'])
+        $attributes =  UserAttributes::join('postcodes', 'user_attributes.postcode', '=', 'postcodes.id')
+            ->where('user_id','!=', $attr['user_id'])
             ->where('interested_in', $attr['gender'])
             ->where('gender', $attr['interested_in'])
-            ->selectRaw("*, $rawWhereString as `score`, latitude, longitude, ".$distanceString."as distance")
-            ->whereRaw("$rawWhereString > 0.0 and ".$distanceString." < 30")
+            ->selectRaw("user_attributes.*, $rawWhereString as `score`, postcodes.latitude, postcodes.longitude, ".$distanceString." as distance")
             ->orderByRaw($orderByRaw)
             ->take($limit)
             ->skip(($page - 1) * $limit)

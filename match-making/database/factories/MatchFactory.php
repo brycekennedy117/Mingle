@@ -5,7 +5,6 @@ use App\MingleLibrary\Models\UserAttributes;
 $factory->define(\App\MingleLibrary\Models\Match::class, function (Faker $faker) {
     $user1 = UserAttributes::all()->random(1)[0];
     $user2 = UserAttributes::all()->where('interested_in', $user1['gender'])->random(1)[0];
-    echo $user1."\n";
     return [
         //
         'user_id_1' => $user1['user_id'],
