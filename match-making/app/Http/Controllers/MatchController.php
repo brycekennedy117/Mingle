@@ -31,6 +31,11 @@ class MatchController extends Controller
         return view('campbell');
     }
 
+
+    public static function distanceBetweenMatches($lat1, $lon1,$lat2, $lon2) {
+        return 10.0;
+    }
+
     public function matches(Request $request)
     {
         $userID = Auth::user()
@@ -96,9 +101,9 @@ class MatchController extends Controller
         #echo json_encode($getRangeY2);
         #echo json_encode($getRangeY);
         #echo json_encode($currentUserLocation);
-
-        $distanceOfMatches = $match->distanceCalculation($location['lat'], $location['long'], $currentUserLocation['lat'], $currentUserLocation['long']);
-        echo json_encode($distanceOfMatches);
-        #return view('matches', ['distance' => $distanceOfMatches], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+//
+//        $distanceOfMatches = $match->distanceCalculation($location['lat'], $location['long'], $currentUserLocation['lat'], $currentUserLocation['long']);
+//        echo json_encode($distanceOfMatches);
+        return view('matches', ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
     }
 }

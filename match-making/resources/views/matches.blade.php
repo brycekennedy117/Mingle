@@ -37,7 +37,7 @@
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
                                                 <a class="container-fluid"><h5>{{$userAttributes->user->name}}</h5></a>
                                                 <a class="container-fluid"><p class="font-italic">{{$userAttributes->postcodeObject->latitude}}</p></a>
-                                                <a class="container-fluid"><p>Distance {{\App\MingleLibrary\Models\Match::distanceCalculation($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $user[0]->, $user)}} km</p></a><br>
+                                                <a class="container-fluid"><p>Distance {{\App\Http\Controllers\MatchController::distanceBetweenMatches(1,1,1,1)}}km</p></a><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
