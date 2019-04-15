@@ -62,6 +62,7 @@ class LoginTest extends DuskTestCase
                 ->type('email', $this->user->email)
                 ->type('password', 'password')
                 ->press('Login')
+                ->pause(500)
                 ->assertUrlIs($this->appUrl.'/attributes');
         });
     }
