@@ -27,7 +27,7 @@ class DashboardController extends Controller
         if ($attributes != null) {
             return view('dashboard');
         }
-        return view('attributes');
+        return redirect('/attributes');
     }
 
     public function viewMatches()

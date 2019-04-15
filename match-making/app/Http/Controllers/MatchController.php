@@ -20,10 +20,15 @@ class MatchController extends Controller
 
     public function index()
     {
-        $name = Auth::user()->name;
+        $attributes = Auth::user()->Attributes;
+        if ($attributes != null) {
+            $name = Auth::user()->name;
 
-        $matches = Match::all();
-        return view('matches', ['name' => $name])->with('matches', $matches);
+            $matches = Match::all();
+
+            return view('matches', ['name' => $name])->with('matches', $matches);
+        }
+        return redirect('/attributes');
     }
 
     public function profile(User $user)
@@ -53,7 +58,6 @@ class MatchController extends Controller
             $attributes = $match->user1->Attributes;
             array_push($attributesArray, $attributes);
         }
-
         //Paginate match page
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $itemCollection = collect($attributesArray);
@@ -65,6 +69,12 @@ class MatchController extends Controller
         $UserAttributes
             ->setPath($request->url());
 
-        return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
+        $attributes = UserAttributes::find(Auth::user()->id);
+        if ($attributes != null) {
+            return view('matches')->with('matches', $attributesArray);
+        }
+        return redirect('/attributes');
     }
+
+
 }
