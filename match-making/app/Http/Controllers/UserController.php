@@ -13,7 +13,7 @@ class UserController extends Controller
 
     /*Displays user information*/
     public function index()   {
-        $attributes = UserAttributes::find(Auth::user()->id);
+        $attributes = Auth::user()->Attributes;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
@@ -22,6 +22,14 @@ class UserController extends Controller
             return view('profile', ['name' => $name])->with('user',$userDetails);
         }
         return redirect('/attributes');
+
+    }
+
+    public function edit($id) {
+        $userDetails = User::find($id)->Attributes()->get();
+    }
+
+    public function update() {
 
     }
 
