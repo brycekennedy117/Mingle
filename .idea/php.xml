@@ -82,6 +82,8 @@
       <path value="$PROJECT_DIR$/match-making/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/match-making/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/match-making/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/match-making/vendor/facebook/webdriver" />
+      <path value="$PROJECT_DIR$/match-making/vendor/laravel/dusk" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

@@ -71,10 +71,13 @@ class MatchController extends Controller
 
         $attributes = Auth::user()->Attributes;
         if ($attributes != null) {
-            return view('matches')->with('matches', $attributesArray);
+            return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
         }
         return redirect('/attributes');
     }
 
 
 }
+
+
+

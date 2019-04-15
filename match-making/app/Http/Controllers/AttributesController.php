@@ -36,7 +36,7 @@ class AttributesController extends Controller
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
         ]);
-        return view('dashboard');
+        return redirect('dashboard');
     }
 
     public function suburbs(Request $request) {
