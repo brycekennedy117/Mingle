@@ -78,16 +78,7 @@ class MatchController extends Controller
         $paginatedMatches
             ->setPath($request->url());
 
-        //Distance between matches
-
-        foreach($attributesArray as $item) {
-            $getRangeX = $item->postcodeObject;
-            $getRangeY = $item->postcodeObject;
-
-            $latitude = $getRangeX->latitude;
-            $longitude = $getRangeY->longitude;
-            $location = array('lat' => $latitude, 'long' => $longitude);
-        }
+        //Get current user location
 
         $getCurrentUser = Match::all()
             ->where('user_id_1', $userID);
@@ -100,18 +91,6 @@ class MatchController extends Controller
 
         }
 
-        #$getRangeX2 = $itemCollection->pluck('postcodeObject')->pluck('latitude');
-        #$getRangeY2 = $itemCollection->pluck('postcodeObject')->pluck('longitude');
-
-        #$locator = array('lat' => $getRangeX2, 'long' => $getRangeY2);
-
-        #echo json_encode($getRangeX2);
-        #echo json_encode($getRangeY2);
-        #echo json_encode($getRangeY);
-        #echo json_encode($currentUserLocation);
-//
-//        $distanceOfMatches = $match->distanceCalculation($location['lat'], $location['long'], $currentUserLocation['lat'], $currentUserLocation['long']);
-//        echo json_encode($distanceOfMatches);
         return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
     }
 }
