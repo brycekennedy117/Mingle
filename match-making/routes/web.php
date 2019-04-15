@@ -28,6 +28,13 @@ $router->group(['middleware' => 'auth'], function() {
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
+    Route::post('/upload', function (){
+        request()->file('file')->store(
+            'my-file',
+            's3'
+        );
+        return back();
+    })->name('upload');
 });
 
 $router->group(['middleware' => 'guest'], function() {

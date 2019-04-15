@@ -6,19 +6,26 @@
             <div class="col-sm-12 col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h1>My Profile</h1>
+                        <h1>{{$name}}'s Profile</h1>
                     </div>
                     <div class="container">
                         <div style="padding: 20px"></div>
-                        <div class="row">
-                            <div class="col align-self-center">
-                                <img src="https://via.placeholder.com/250" class="mx-auto d-block rounded-circle">
+                        <div class="row a">
+                            <div class="col">
+                                <img src="https://profiles.utdallas.edu/img/default.png" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <form action="{{ route('upload') }}"method="post" enctype="multipart/form-data">
+                                    <div class="container-fluid" style="align-content: center;float: right;width: 600px;">
+                                    @csrf
+                                        <input type="file" name="file" class="form-control-sm border">
+                                        <input type="submit" class="btn-primary btn-group-sm">
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
-                        <div class="row">
                             <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
-                        </div>
+
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
