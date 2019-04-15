@@ -27,7 +27,6 @@
 
                             @if(count($matches) > 0)
                                 @foreach($matches as $userAttributes)
-
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-center align-items-center">
@@ -36,12 +35,9 @@
                                                      width="100px"/>
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
-                                                <div class="container-fluid"><h4></h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">{{$userAttributes->postcodeObject->suburb}}</p></div>
-                                                <div class="container-fluid"><p>Location </p></div><br>
-                                                <div class="container-fluid"><h4>{{$userAttributes->user->name}}</h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic"></p></div>
-                                                <div class="container-fluid"><p></p></div><br>
+                                                <a class="container-fluid"><h5>{{$userAttributes->user->name}}</h5></a>
+                                                <a class="container-fluid"><p class="font-italic">{{$userAttributes->postcodeObject->latitude}}</p></a>
+                                                <a class="container-fluid"><p>Distance {{\App\MingleLibrary\Models\Match::distanceCalculation($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $user[0]->, $user)}} km</p></a><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">

@@ -61,10 +61,44 @@ class MatchController extends Controller
         $currentPageItems = $itemCollection
             ->slice(($currentPage * $perPage) - $perPage, $perPage)
             ->all();
-        $UserAttributes = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-        $UserAttributes
+        $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $paginatedMatches
             ->setPath($request->url());
 
-        return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
+        //Distance between matches
+
+        foreach($itemCollection as $item) {
+            $getRangeX = $item->postcodeObject;
+            $getRangeY = $item->postcodeObject;
+
+            $latitude = $getRangeX->latitude;
+            $longitude = $getRangeY->longitude;
+            $location = array('lat' => $latitude, 'long' => $longitude);
+        }
+
+        $getCurrentUser = Match::all()
+            ->where('user_id_1', $userID);
+
+        foreach($getCurrentUser as $match) {
+            $currentUserpostcode = $match->user1->Attributes->postcodeObject;
+            $getRangeXcurrentUser = $currentUserpostcode->latitude;
+            $getRangeYcurrentUser = $currentUserpostcode->longitude;
+            $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
+
+        }
+
+        #$getRangeX2 = $itemCollection->pluck('postcodeObject')->pluck('latitude');
+        #$getRangeY2 = $itemCollection->pluck('postcodeObject')->pluck('longitude');
+
+        #$locator = array('lat' => $getRangeX2, 'long' => $getRangeY2);
+
+        #echo json_encode($getRangeX2);
+        #echo json_encode($getRangeY2);
+        #echo json_encode($getRangeY);
+        #echo json_encode($currentUserLocation);
+
+        $distanceOfMatches = $match->distanceCalculation($location['lat'], $location['long'], $currentUserLocation['lat'], $currentUserLocation['long']);
+        echo json_encode($distanceOfMatches);
+        #return view('matches', ['distance' => $distanceOfMatches], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
     }
 }
