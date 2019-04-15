@@ -16,6 +16,9 @@ class AttributesController extends Controller
 
     public function index()
     {
+        if (Auth::user()->Attributes != null) {
+            return redirect()->back();
+        }
         return view('attributes');
     }
 
