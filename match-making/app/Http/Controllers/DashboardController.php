@@ -34,6 +34,11 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes;
+        if ($userDetails == null) {
+            return redirect('/attributes');
+        }
+        return json_encode($userDetails);
+
         $matchMaker = new MatchMaker();
         $attributes = $matchMaker->getPotentialMatches($userDetails);
         foreach ($attributes as $user)  {
