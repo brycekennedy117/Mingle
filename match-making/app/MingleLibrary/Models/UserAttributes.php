@@ -17,7 +17,8 @@ class UserAttributes extends Model
 
     protected $fillable = [
         'user_id', 'openness', 'conscientiousness', 'extraversion', 'agreeableness',
-        'neuroticism', 'postcode', 'suburb', 'date_of_birth', 'gender', 'interested_in', 'latitude', 'longitude'
+        'neuroticism', 'postcode', 'suburb', 'date_of_birth', 'gender', 'interested_in', 'latitude', 'longitude',
+        'image_url'
     ];
 
     public $primaryKey = 'id';
@@ -26,9 +27,10 @@ class UserAttributes extends Model
 
     public function user() {
 
-        return $this->belongsTo('App\MingleLibrary\Models\Postcode');
+        return $this->belongsTo('App\User');
     }
 
-
-
+    public function postcodeObject() {
+        return $this->belongsTo('App\MingleLibrary\Models\Postcode', 'postcode');
+    }
 }

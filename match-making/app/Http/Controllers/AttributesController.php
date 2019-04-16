@@ -16,6 +16,9 @@ class AttributesController extends Controller
 
     public function index()
     {
+        if (Auth::user()->Attributes != null) {
+            return redirect()->back();
+        }
         return view('attributes');
     }
 
@@ -32,8 +35,9 @@ class AttributesController extends Controller
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
+            'image_url' =>  "https://profiles.utdallas.edu/img/default.png"
         ]);
-        return view('dashboard');
+        return redirect('dashboard');
     }
 
     public function suburbs(Request $request) {

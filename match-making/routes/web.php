@@ -28,6 +28,8 @@ $router->group(['middleware' => 'auth'], function() {
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
+//    test route
+    Route::get('/dashboard', 'DashboardController@viewMatches');
     Route::post('/upload', function (){
         request()->file('file')->store(
             'my-file',
