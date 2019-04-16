@@ -26,9 +26,10 @@ class UserAttributes extends Model
 
     public function user() {
 
-        return $this->belongsTo('App\MingleLibrary\Models\Postcode');
+        return $this->belongsTo('App\User');
     }
 
-
-
+    public function postcodeObject() {
+        return $this->belongsTo('App\MingleLibrary\Models\Postcode', 'postcode');
+    }
 }
