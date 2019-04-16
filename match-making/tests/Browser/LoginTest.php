@@ -53,16 +53,16 @@ class LoginTest extends DuskTestCase
     }
 
     public function testLoginWithIncompleteRegistration() {
-        $incomplete_user = factory(User::class)->make();
-        $incomplete_user->save();
-        $this->actingAs($this->user)->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) {
+            $incomplete_user = factory(User::class)->make();
+            $incomplete_user->save();
             $browser->visit('/')
                 ->click('.links > a')
                 ->assertUrlIs($this->appUrl.'/login')
-                ->type('email', $this->user->email)
+                ->type('email', $incomplete_user->email)
                 ->type('password', 'password')
                 ->press('Login')
-                ->pause(500)
+                ->pause(2000)
                 ->assertUrlIs($this->appUrl.'/attributes');
         });
     }

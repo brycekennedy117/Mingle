@@ -36,7 +36,4 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    public function testUserLogin(){
-
-    }
 }
