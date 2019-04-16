@@ -51,8 +51,7 @@ class MatchController extends Controller
 
     public function matches(Request $request)
     {
-        $userID = Auth::user()
-            ->id;
+        $userID = Auth::user()->id;
 
         $matches1 = Match::all(['user_id_2', 'user_id_1'])
             ->where('user_id_1', $userID)->all();
@@ -62,7 +61,7 @@ class MatchController extends Controller
 
 
         $attributesArray = array();
-
+        $attributes = null;
         foreach($matches1 as $match) {
             $attributes = $match->user2->Attributes;
             array_push($attributesArray, $attributes);
@@ -87,7 +86,7 @@ class MatchController extends Controller
 
         $getCurrentUser = Match::all()
             ->where('user_id_1', $userID);
-
+        $currentUserLocation = [];
         foreach($getCurrentUser as $match) {
             $currentUserpostcode = $match->user1->Attributes->postcodeObject;
             $getRangeXcurrentUser = $currentUserpostcode->latitude;
@@ -95,7 +94,7 @@ class MatchController extends Controller
             $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
 
         }
-        if ($attributes != null) {
+        if (auth()->user()->Attributes != null) {
             return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
         }
         return redirect('/attributes');

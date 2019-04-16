@@ -34,7 +34,6 @@ class LoginTest extends DuskTestCase
                 ->type('password', 'password')
                 ->press('Login')
                 ->assertUrlIs($this->appUrl.'/dashboard');
-
         });
     }
 

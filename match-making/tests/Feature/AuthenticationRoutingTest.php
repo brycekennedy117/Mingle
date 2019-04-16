@@ -98,10 +98,19 @@ class AuthenticationRoutingTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testAuthorisedIncompleteAttributes()
+    {   $user = factory(User::class)->make();
+        $user->save();
+        $response = $this->actingAs($user)->get('/attributes');
+        $response->assertStatus(200);
+    }
+
     public function testAuthorisedAttributes()
     {
         $response = $this->actingAs($this->user)->get('/attributes');
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $response->assertHeader('location', $this->appUrl.'/dashboard');
+
     }
 
     public function testAuthorisedMatches()
