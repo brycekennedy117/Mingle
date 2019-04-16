@@ -27,7 +27,6 @@
 
                             @if(count($matches) > 0)
                                 @foreach($matches as $userAttributes)
-
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-center align-items-center">
@@ -35,13 +34,10 @@
                                                      class="rounded-circle img-thumbnail"
                                                      width="100px"/>
                                             </div>
-                                            <div class="p3 d-flex justify-content-center align-items-center flex-column">
-                                                <div class="container-fluid"><h4></h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic">{{$userAttributes->postcodeObject->suburb}}</p></div>
-                                                <div class="container-fluid"><p>Location </p></div><br>
-                                                <div class="container-fluid"><h4>{{$userAttributes->user->name}}</h4></div><br>
-                                                <div class="container-fluid"><p class="font-italic"></p></div>
-                                                <div class="container-fluid"><p></p></div><br>
+                                            <div class="p3 d-flex justify-content-center flex-column">
+                                                <a class="font-weight-bold"><h3>{{$userAttributes->user->name}}</h3></a>
+                                                <a class="font-weight-bold">{{$userAttributes->postcodeObject->suburb}}</a>
+                                                <a class="font-weight-bold font-italic">Distance {{\App\Http\Controllers\MatchController::distanceBetweenMatches($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $currentUserLocate['lat'], $currentUserLocate['long'])}}km</a><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
