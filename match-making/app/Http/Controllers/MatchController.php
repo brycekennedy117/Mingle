@@ -20,10 +20,15 @@ class MatchController extends Controller
 
     public function index()
     {
-        $name = Auth::user()->name;
+        $attributes = Auth::user()->Attributes;
+        if ($attributes != null) {
+            $name = Auth::user()->name;
 
-        $matches = Match::all();
-        return view('matches', ['name' => $name])->with('matches', $matches);
+            $matches = Match::all();
+
+            return view('matches', ['name' => $name])->with('matches', $matches);
+        }
+        return redirect('/attributes');
     }
 
     public function profile(User $user)
@@ -90,6 +95,9 @@ class MatchController extends Controller
             $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
 
         }
-        return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+        if ($attributes != null) {
+            return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+        }
+        return redirect('/attributes');
     }
 }

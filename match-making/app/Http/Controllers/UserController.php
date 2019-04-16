@@ -5,19 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 //User attributes model
-use app\User;
-use app\MingleLibrary\Models\UserAttributes;
+use App\User;
+use App\MingleLibrary\Models\UserAttributes;
 
 class UserController extends Controller
 {
 
     /*Displays user information*/
     public function index()   {
+        $attributes = Auth::user()->Attributes;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
 
-        return view('profile', ['name' => $name])->with('user',$userDetails);
+        if ($attributes != null) {
+            return view('profile', ['name' => $name])->with('user',$userDetails);
+        }
+        return redirect('/attributes');
+
+    }
+
+    public function edit() {
+        $name = Auth::user()->name;
+        $userId = Auth::id();
+        $userDetails = User::find($userId)->Attributes()->get();
+        return view('/editprofile', ['name' => $name])->with('user', $userDetails);
+    }
+
+    public function update(Request $request, $id) {
 
     }
 
@@ -39,8 +54,10 @@ class UserController extends Controller
         ]);
 
         //Change Password
+        $attributes = Auth::user()->Attributes;
         $user = Auth::user();
         $user->password = bcrypt($request->get('change-password'));
+        $attributes->postcode = $request->get('postcode');
         $user->save();
 
         return redirect()->back()->with("success","Password changed successfully.");

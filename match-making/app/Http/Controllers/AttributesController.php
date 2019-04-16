@@ -16,6 +16,9 @@ class AttributesController extends Controller
 
     public function index()
     {
+        if (Auth::user()->Attributes != null) {
+            return redirect()->back();
+        }
         return view('attributes');
     }
 
@@ -33,7 +36,7 @@ class AttributesController extends Controller
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
         ]);
-        return view('dashboard');
+        return redirect('dashboard');
     }
 
     public function suburbs(Request $request) {
