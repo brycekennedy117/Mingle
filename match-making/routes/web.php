@@ -30,6 +30,8 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'UserController@index')->name('profile');
 //    test route
     Route::get('/dashboard', 'DashboardController@viewMatches');
+    Route::get('/editprofile', 'UserController@edit');
+    Route::get('/messages', 'MessagesController@index')->name('messages');
 });
 
 $router->group(['middleware' => 'guest'], function() {

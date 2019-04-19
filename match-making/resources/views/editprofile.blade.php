@@ -7,12 +7,12 @@
                 <h1>Edit Profile</h1>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-
+                    {{ Auth::user()->name }}
                     <div class="form-group row">
                         <label for="postcode" class="col-md-4 col-form-label text-md-right">Postcode</label>
 
                         <div class="col-md-6">
-                            <input id="postcode" type="number" class="" name="postcode" required autofocus>
+                            <input id="postcode" type="number" class="" name="postcode" required autofocus value="{{ Auth::user()->Attributes->postcode }}">
                         </div>
                     </div>
 
