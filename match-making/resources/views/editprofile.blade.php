@@ -5,22 +5,49 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8">
                 <h1>Edit Profile</h1>
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('edit') }}">
                     @csrf
-                    {{ Auth::user()->name }}
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="postcode" class="col-md-4 col-form-label text-md-right">Postcode</label>
 
                         <div class="col-md-6">
-                            <input id="postcode" type="number" class="" name="postcode" required autofocus value="{{ Auth::user()->Attributes->postcode }}">
+                            <input id="postcode" type="number" class="form-control" name="postcode" required autofocus value="{{ Auth::user()->Attributes->postcode }}">
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="interested_in" class="col-md-4 col-form-label text-md-right">{{ __('Interested in') }}</label>
+
+                        <div class="col-md-6">
+                            <select name="interested_in" id="interested_in">
+                                <option value="F">Female</option>
+                                <option value="M">Male</option>
+                                <option value="MF">Both</option>
+                            </select>
+
+                            @if ($errors->has('interested_in'))
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('interested_in') }}</strong>
+                                        </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <a href="#">Change Password</a>
 
                     <div class="form-group row">
                         <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="" name="password" required autofocus>
+                            <input id="password" type="password" class="form-control" name="password" autofocus>
                         </div>
                     </div>
 
@@ -28,7 +55,7 @@
                         <label for="change-password" class="col-md-4 col-form-label text-md-right">New Password</label>
 
                         <div class="col-md-6">
-                            <input id="change-password" type="password" class="" name="change-password" required>
+                            <input id="change-password" type="password" class="form-control" name="change-password">
 
                         </div>
                     </div>

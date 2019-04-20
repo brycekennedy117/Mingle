@@ -32,13 +32,9 @@ class UserController extends Controller
         return view('/editprofile', ['name' => $name])->with('user', $userDetails);
     }
 
-    public function update(Request $request, $id) {
-
-    }
-
     /*Edits password in user profile*/
     public function editPassword(Request $request)   {
-        if (!(Hash::check($request->get('password'), Auth::user()->password))) {
+       /* if (!(Hash::check($request->get('password'), Auth::user()->password))) {
             // The passwords matches
             return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
         }
@@ -51,13 +47,15 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'password' => 'required',
             'new-password' => 'required|string|min:6|confirmed',
-        ]);
+        ]);*/
 
         //Change Password
         $attributes = Auth::user()->Attributes;
         $user = Auth::user();
         $user->password = bcrypt($request->get('change-password'));
         $attributes->postcode = $request->get('postcode');
+        $attributes->interested_in = $request->get('interested_in');
+        $attributes->save();
         $user->save();
 
         return redirect()->back()->with("success","Password changed successfully.");
