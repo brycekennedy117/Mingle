@@ -23,7 +23,7 @@
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
                             <tr>
-                                <th>Name:</th>
+                                <th>Name</th>
                                 <td>{{$name}}</td>
                             </tr>
                             <tr>
@@ -32,11 +32,11 @@
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td>{{$user[0]->postcode}}</td>
+                                <td>{{$user[0]->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td>{{$user[0]->suburb}}</td>
+                                <td>{{$user[0]->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
