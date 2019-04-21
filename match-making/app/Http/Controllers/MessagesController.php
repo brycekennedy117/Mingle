@@ -10,7 +10,12 @@ class MessagesController extends Controller
 {
     public function index()
     {
-        return view('messages');
+        $messages = Message::all();
+        $attributes = Auth::user()->Attributes;
+        if ($attributes != null) {
+            return view('messages')->with('messages', $messages);
+        }
+        return redirect('/attributes');
     }
 
     public function store(Request $request)
@@ -21,5 +26,12 @@ class MessagesController extends Controller
             'content' => $request['content'],
         ]);
         return redirect('/messages');
+    }
+
+    public function delete($id)
+    {
+        $message = Message::find($id);
+        $message->delete();
+        return redirect('/messages')->with('success', 'Message removed!');
     }
 }

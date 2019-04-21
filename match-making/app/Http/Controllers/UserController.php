@@ -26,10 +26,14 @@ class UserController extends Controller
     }
 
     public function edit() {
+        $attributes = Auth::user()->Attributes;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
-        return view('/editprofile', ['name' => $name])->with('user', $userDetails);
+        if ($attributes != null) {
+            return view('/editprofile', ['name' => $name])->with('user', $userDetails);
+        }
+        return redirect('/attributes');
     }
 
     /*Edits password in user profile*/

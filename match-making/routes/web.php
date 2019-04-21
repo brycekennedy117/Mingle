@@ -31,10 +31,12 @@ $router->group(['middleware' => 'auth'], function() {
 //    test route
     Route::get('/dashboard', 'DashboardController@viewMatches');
     Route::get('/editprofile', 'UserController@edit');
+    Route::resource('messages', 'MessagesController');
     Route::get('/messages', 'MessagesController@index')->name('messages');
     Route::post('/messages', 'MessagesController@store');
     Route::get('/', 'HomeController@index');
     Route::post('/editprofile', 'UserController@editpassword')->name('edit');
+    Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
 });
 
 $router->group(['middleware' => 'guest'], function() {
