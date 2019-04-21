@@ -13,7 +13,12 @@
                                 {{ Auth::user()::find($message->sender_id)->name }} :
                                 {{ $message->created_at }}
                                 <a href="{{route('message.delete', $message->id)}}" class="btn btn-danger float-right">Delete</a>
+                                <a href="#" class="btn btn-primary float-right" id="edit">Edit</a>
                             </small>
+                            <div class="col-md-8 offset-md-4" style="display: none;" id="edit-form">
+                                <textarea id="content" name="content" rows="1">{{ $message->content }}</textarea>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
                        </div>
                     @endif
                 @endforeach
