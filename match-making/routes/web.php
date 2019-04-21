@@ -29,6 +29,7 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
 //    test route
+    Route::post('/dashboard', 'DashboardController@liked')->name('liked');
     Route::get('/dashboard', 'DashboardController@viewMatches');
     Route::get('/', 'HomeController@index');
 });

@@ -19,7 +19,11 @@
                                         <p class="card-text">nal content. This content is a little bit longer.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <a href="#" class="btn btn-primary">Like</a>
+                                        <form method="POST" action="{{ route('liked') }}">
+                                            @csrf
+                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <button type="submit" class="btn btn-primary">Like</button>
+                                        </form>
                                         <a href="#" class="btn btn-danger">Next</a>
                                     </div>
                                 </div>
