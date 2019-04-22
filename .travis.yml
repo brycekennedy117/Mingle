@@ -14,6 +14,7 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `mingle-data-test`'
   - composer self-update
   - composer install
+  - php artisan config:clear
   - php artisan --env=testing migrate
 script:
   - phpunit tests/
