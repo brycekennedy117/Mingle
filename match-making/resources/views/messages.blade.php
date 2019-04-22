@@ -12,8 +12,10 @@
                             <small>
                                 {{ Auth::user()::find($message->sender_id)->name }} :
                                 {{ $message->created_at }}
+                            @if($message->sender_id === Auth::user()->id)
                                 <a href="{{route('message.delete', $message->id)}}" class="btn btn-danger float-right">Delete</a>
                                 <a href="#" class="btn btn-primary float-right" id="edit">Edit</a>
+                            @endif
                             </small>
                             <div class="col-md-8 offset-md-4" style="display: none;" id="edit-form">
                                 <textarea id="content" name="content" rows="1">{{ $message->content }}</textarea>
