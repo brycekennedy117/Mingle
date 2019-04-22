@@ -4,11 +4,14 @@
 /storage/*.key
 /vendor
 .env
+composer.phar
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+./idea
+.env.testing
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

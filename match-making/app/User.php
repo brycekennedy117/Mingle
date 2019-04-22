@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public $primaryKey = 'id';
+
     use Notifiable;
 
     /**
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -36,4 +38,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Attributes() {
+
+        return $this->hasOne('App\MingleLibrary\Models\UserAttributes');
+
+    }
+    public function matches(){
+
+        return $this->hasMany('App\MingleLibrary\Models\Matches', 'user_id_1');
+    }
+
+    public function getID() {
+        return $this->id;
+    }
 }
