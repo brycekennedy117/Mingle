@@ -10,6 +10,7 @@ before_script:
   - cd match-making
   - composer self-update
   - composer install --no-dev
+  - vendor/bin/phpunit
 
 deploy:
   provider: elasticbeanstalk
