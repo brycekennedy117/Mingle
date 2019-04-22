@@ -4,6 +4,8 @@ php:
 branches:
   only:
   - master
+services:
+  - mysql
 notifications:
   email: false
 before_script:
