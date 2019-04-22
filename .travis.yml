@@ -16,8 +16,6 @@ before_script:
   - composer install
   - php artisan config:clear
   - php artisan --env=testing migrate
-script:
-  - phpunit tests/
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
