@@ -10,8 +10,8 @@ before_script:
   - cd match-making
   - composer self-update
   - composer install --no-dev
+script:
   - vendor/bin/phpunit
-
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
