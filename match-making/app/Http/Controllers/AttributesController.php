@@ -47,28 +47,6 @@ class AttributesController extends Controller
         return redirect('dashboard');
     }
 
-    //public function pictureUpload(Request $request)
-    //{
-    //    $image= $request->file('image');
-    //    $input['imagename']=time().'.'.$image->getClientOriginalExtension();
-    //    $destinationPath=public_path('/avatars/');
-    //    $image->move($destinationPath,$input['imagename']);
-    //    return back()->with("Picture uploaded");
-
-    //}
-
-    #public function showAvatar(Request $request)
-   # {
-
-           // $image=$request->file('image');
-           // $filename = time().'.'.$image->getClientOriginalExtension();
-           // $destinationPath=public_path('/avatars/');
-           // $image->move($destinationPath,$filename);
-
-
-
-            #return view('profile')->with('image', $att);
-     #   }
 
     public function showAvatar(Request $request)
     {
