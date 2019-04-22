@@ -10,7 +10,7 @@ notifications:
   email: false
 before_script:
   - cd match-making
-  - mysql -e 'DROP DATABASE IF NOT EXISTS `mingle-data-test`'
+  - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `mingle-data-test`'
   - composer self-update
   - composer install
