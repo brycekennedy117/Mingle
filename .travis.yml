@@ -9,7 +9,9 @@ notifications:
 before_script:
   - cd match-making
   - composer self-update
-  - composer install --no-dev
+  - composer install
+script:
+  - phpunit tests/
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
