@@ -8,6 +8,7 @@ services:
   - mysql
 notifications:
   email: false
+skip_cleanup: true
 before_script:
   - cd match-making
   - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
