@@ -8,8 +8,10 @@ notifications:
   email: false
 before_script:
   - cd match-making
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS mingle-data-test'
   - composer self-update
   - composer install
+  - php artisan --env=testing migrate
 script:
   - phpunit tests/
 deploy:
