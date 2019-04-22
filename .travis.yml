@@ -8,7 +8,6 @@ services:
   - mysql
 notifications:
   email: false
-skip_cleanup: true
 before_script:
   - cd match-making
   - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
@@ -29,3 +28,4 @@ deploy:
     repo: brycekennedy117/PP1-Matchmaking
   bucket_name: elasticbeanstalk-us-east-2-112626369674
   bucket_path: Mingle 2019/
+  skip_cleanup: true
