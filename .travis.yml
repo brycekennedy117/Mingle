@@ -15,6 +15,7 @@ before_script:
   - composer self-update
   - composer install
   - php artisan config:clear
+  - printenv
   - php artisan --env=testing migrate
 script:
   - phpunit tests/
