@@ -12,14 +12,11 @@
                         <div style="padding: 20px"></div>
                         <div class="row a">
                             <div class="col">
-                                <img src="https://profiles.utdallas.edu/img/default.png" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
-                                <form action="{{ route('upload') }}"method="post" enctype="multipart/form-data">
-                                    <div class="container-fluid" style="align-content: center;float: right;width: 600px;">
-                                    @csrf
-                                        <input type="file" name="file" class="form-control-sm border">
-                                        <input type="submit" class="btn-primary btn-group-sm">
-                                    </div>
-
+                                <img src="{{$user[0]->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                                    <input type="file" name="file" class="form-control-sm border">
+                                    <input type="submit" class="btn-primary btn-group-sm">
                                 </form>
                             </div>
                         </div>

@@ -36,7 +36,13 @@ $router->group(['middleware' => 'auth'], function() {
             's3'
         );
         return back();
-    })->name('upload');
+    });
+
+    Route::post('profile', [
+        'as' => 'avatar',
+        'uses' => 'AttributesController@showAvatar'
+    ]);return back();
+
 });
 
 $router->group(['middleware' => 'guest'], function() {

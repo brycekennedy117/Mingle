@@ -31,9 +31,7 @@
                                     <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-center align-items-center">
-                                                <img src="https://www.guidedogsvictoria.com.au/wp-content/themes/default/static/img/puppy.png"
-                                                     class="rounded-circle img-thumbnail"
-                                                     width="100px"/>
+                                                <img src='{{$userAttributes->image_url}}' class="rounded-circle img-thumbnail" width="100px"/>
                                             </div>
                                             <div class="p3 d-flex justify-content-center align-items-center flex-column">
                                                 <div class="container-fluid"><h4></h4></div><br>
