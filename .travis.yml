@@ -9,7 +9,7 @@ notifications:
 before_script:
   - cd match-making
   - composer self-update
-  - composer install
+  - composer install --no-dev
 
 deploy:
   provider: elasticbeanstalk

@@ -36,10 +36,22 @@ class MatchController extends Controller
         return view('campbell');
     }
 
+
+    public static function distanceBetweenMatches($point1_lat, $point1_long, $point2_lat, $point2_long, $unit = 'km', $decimals = 2) {
+        $degrees = rad2deg(acos((sin(deg2rad($point1_lat)) * sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat)) * cos(deg2rad($point2_lat)) * cos(deg2rad($point1_long - $point2_long)))));
+
+        // Convert the distance in degrees to the chosen unit (kilometres, miles or nautical miles)
+        switch ($unit) {
+            case 'km':
+                $distance = $degrees * 111.13384; // 1 degree = 111.13384 km, based on the average diameter of the Earth (12,735 km)
+                break;
+        }
+        return round($distance, $decimals);
+    }
+
     public function matches(Request $request)
     {
-        $userID = Auth::user()
-            ->id;
+        $userID = Auth::user()->id;
 
         $matches1 = Match::all(['user_id_2', 'user_id_1'])
             ->where('user_id_1', $userID)->all();
@@ -49,7 +61,7 @@ class MatchController extends Controller
 
 
         $attributesArray = array();
-
+        $attributes = null;
         foreach($matches1 as $match) {
             $attributes = $match->user2->Attributes;
             array_push($attributesArray, $attributes);
@@ -58,6 +70,7 @@ class MatchController extends Controller
             $attributes = $match->user1->Attributes;
             array_push($attributesArray, $attributes);
         }
+
         //Paginate match page
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $itemCollection = collect($attributesArray);
@@ -65,19 +78,25 @@ class MatchController extends Controller
         $currentPageItems = $itemCollection
             ->slice(($currentPage * $perPage) - $perPage, $perPage)
             ->all();
-        $UserAttributes = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-        $UserAttributes
+        $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $paginatedMatches
             ->setPath($request->url());
 
-        $attributes = Auth::user()->Attributes;
-        if ($attributes != null) {
-            return view('matches', ['items' => $UserAttributes])->with('matches', $UserAttributes);
+        //Get current user location
+
+        $getCurrentUser = Match::all()
+            ->where('user_id_1', $userID);
+        $currentUserLocation = [];
+        foreach($getCurrentUser as $match) {
+            $currentUserpostcode = $match->user1->Attributes->postcodeObject;
+            $getRangeXcurrentUser = $currentUserpostcode->latitude;
+            $getRangeYcurrentUser = $currentUserpostcode->longitude;
+            $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
+
+        }
+        if (auth()->user()->Attributes != null) {
+            return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
         }
         return redirect('/attributes');
     }
-
-
 }
-
-
-

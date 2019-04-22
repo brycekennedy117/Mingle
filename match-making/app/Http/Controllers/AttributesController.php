@@ -20,7 +20,7 @@ class AttributesController extends Controller
     {
 
         if (Auth::user()->Attributes != null) {
-            return redirect()->back();
+            return redirect('/dashboard');
         }
         return view('attributes');
 
