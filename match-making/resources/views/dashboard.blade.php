@@ -4,69 +4,75 @@
     <script>
         function show_value(x)
         {
-            document.getElementById("slider_value").innerHTML=x;
+            document.getElementById("slider_valueDistance").innerHTML=x;
         }
         getValue('slider').value = 50
+
+        function show_value2(x)
+        {
+            document.getElementById("slider_valueAge").innerHTML=x;
+        }
+        getValue('slider').value2 = 50
     </script>
+    <script src="multirange.js"></script>
+
 
 
     <div class="container text-center col-md-auto">
 
         <div class="row justify-content-center">
             <div class="col-md-auto">
+                <!-- Filter -->
+
+                <div class="container">
+                    <h4>Filter</h4>
+
+                    <div class="row border-bottom p-1">
+                        <div class="col">
+                            <h6 class="font-weight-bolder">Distance: <span id="slider_valueDistance">25</span>km</h6><br>
+                            <h6 class="font-weight-bolder">Age: <span id="slider_valueAge">18</span></h6>
+                        </div>
+                        <div class="col">
+                            <form class="range-field my-4 w-50 d-flex justify-content-center my-43">
+                                <input type="range" min="0" max="50" step="5" value="" onchange="show_value(this.value);"/>
+                            </form>
+                            <form class="range-field my-4 w-50 d-flex justify-content-center my-43">
+                                <input type="range" min="18" max="50" step="1" value="" onchange="show_value2(this.value)"/>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Age
+                    <div class="row border-bottom p-2">
+                        <div class="col">
+                            <h6 class="font-weight-bolder">Age: </h6>
+                        </div>
+
+                        <div class="col">
+                            <form class="range-field my-4 w-50 d-flex justify-content-center my-43">
+                                <input type="range" min="0" max="50" step="1" value="25"/>
+                            </form>
+                        </div>
+                    </div>
+                    -->
+                    <div class="row p-3">
+                        <div class="col">
+                            <button class="btn btn-primary" style="width:150px;" type="submit">Update</button>
+                            <button class="btn btn-secondary" type="button">Save search</button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Filter end-->
+
                 <div class="card">
+
                     <div class="card-header font-weight-bold font">Mingles♥ near you</div>
 
                     <div class="container">
                         <div class="row justify-content-center">
 
 
-                            <!-- Filter -->
 
-                            <div class="card-body">
-                                Filter
-                                <div class="row border-bottom p-2">
-                                    <div class="col">
-                                        <h6 class="font-weight-bolder">Distance: <span id="slider_value">25</span>km</h6>
-                                    </div>
-
-                                    <div class="col">
-                                        <form class="range-field my-4 w-50 d-flex justify-content-center my-43">
-                                                <input type="range" min="0" max="50" step="5" value="25" onchange="show_value(this.value);"/>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="row border-bottom p-2">
-                                    <div class="col">
-                                        <h6 class="font-weight-bolder">Age: </h6>
-                                    </div>
-
-                                    <div class="col">
-                                        <form class="range-field my-4 w-50 d-flex justify-content-center my-43">
-                                                <input type="range" min="0" max="50" step="1" value="25"/>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                </div>
-                                <div class="row">
-
-                                </div>
-                                <div class="row">
-
-                                </div>
-                                <div class="row p-3">
-                                    <div class="col">
-                                        <button class="btn btn-primary" style="width:150px;" type="submit">Update</button>
-                                        <button class="btn btn-secondary" type="button">Save search</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- Filter end-->
 
                             @foreach ($attributes as $user)
                                 <div class="card" style= "max-width:12rem">
