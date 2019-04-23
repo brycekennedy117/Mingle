@@ -32,6 +32,19 @@ $router->group(['middleware' => 'auth'], function() {
     Route::post('/dashboard', 'DashboardController@liked')->name('liked');
     Route::get('/dashboard', 'DashboardController@viewMatches');
     Route::get('/', 'HomeController@index');
+    Route::post('/upload', function (){
+        request()->file('file')->store(
+            'my-file',
+            's3'
+        );
+        return back();
+    });
+
+    Route::post('profile', [
+        'as' => 'avatar',
+        'uses' => 'AttributesController@showAvatar'
+    ]);return back();
+
 });
 
 $router->group(['middleware' => 'guest'], function() {
