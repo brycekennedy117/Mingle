@@ -83,10 +83,8 @@ class MatchController extends Controller
             ->setPath($request->url());
 
         //Get current user location
-
         $getCurrentUser = Match::all()
             ->where('user_id_1', $userID);
-        $currentUserLocation = [];
         foreach($getCurrentUser as $match) {
             $currentUserpostcode = $match->user1->Attributes->postcodeObject;
             $getRangeXcurrentUser = $currentUserpostcode->latitude;
