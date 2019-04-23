@@ -17,7 +17,8 @@ $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker
         'gender' => 'M',
         'interested_in' => 'F',
         'date_of_birth' => $faker->date("Y-m-d H:i:s"),
-        'postcode' => $postcode->id
+        'postcode' => $postcode->id,
+        'image_url' => "https://profiles.utdallas.edu/img/default.png"
     ];
 });
 
