@@ -21,7 +21,7 @@
     <div class="container text-center col-md-auto">
 
         <div class="row justify-content-center">
-            <div class="col-md-auto">
+            <div class="container-fluid">
                 <!-- Filter -->
 
                 <div class="container">
