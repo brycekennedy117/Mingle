@@ -22,7 +22,7 @@
                         </div>
                         <div style="padding: 10px"></div>
                         <div class="row">
-                            <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
+                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
                         </div>
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
