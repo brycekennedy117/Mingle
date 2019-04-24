@@ -14,5 +14,6 @@ class MatchTableSeeder extends Seeder
         //
         $this->call([UserTableSeeder::class]);
         factory(App\MingleLibrary\Models\Match::class, 1000)->make();
+
     }
 }

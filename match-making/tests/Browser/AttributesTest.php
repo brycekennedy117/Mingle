@@ -43,6 +43,17 @@ class AttributesTest extends DuskTestCase
         });
     }
 
+    public function testValidAttributesRoute()
+    {
+        $this->browse(function (Browser $browser) {
+            $user = factory(User::class)->create();
+            $browser->loginAs($user->email)
+                ->visit($this->appUrl.'/attributes')
+                ->assertUrlIs($this->appUrl.'/dashboard');
+
+        });
+    }
+
     public function testPostcodeListCount() {
 
 
