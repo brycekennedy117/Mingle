@@ -48,21 +48,25 @@ class UserController extends Controller
 
         if (strlen($current_password) > 0 && strlen($new_password) == 0)
         {
-            return redirect("/editprofile")->with('error', 'Please ensure to fill out all password related fields.');
+            return redirect("/editprofile")->with('error', 'If you want to change your password, please ensure to fill out all password related fields.');
         }
         if (strlen($new_password) > 0 && strlen($current_password) == 0)
         {
-            return redirect("/editprofile")->with('error', 'Please ensure to fill out all password related fields.');
+            return redirect("/editprofile")->with('error', 'If you want to change your password, please ensure to fill out all password related fields.');
         }
         if (strlen($current_password) > 0 && strlen($new_password) > 0)
         {
-            if (Hash::check($request->get('password'), Auth::user()->password) && $new_password === $password_confirm)
-            {
-                Auth::user()->password = Hash::make($new_password);
-            }
             if (!Hash::check($request->get('password'), Auth::user()->password))
             {
                 return redirect("/editprofile")->with('error', 'Current password was entered incorrectly.');
+            }
+            if (!($new_password === $password_confirm))
+            {
+                return redirect("/editprofile")->with('error', 'New password and confirmation do not match.');
+            }
+            if (Hash::check($request->get('password'), Auth::user()->password) && $new_password === $password_confirm)
+            {
+                Auth::user()->password = Hash::make($new_password);
             }
         }
         $attributes->save();
