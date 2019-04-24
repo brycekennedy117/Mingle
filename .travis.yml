@@ -21,6 +21,7 @@ notifications:
   email: false
 before_script:
   - cd match-making
+  - google-chrome --version
   - cp .env.travis .env
   - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `mingle-data-test`'
