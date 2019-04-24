@@ -5,13 +5,6 @@ php:
 
 dist: trusty
 
-addons:
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
-
 branches:
   only:
   - master
@@ -21,7 +14,6 @@ notifications:
   email: false
 before_script:
   - cd match-making
-  - google-chrome --version
   - cp .env.travis .env
   - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `mingle-data-test`'
@@ -29,11 +21,6 @@ before_script:
   - composer install
   - php artisan config:clear
   - php artisan migrate
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-  - php artisan serve &
-script:
-  - phpunit
-  - php artisan dusk
 after_success:
   - export DB_HOST=$PRODUCTION_DB_HOST
   - export DB_DATABASE=$PRODUCTION_DB_DATABASE
