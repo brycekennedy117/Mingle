@@ -17,6 +17,9 @@ before_script:
   - composer install
   - php artisan config:clear
   - php artisan migrate
+script:
+  - phpunit
+  - php artisan dusk
 after_success:
   - export DB_HOST=$PRODUCTION_DB_HOST
   - export DB_DATABASE=$PRODUCTION_DB_DATABASE
