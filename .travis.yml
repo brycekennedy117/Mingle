@@ -6,7 +6,7 @@ php:
 dist: trusty
 
 addons:
-  chrome: stable
+  chrome: beta
 
 branches:
   only:
