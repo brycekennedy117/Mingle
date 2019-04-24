@@ -41,22 +41,33 @@
                         </div>
                     </div>
 
-                    <a href="#">Change Password</a>
-
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
-
-                        <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password" autofocus>
-                        </div>
+                        <a href="#" id="password-toggle">Change Password</a>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="change-password" class="col-md-4 col-form-label text-md-right">New Password</label>
+                    <div id="password-form" style="display: none">
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
 
-                        <div class="col-md-6">
-                            <input id="change-password" type="password" class="form-control" name="change-password">
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" autofocus>
+                            </div>
+                        </div>
 
+                        <div class="form-group row">
+                            <label for="change-password" class="col-md-4 col-form-label text-md-right">New Password</label>
+
+                            <div class="col-md-6">
+                                <input id="change-password" type="password" class="form-control" name="change-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="change-password-confirm" class="col-md-4 col-form-label text-md-right">Confirm New Password</label>
+
+                            <div class="col-md-6">
+                                <input id="change-password-confirm" type="password" class="form-control" name="change-password-confirm">
+                            </div>
                         </div>
                     </div>
 
