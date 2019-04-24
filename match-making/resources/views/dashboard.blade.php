@@ -56,7 +56,7 @@
                         <div class="row justify-content-center">
 
                             @foreach ($attributes as $user)
-                                <div class="card m-3" style= "max-width:12rem">
+                                <div id="match-card" class="card m-3" style= "max-width:12rem">
                                     <div class="p-3">
                                         <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
                                     </div>

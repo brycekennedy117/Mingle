@@ -28,27 +28,27 @@
                             <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td>{{$name}}</td>
+                                <td id="name-cell">{{$name}}</td>
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td>{{$user[0]->date_of_birth}}</td>
+                                <td id="dob-cell">{{$user[0]->date_of_birth}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td>{{$user[0]->postcodeObject->postcode}}</td>
+                                <td id="postcode-cell">{{$user[0]->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td>{{$user[0]->postcodeObject->suburb}}</td>
+                                <td id="suburb-cell">{{$user[0]->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>{{$user[0]->gender}}</td>
+                                <td id="gender-cell">{{$user[0]->gender}}</td>
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td>{{$user[0]->interested_in}}</td>
+                                <td id="interested-in-cell">{{$user[0]->interested_in}}</td>
                             </tr>
                             </tbody>
                         </table>
