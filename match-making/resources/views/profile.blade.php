@@ -21,8 +21,9 @@
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
-                            <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
-
+                        <div class="row">
+                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
+                        </div>
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
