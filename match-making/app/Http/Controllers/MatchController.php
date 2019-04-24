@@ -85,13 +85,19 @@ class MatchController extends Controller
         //Get current user location
         $getCurrentUser = Match::all()
             ->where('user_id_1', $userID);
-        foreach($getCurrentUser as $match) {
+        $otherUsers = Match::all()
+            ->where('user_id_2', $userID);
+
+        $users = $getCurrentUser->merge($otherUsers);
+
+        $currentUserLocation = array();
+        foreach($users as $match) {
             $currentUserpostcode = $match->user1->Attributes->postcodeObject;
             $getRangeXcurrentUser = $currentUserpostcode->latitude;
             $getRangeYcurrentUser = $currentUserpostcode->longitude;
             $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
-
         }
+
         if (auth()->user()->Attributes != null) {
             return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
         }

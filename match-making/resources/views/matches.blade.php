@@ -36,7 +36,7 @@
                                             <div class="p3 d-flex justify-content-center flex-column">
                                                 <a class="font-weight-bold"><h3>{{$userAttributes->user->name}}</h3></a>
                                                 <a class="font-weight-bold">{{$userAttributes->postcodeObject->suburb}}</a>
-                                                <a class="font-weight-bold font-italic">Distance {{\App\Http\Controllers\MatchController::distanceBetweenMatches($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $currentUserLocate['lat'], $currentUserLocate['long'])}}km</a><br>
+                                                <a class="font-weight-bold font-italic">Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $currentUserLocate['lat'], $currentUserLocate['long'])}}km</a><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
