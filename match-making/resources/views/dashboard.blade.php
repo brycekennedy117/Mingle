@@ -65,12 +65,17 @@
                                         <p class="card-text">nal content. This content is a little bit longer.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <form method="POST" action="{{ route('liked') }}">
+                                        <form method="POST" action="{{ route('like')}}">
                                             @csrf
                                             <input name="user_id" type="hidden" value={{$user->id}}>
                                             <button type="submit" class="btn btn-primary">Like</button>
                                         </form>
-                                        <a href="#" class="btn btn-danger">Next</a>
+                                        <form method="POST" action="{{ route('ignore') }}">
+                                            @csrf
+                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <button type="submit" class="btn btn-danger">Next</button>
+                                        </form>
+
                                     </div>
                                 </div>
                             @endforeach
