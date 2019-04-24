@@ -31,7 +31,13 @@ $router->group(['middleware' => 'auth'], function() {
 //    test route
     Route::post('/dashboard', 'DashboardController@liked')->name('liked');
     Route::get('/dashboard', 'DashboardController@viewMatches');
+    Route::get('/editprofile', 'UserController@edit');
+    Route::resource('messages', 'MessagesController');
+    Route::get('/messages', 'MessagesController@index')->name('messages');
+    Route::post('/messages', 'MessagesController@store');
     Route::get('/', 'HomeController@index');
+    Route::post('/editprofile', 'UserController@editpassword')->name('edit');
+    Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
     Route::post('/upload', function (){
         request()->file('file')->store(
             'my-file',
@@ -44,7 +50,6 @@ $router->group(['middleware' => 'auth'], function() {
         'as' => 'avatar',
         'uses' => 'AttributesController@showAvatar'
     ]);return back();
-
 });
 
 $router->group(['middleware' => 'guest'], function() {

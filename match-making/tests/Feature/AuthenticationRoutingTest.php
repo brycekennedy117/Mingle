@@ -115,6 +115,7 @@ class AuthenticationRoutingTest extends TestCase
 
     public function testAuthorisedMatches()
     {
+        echo "Email".$this->user->email;
         $response = $this->actingAs($this->user)->get('/matches');
         $response->assertStatus(200);
     }

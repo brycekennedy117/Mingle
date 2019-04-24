@@ -6,7 +6,7 @@ use App\MingleLibrary\Models\Postcode;
 $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker $faker) {
     $int= mt_rand(1262055681,1262055681);
     $date = date("Y-m-d H:i:s",$int);
-    $postcode = Postcode::inRandomOrder()->take(1)->get()[0];
+    $postcode = Postcode::all()->whereBetween('postcode', [3121, 3150])->random();
     return [
         'user_id' => 1,
         'openness' => $faker->randomFloat(2,0,1),
