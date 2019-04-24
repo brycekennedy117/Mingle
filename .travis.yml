@@ -17,6 +17,10 @@ before_script:
   - composer install
   - php artisan config:clear
   - php artisan migrate
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - ./vendor/laravel/dusk/bin/chromedriver-linux &
+  - php artisan serve &
 script:
   - phpunit
   - php artisan dusk
