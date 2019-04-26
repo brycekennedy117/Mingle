@@ -27,6 +27,7 @@ after_success:
   - export DB_USERNAME=$PRODUCTION_DB_USERNAME
   - export DB_PASSWORD=$PRODUCTION_DB_PASSWORD
   - php artisan migrate
+  - php artisan db:seed --class=MatchTableSeeder
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
