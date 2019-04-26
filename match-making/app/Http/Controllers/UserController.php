@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Postcode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 //User attributes model
@@ -15,12 +16,14 @@ class UserController extends Controller
     /*Displays user information*/
     public function index()   {
         $attributes = Auth::user()->Attributes;
+
+        echo Auth::user()->Attributes->postcodeObject;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
 
         if ($attributes != null) {
-            return view('profile', ['name' => $name])->with('user',$userDetails);
+            return view('profile', ['name' => $name])->with('user',$attributes);
         }
         return redirect('/attributes');
 
@@ -32,7 +35,7 @@ class UserController extends Controller
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
         if ($attributes != null) {
-            return view('/editprofile', ['name' => $name])->with('user', $userDetails);
+            return view('/editprofile', ['name' => $name])->with('user', $attributes);
         }
         return redirect('/attributes');
     }

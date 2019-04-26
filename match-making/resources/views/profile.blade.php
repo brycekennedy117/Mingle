@@ -12,7 +12,7 @@
                         <div style="padding: 20px"></div>
                         <div class="row a">
                             <div class="col">
-                                <img src="{{$user[0]->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
                                 <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                                     <input type="file" name="file" class="form-control-sm border">
@@ -33,23 +33,23 @@
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td id="dob-cell">{{$user[0]->date_of_birth}}</td>
+                                <td id="dob-cell">{{$user->date_of_birth}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td id="postcode-cell">{{$user[0]->postcodeObject->postcode}}</td>
+                                <td id="postcode-cell">{{$user->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td id="suburb-cell">{{$user[0]->postcodeObject->suburb}}</td>
+                                <td id="suburb-cell">{{$user->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td id="gender-cell">{{$user[0]->gender}}</td>
+                                <td id="gender-cell">{{$user->gender}}</td>
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td id="interested-in-cell">{{$user[0]->interested_in}}</td>
+                                <td id="interested-in-cell">{{$user->interested_in}}</td>
                             </tr>
                             </tbody>
                         </table>

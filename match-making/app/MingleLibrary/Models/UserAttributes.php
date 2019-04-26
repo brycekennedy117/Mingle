@@ -31,6 +31,6 @@ class UserAttributes extends Model
     }
 
     public function postcodeObject() {
-        return $this->belongsTo('App\MingleLibrary\Models\Postcode', 'id');
+        return $this->belongsTo('App\MingleLibrary\Models\Postcode', 'postcode');
     }
 }

@@ -63,6 +63,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{$user->name}}</h5>
                                         <p class="card-text">nal content. This content is a little bit longer.</p>
+                                        <p>Suburb: {{$user->postcodeObject->suburb}}</p>
+                                        <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
                                     <div class="card-footer">
                                         <a href="#" class="btn btn-primary">Like</a>
