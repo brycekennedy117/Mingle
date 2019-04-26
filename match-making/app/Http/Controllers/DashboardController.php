@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Like;
+use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\MatchMaker;
 use App\User;
+use App\MingleLibrary\Models\Ignored;
 
 class DashboardController extends Controller
 {
@@ -47,4 +50,97 @@ class DashboardController extends Controller
 
         return view('dashboard')->with('attributes',$attributes);
     }
+
+    public function liked(Request $request)
+    {
+        //Validate data
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        //Get user ids
+        $userId = Auth::id();
+        $matchId = (int)$request->user_id;
+
+        //Check if user exists, if not return error
+        $findUser = User::find($matchId);
+        if($findUser == null)   {
+            return redirect()->back()->with('error', 'User does not exist');
+        }
+
+        //Get all records for user likes
+        $likes = Like::where('user_id_1', $userId)
+            ->orWhere('user_id_2', $userId)
+            ->get();
+
+        //Search if the user has already been liked by other user.
+        //If so, save to match database.
+        if($likes != null)  {
+            foreach ($likes as $l)  {
+                if($l->user_id_1 == $matchId || $l->user_id_2 == $matchId)   {
+                    //Delete like record
+                    $like = Like::find($l->id);
+                    $like->delete();
+                    //Create new match
+                    $match = new Match;
+                    $match->user_id_1 = $userId;
+                    $match->user_id_2 = $matchId;
+                    $match->save();
+                    //Create new Ignored record
+                    $ignored = new Ignored();
+                    $ignored->user_id_1 = $userId;
+                    $ignored->user_id_2 = $matchId;
+                    $ignored->save();
+                    return redirect('/dashboard')->with('success', 'User liked');
+                }
+            }
+        }
+
+        if (Like::all()->where('user_id_1', $userId)->where('user_id_2', $matchId)) {
+            return redirect()->back()->with('error', User::all()->where('id', $matchId)->first()->name." has already been liked.");
+        }
+       //Create new like record
+        $newLike = new Like();
+        $newLike->user_id_1 = $userId;
+        $newLike->user_id_2 = $matchId;
+        $newLike->save();
+
+        //Create new Ignored record
+        $ignored = new Ignored();
+        $ignored->user_id_1 = $userId;
+        $ignored->user_id_2 = $matchId;
+        $ignored->save();
+
+        //Return a success message
+        return redirect('/dashboard')->with('success', 'User liked');
+
+    }
+
+    public function dislike(Request $request)
+    {
+        //Validate data
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        //Get user ids
+        $userId = Auth::id();
+        $matchId = (int)$request->user_id;
+
+        //Check if user exists, if not return error
+        $findUser = User::find($matchId);
+        if($findUser == null)   {
+            return redirect()->back()->with('error', 'User does not exist');
+        }
+
+        //Create new ignored record
+        $ignored = new Ignored();
+        $ignored->user_id_1 = $userId;
+        $ignored->user_id_2 = $matchId;
+        $ignored->save();
+
+        return redirect()->back()->with('success', 'User ignored');
+
+    }
+
 }
