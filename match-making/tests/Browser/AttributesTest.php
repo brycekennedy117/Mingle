@@ -63,7 +63,6 @@ class AttributesTest extends DuskTestCase
             $postcode = Postcode::all()->where('id', $postcodeID)->first()->postcode;
             $suburbs = Postcode::all()->where('postcode', $postcode);
             $numOfSuburbs =  sizeof($suburbs);
-            echo $this->appUrl;
             $browser->loginAs($this->user->email)
                 ->visit($this->appUrl.'/attributes')
                 ->assertUrlIs($this->appUrl.'/attributes')

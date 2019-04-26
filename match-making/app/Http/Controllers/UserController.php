@@ -45,6 +45,17 @@ class UserController extends Controller
         $attributes = Auth::user()->Attributes;
         $attributes->postcode = $request->get('postcode');
         $attributes->interested_in = $request->get('interested_in');
+        $email = $request->get('email');
+
+        $existing = User::all()->where('email', $email);
+
+        if(sizeof($existing) > 0 && $existing->first()->id != $attributes->user_id) {
+            return redirect("/editprofile")->with('error', 'User already exists. Couldnt change email.');
+
+        }
+        else{
+            Auth::user()->email = $email;
+        }
 
         if (strlen($current_password) > 0 && strlen($new_password) == 0)
         {

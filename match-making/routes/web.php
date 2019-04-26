@@ -28,7 +28,6 @@ $router->group(['middleware' => 'auth'], function() {
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
-//    test route
     Route::get('/dashboard', 'DashboardController@viewMatches');
     Route::get('/editprofile', 'UserController@edit');
     Route::resource('messages', 'MessagesController');
@@ -37,18 +36,12 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index');
     Route::post('/editprofile', 'UserController@editpassword')->name('edit');
     Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
-    Route::post('/upload', function (){
-        request()->file('file')->store(
-            'my-file',
-            's3'
-        );
-        return back();
-    });
 
-    Route::post('profile', [
+
+    Route::post('/profile', [
         'as' => 'avatar',
         'uses' => 'AttributesController@showAvatar'
-    ]);return back();
+    ]);
 });
 
 $router->group(['middleware' => 'guest'], function() {

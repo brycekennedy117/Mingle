@@ -27,16 +27,16 @@
 
                             @if(count($matches) > 0)
                                 @foreach($matches as $userAttributes)
-                                    <div class="container-fluid d-flex flex-row justify-content-between border-bottom">
+                                    <div id="match-container" class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-center align-items-center">
 
                                                 <img src='{{$userAttributes->image_url}}' class="rounded-circle img-thumbnail" width="100px"/>
                                             </div>
                                             <div class="p3 d-flex justify-content-center flex-column">
-                                                <a class="font-weight-bold"><h3>{{$userAttributes->user->name}}</h3></a>
-                                                <a class="font-weight-bold">{{$userAttributes->postcodeObject->suburb}}</a>
-                                                <a class="font-weight-bold font-italic">Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, $currentUserLocate['lat'], $currentUserLocate['long'])}}km</a><br>
+                                                <a class="font-weight-bold"><h3 id="match-name">{{$userAttributes->user->name}}</h3></a>
+                                                <a id="match-suburb" class="font-weight-bold">{{$userAttributes->postcodeObject->suburb}}</a>
+                                                <a id="match-distance" class="font-weight-bold font-italic">Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches($userAttributes->postcodeObject->latitude, $userAttributes->postcodeObject->longitude, auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude)}}km</a><br>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">

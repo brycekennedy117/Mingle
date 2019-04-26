@@ -22,7 +22,7 @@ class MatchMaker
      *
      * Returns a list of UserAttribute objects who are likely good matches with a user.
      */
-    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1, $maxDistance=20) {
+    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1, $maxDistance=20000000) {
         $postcode = $attr->postcodeObject;
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
