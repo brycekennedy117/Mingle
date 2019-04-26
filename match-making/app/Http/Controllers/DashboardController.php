@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\MatchMaker;
 use App\User;
+use App\MingleLibrary\Models\Ignored;
 
 class DashboardController extends Controller
 {
@@ -134,8 +135,8 @@ class DashboardController extends Controller
 
         //Create new ignored record
         $ignored = new Ignored();
-        $ignored->user1 = $userId;
-        $ignored->user2 = $matchId;
+        $ignored->user_id_1 = $userId;
+        $ignored->user_id_2 = $matchId;
         $ignored->save();
 
         return redirect()->back()->with('success', 'User ignored');
