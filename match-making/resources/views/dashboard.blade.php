@@ -8,7 +8,16 @@
             <div class="col-md-auto">
                 <div class="card">
                     <div class="card-header font-weight-bold font">Mingles♥ near you</div>
-
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="container">
                         <div class="row justify-content-center">
                             @foreach ($attributes as $user)

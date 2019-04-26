@@ -83,19 +83,22 @@ class DashboardController extends Controller
                     $match->user_id_1 = $userId;
                     $match->user_id_2 = $matchId;
                     $match->save();
-                    return redirect()->back()->with('success', 'User liked');
+                    return redirect('/dashboard')->with('success', 'User liked');
                 }
             }
         }
 
+        if (Like::all()->where('user_id_1', $userId)->where('user_id_2', $matchId)) {
+            return redirect()->back()->with('error', User::all()->where('id', $matchId)->first()->name." has already been liked.");
+        }
        //Create new like record
-        $newLike = new Like;
-        $newLike->user1 = $userId;
-        $newLike->user2 = $matchId;
+        $newLike = new Like();
+        $newLike->user_id_1 = $userId;
+        $newLike->user_id_2 = $matchId;
         $newLike->save();
 
         //Return a success message
-        return redirect()->back()->with('success', 'User liked');
+        return redirect('/dashboard')->with('success', 'User liked');
 
     }
 
