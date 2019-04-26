@@ -51,7 +51,16 @@
                 <div class="card">
 
                     <div class="card-header font-weight-bold font">Mingles♥ near you</div>
-
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="container">
                         <div class="row justify-content-center">
 
@@ -67,8 +76,17 @@
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
                                     <div class="card-footer">
-                                        <a href="#" class="btn btn-primary">Like</a>
-                                        <a href="#" class="btn btn-danger">Next</a>
+                                        <form method="POST" action="{{ route('like')}}">
+                                            @csrf
+                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <button type="submit" class="btn btn-primary">Like</button>
+                                        </form>
+                                        <form method="POST" action="{{ route('ignore') }}">
+                                            @csrf
+                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <button type="submit" class="btn btn-danger">Next</button>
+                                        </form>
+
                                     </div>
                                 </div>
                             @endforeach
