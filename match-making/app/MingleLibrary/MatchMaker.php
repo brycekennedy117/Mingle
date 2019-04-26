@@ -10,6 +10,7 @@ namespace App\MingleLibrary;
 use App\MingleLibrary\Models\Ignored;
 use App\MingleLibrary\Models\Postcode;
 use App\MingleLibrary\Models\UserAttributes as UserAttributes;
+use function GuzzleHttp\Psr7\str;
 
 class MatchMaker
 {
@@ -22,7 +23,7 @@ class MatchMaker
      *
      * Returns a list of UserAttribute objects who are likely good matches with a user.
      */
-    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1) {
+    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1, $maxDistance=20000000) {
         $postcode = $attr->postcodeObject;
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
@@ -44,6 +45,7 @@ class MatchMaker
             ->where('interested_in', $attr['gender'])
             ->where('gender', $attr['interested_in'])
             ->selectRaw("user_attributes.*, $rawWhereString as `score`, postcodes.latitude, postcodes.longitude, ".$distanceString." as distance")
+            ->whereRaw($distanceString.'<'.strval($maxDistance))
             ->orderByRaw($orderByRaw)
             ->take($limit)
             ->skip(($page - 1) * $limit)

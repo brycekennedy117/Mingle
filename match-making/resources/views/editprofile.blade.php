@@ -79,7 +79,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <input type="submit" class="btn btn-primary"/>
+                            <input type="submit" value="Submit" class="btn btn-primary"/>
                         </div>
                     </div>
                 </form>

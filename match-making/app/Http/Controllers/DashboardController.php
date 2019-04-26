@@ -27,7 +27,6 @@ class DashboardController extends Controller
     public function index()
     {
         $attributes = Auth::user()->Attributes;
-        echo 'INDEXXXXXD';
         if ($attributes != null) {
             return view('dashboard');
         }
@@ -43,7 +42,7 @@ class DashboardController extends Controller
         }
 
         $matchMaker = new MatchMaker();
-        $attributes = $matchMaker->getPotentialMatches($userDetails);
+        $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=40);
         foreach ($attributes as $user)  {
             $user->name = User::find($user->user_id)->name;
         }

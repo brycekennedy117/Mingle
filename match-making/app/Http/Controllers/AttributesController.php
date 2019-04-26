@@ -53,6 +53,7 @@ class AttributesController extends Controller
         $this->validate($request, [
             'file' => 'required'
         ]);
+        echo "AVATAR\n";
         $file = $request->file('file');
 
         if ($file->isValid()) {
@@ -67,13 +68,12 @@ class AttributesController extends Controller
             ->where('user_id', '==', $id)->first();
             $attr->image_url = $url;
             $attr->save();
-            echo $id." ".$url;
+
         }
 
-        #return back();
+        return redirect('/profile');
+
     }
-
-
 
 
     public function suburbs(Request $request) {
