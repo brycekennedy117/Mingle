@@ -1,16 +1,32 @@
+sudo: required
 language: php
 php:
 - 7.1.16
+
+dist: trusty
+
 branches:
   only:
   - master
+services:
+  - mysql
 notifications:
   email: false
 before_script:
   - cd match-making
+  - cp .env.travis .env
+  - mysql -e 'DROP DATABASE IF EXISTS `mingle-data-test`'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS `mingle-data-test`'
   - composer self-update
   - composer install
-
+  - php artisan config:clear
+  - php artisan migrate
+after_success:
+  - export DB_HOST=$PRODUCTION_DB_HOST
+  - export DB_DATABASE=$PRODUCTION_DB_DATABASE
+  - export DB_USERNAME=$PRODUCTION_DB_USERNAME
+  - export DB_PASSWORD=$PRODUCTION_DB_PASSWORD
+  - php artisan migrate
 deploy:
   provider: elasticbeanstalk
   access_key_id: AKIAI7EF2HVYMWALYQAQ
@@ -23,3 +39,4 @@ deploy:
     repo: brycekennedy117/PP1-Matchmaking
   bucket_name: elasticbeanstalk-us-east-2-112626369674
   bucket_path: Mingle 2019/
+  skip_cleanup: true

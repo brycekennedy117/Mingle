@@ -26,6 +26,8 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ URL::asset('js/attributes.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/messages.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/editprofile.js') }}"></script>
 
 
 
@@ -72,6 +74,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('messages') }}">
+                                        Messages
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

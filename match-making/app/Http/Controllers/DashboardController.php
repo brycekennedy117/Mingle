@@ -53,7 +53,7 @@ class DashboardController extends Controller
     public function liked(Request $request)
     {
         //Validate data
-        $validatedData = $request->validate([
+        $request->validate([
             'user_id' => 'required|integer'
         ]);
 
@@ -77,12 +77,19 @@ class DashboardController extends Controller
         if($likes != null)  {
             foreach ($likes as $l)  {
                 if($l->user_id_1 == $matchId || $l->user_id_2 == $matchId)   {
+                    //Delete like record
                     $like = Like::find($l->id);
                     $like->delete();
+                    //Create new match
                     $match = new Match;
                     $match->user_id_1 = $userId;
                     $match->user_id_2 = $matchId;
                     $match->save();
+                    //Create new Ignored record
+                    $ignored = new Ignored();
+                    $ignored->user_id_1 = $userId;
+                    $ignored->user_id_2 = $matchId;
+                    $ignored->save();
                     return redirect('/dashboard')->with('success', 'User liked');
                 }
             }
@@ -97,8 +104,41 @@ class DashboardController extends Controller
         $newLike->user_id_2 = $matchId;
         $newLike->save();
 
+        //Create new Ignored record
+        $ignored = new Ignored();
+        $ignored->user_id_1 = $userId;
+        $ignored->user_id_2 = $matchId;
+        $ignored->save();
+
         //Return a success message
         return redirect('/dashboard')->with('success', 'User liked');
+
+    }
+
+    public function dislike(Request $request)
+    {
+        //Validate data
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        //Get user ids
+        $userId = Auth::id();
+        $matchId = (int)$request->user_id;
+
+        //Check if user exists, if not return error
+        $findUser = User::find($matchId);
+        if($findUser == null)   {
+            return redirect()->back()->with('error', 'User does not exist');
+        }
+
+        //Create new ignored record
+        $ignored = new Ignored();
+        $ignored->user1 = $userId;
+        $ignored->user2 = $matchId;
+        $ignored->save();
+
+        return redirect()->back()->with('success', 'User ignored');
 
     }
 

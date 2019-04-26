@@ -7,6 +7,7 @@
  */
 
 namespace App\MingleLibrary;
+use App\MingleLibrary\Models\Ignored;
 use App\MingleLibrary\Models\Postcode;
 use App\MingleLibrary\Models\UserAttributes as UserAttributes;
 
@@ -47,6 +48,15 @@ class MatchMaker
             ->take($limit)
             ->skip(($page - 1) * $limit)
             ->get();
+        $ignored = Ignored::where('user_id_1', $attr->user_id)->get();
+        foreach ($attributes as $attKey => $att)   {
+            foreach ($ignored as $iKey => $ignore)    {
+                if($ignore->user_id_2 == $att->user_id)   {
+                    unset($attributes[$attKey]);
+                }
+            }
+        }
+
 
         return $attributes;
     }
