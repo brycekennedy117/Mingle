@@ -43,6 +43,17 @@ class AttributesTest extends DuskTestCase
         });
     }
 
+    public function testValidAttributesRoute()
+    {
+        $this->browse(function (Browser $browser) {
+            $user = factory(User::class)->create();
+            $browser->loginAs($user->email)
+                ->visit($this->appUrl.'/attributes')
+                ->assertUrlIs($this->appUrl.'/dashboard');
+
+        });
+    }
+
     public function testPostcodeListCount() {
 
 
@@ -52,7 +63,7 @@ class AttributesTest extends DuskTestCase
             $postcode = Postcode::all()->where('id', $postcodeID)->first()->postcode;
             $suburbs = Postcode::all()->where('postcode', $postcode);
             $numOfSuburbs =  sizeof($suburbs);
-            $browser->loginAs($user->email)
+            $browser->loginAs($this->user->email)
                 ->visit($this->appUrl.'/attributes')
                 ->assertUrlIs($this->appUrl.'/attributes')
                 ->type('#postcode', $postcode)

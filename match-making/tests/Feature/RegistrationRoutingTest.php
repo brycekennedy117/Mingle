@@ -20,9 +20,15 @@ class RegistrationRoutingTest extends TestCase
     }
 
     public function testUnregisteredHome() {
+        echo "Attributes: ".$this->user->Attributes;
         $response = $this->actingAs($this->user)->get('/');
         $response->assertStatus(302);
+        $response->assertHeader('location', $this->appUrl.'/dashboard');
+        $response = $this->actingAs($this->user)->get('/dashboard');
+        $response->assertStatus(302);
         $response->assertHeader('location', $this->appUrl.'/attributes');
+
+
     }
 
     public function testUnregisteredDashboard() {

@@ -29,7 +29,22 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
 //    test route
+    Route::post('/like', 'DashboardController@liked')->name('like');
+    Route::post('/dislike', 'DashboardController@dislike')->name('ignore');
     Route::get('/dashboard', 'DashboardController@viewMatches');
+    Route::get('/editprofile', 'UserController@edit');
+    Route::resource('messages', 'MessagesController');
+    Route::get('/messages', 'MessagesController@index')->name('messages');
+    Route::post('/messages', 'MessagesController@store');
+    Route::get('/', 'HomeController@index');
+    Route::post('/editprofile', 'UserController@editpassword')->name('edit');
+    Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
+
+
+    Route::post('/profile', [
+        'as' => 'avatar',
+        'uses' => 'AttributesController@showAvatar'
+    ]);
 });
 
 $router->group(['middleware' => 'guest'], function() {

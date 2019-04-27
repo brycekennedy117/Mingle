@@ -6,45 +6,50 @@
             <div class="col-sm-12 col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h1>My Profile</h1>
+                        <h1>{{$name}}'s Profile</h1>
                     </div>
                     <div class="container">
                         <div style="padding: 20px"></div>
-                        <div class="row">
-                            <div class="col align-self-center">
-                                <img src="https://via.placeholder.com/250" class="mx-auto d-block rounded-circle">
+                        <div class="row a">
+                            <div class="col">
+                                <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                                    <input type="file" name="file" class="form-control-sm border">
+                                    <input type="submit" class="btn-primary btn-group-sm">
+                                </form>
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
                         <div class="row">
-                            <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
+                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
                         </div>
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
                             <tr>
-                                <th>Name:</th>
-                                <td>{{$name}}</td>
+                                <th>Name</th>
+                                <td id="name-cell">{{$name}}</td>
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td>{{$user[0]->date_of_birth}}</td>
+                                <td id="dob-cell">{{$user->date_of_birth}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td>{{$user[0]->postcode}}</td>
+                                <td id="postcode-cell">{{$user->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td>{{$user[0]->suburb}}</td>
+                                <td id="suburb-cell">{{$user->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>{{$user[0]->gender}}</td>
+                                <td id="gender-cell">{{$user->gender}}</td>
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td>{{$user[0]->interested_in}}</td>
+                                <td id="interested-in-cell">{{$user->interested_in}}</td>
                             </tr>
                             </tbody>
                         </table>
