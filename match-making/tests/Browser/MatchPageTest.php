@@ -119,7 +119,13 @@ class MatchPageTest extends DuskTestCase
             $pageItems = $browser->loginAs($this->user)->visit('/matches')
                 ->elements('.page-item');
             $expectedNumberOfPages = ceil(sizeof($attributesArray)/10);
-            $numOfPageItems = sizeof($pageItems) - 2;
+
+            if ($expectedNumberOfPages <= 1) {
+                $numOfPageItems = sizeof($pageItems);
+            }
+            else {
+                $numOfPageItems = sizeof($pageItems) - 2;
+            }
             self::assertEquals($expectedNumberOfPages, $numOfPageItems);
         });
     }
