@@ -68,8 +68,8 @@ class DashboardController extends Controller
         }
 
         //Get all records for user likes
-        $likes = Like::where('user_id_1', $userId)
-            ->orWhere('user_id_2', $userId)
+        $likes = Like::where('user_id_2', $userId)
+            ->where('user_id_1', $matchId)
             ->get();
 
         //Search if the user has already been liked by other user.
@@ -85,17 +85,13 @@ class DashboardController extends Controller
                     $match->user_id_1 = $userId;
                     $match->user_id_2 = $matchId;
                     $match->save();
-                    //Create new Ignored record
-                    $ignored = new Ignored();
-                    $ignored->user_id_1 = $userId;
-                    $ignored->user_id_2 = $matchId;
-                    $ignored->save();
-                    return redirect('/dashboard')->with('success', 'User liked');
+
+                    return redirect('/dashboard')->with('success', 'Congratulations. You have successfully matched with '.User::all()->where('id', $matchId)->first()->name);
                 }
             }
         }
 
-        if (Like::all()->where('user_id_1', $userId)->where('user_id_2', $matchId)) {
+        if (sizeof(Like::all()->where('user_id_1', $userId)->where('user_id_2', $matchId)) > 0) {
             return redirect()->back()->with('error', User::all()->where('id', $matchId)->first()->name." has already been liked.");
         }
        //Create new like record
@@ -104,11 +100,6 @@ class DashboardController extends Controller
         $newLike->user_id_2 = $matchId;
         $newLike->save();
 
-        //Create new Ignored record
-        $ignored = new Ignored();
-        $ignored->user_id_1 = $userId;
-        $ignored->user_id_2 = $matchId;
-        $ignored->save();
 
         //Return a success message
         return redirect('/dashboard')->with('success', 'User liked');

@@ -2,6 +2,9 @@
 
 namespace Tests\Browser;
 
+use App\MingleLibrary\Models\Like;
+use Facebook\WebDriver\WebDriverBy;
+use Illuminate\Support\Facades\DB;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -31,6 +34,21 @@ class DashboardTest extends DuskTestCase
                 ->elements('#match-card');
             self::assertLessThanOrEqual(10, sizeof($matches), "Match Limit Is Greater Than 10");
             self::assertGreaterThanOrEqual(0, sizeof($matches), "Match Limit Is Less Than 0");
+
+        });
+    }
+
+    public function testLikeFunction() {
+        $this->browse(function (Browser $browser) {
+            $id = $browser->loginAs($this->user)->visit('/dashboard')
+                ->element('#user_id_liked')
+                ->getAttribute('innerHTML');
+            $browser->loginAs($this->user)->visit('/dashboard')
+                ->element('#match-card')
+                ->click('Like');
+
+            echo json_encode( Like::all()->where('user_id_1', $this->user->id)->where('user_id_2', $id));
+
 
         });
     }

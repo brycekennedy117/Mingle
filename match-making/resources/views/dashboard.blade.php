@@ -78,12 +78,12 @@
                                     <div class="card-footer">
                                         <form method="POST" action="{{ route('like')}}">
                                             @csrf
-                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
                                             <button type="submit" class="btn btn-primary">Like</button>
                                         </form>
                                         <form method="POST" action="{{ route('ignore') }}">
                                             @csrf
-                                            <input name="user_id" type="hidden" value={{$user->id}}>
+                                            <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
                                             <button type="submit" class="btn btn-danger">Next</button>
                                         </form>
 
