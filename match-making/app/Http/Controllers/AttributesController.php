@@ -53,7 +53,6 @@ class AttributesController extends Controller
         $this->validate($request, [
             'file' => 'required'
         ]);
-        echo "AVATAR\n";
         $file = $request->file('file');
 
         if ($file->isValid()) {
