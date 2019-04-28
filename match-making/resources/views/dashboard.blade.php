@@ -76,16 +76,24 @@
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
                                     <div class="card-footer">
-                                        <form method="POST" action="{{ route('like')}}">
-                                            @csrf
-                                            <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
-                                            <button type="submit" class="btn btn-primary">Like</button>
-                                        </form>
-                                        <form method="POST" action="{{ route('ignore') }}">
-                                            @csrf
-                                            <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
-                                            <button type="submit" class="btn btn-danger">Next</button>
-                                        </form>
+                                        <div class="row" style="font-size: 30px;">
+                                            <div class="col-sm-6">
+                                                <form method="POST" action="{{ route('like')}}">
+                                                    @csrf
+                                                    <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
+                                                    <a type="submit" class="like"><i class="fas fa-heart fa-fw red"></i></a>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <form method="POST" action="{{ route('ignore') }}">
+                                                    @csrf
+                                                    <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
+                                                    <a type="submit" class="dislike"><i class="fas fa-times fa-fw"></i></a>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
 
                                     </div>
                                 </div>
