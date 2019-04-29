@@ -33,7 +33,7 @@
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td id="dob-cell">{{$user->date_of_birth}}</td>
+                                <td id="dob-cell">{{date('d-m-Y', strtotime($user->date_of_birth))}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
