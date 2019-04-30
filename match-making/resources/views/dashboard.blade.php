@@ -76,19 +76,19 @@
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="row" style="font-size: 30px;">
-                                            <div class="col-sm-6">
-                                                <form method="POST" action="{{ route('like')}}">
+                                        <div class="row d-flex flex-row align-items-center justify-content-center p-0" style="font-size: 30px;">
+                                            <div class="">
+                                                <form style="height: 40px" method="POST" action="{{ route('like')}}">
                                                     @csrf
                                                     <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
-                                                    <a type="submit" class="like"><i class="fas fa-heart fa-fw red"></i></a>
+                                                    <input type="image" src="/svg/si-glyph-heart.svg" width="40px"/>
                                                 </form>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <form method="POST" action="{{ route('ignore') }}">
+                                            <div class="ml-5">
+                                                <form method="POST" action="{{ route('ignore') }}" style="height: 40px;">
                                                     @csrf
                                                     <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
-                                                    <a type="submit" class="dislike"><i class="fas fa-times fa-fw"></i></a>
+                                                    <input type="image" src="/svg/si-glyph-button-error.svg" width="40px"/>
                                                 </form>
                                             </div>
                                         </div>
