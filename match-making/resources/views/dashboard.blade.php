@@ -6,17 +6,12 @@
         {
             document.getElementById("slider_valueDistance").innerHTML=x;
         }
-        getValue('slider').value = 50
 
         function show_value2(x)
         {
             document.getElementById("slider_valueAge").innerHTML=x;
         }
-        getValue('slider').value2 = 50
     </script>
-    <script src="multirange.js"></script>
-
-
 
     <div class="container text-center col-md-auto">
 
