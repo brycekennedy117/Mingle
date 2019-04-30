@@ -41,7 +41,8 @@ class AttributesController extends Controller
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
-            'image_url' =>  $request['image_url'] ? $request['image_url'] : "https://profiles.utdallas.edu/img/default.png"
+            'image_url' =>  $request['image_url'] ? $request['image_url'] : "https://profiles.utdallas.edu/img/default.png",
+            'greeting' => $request['greeting']
 
         ]);
         return redirect('dashboard');
