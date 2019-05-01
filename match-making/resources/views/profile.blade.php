@@ -12,7 +12,7 @@
                         <div style="padding: 20px"></div>
                         <div class="row a">
                             <div class="col">
-                                <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <img src="{{$user[0]->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
                                 <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                                     <input type="file" name="file" class="form-control-sm border">
@@ -21,15 +21,14 @@
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
-                        <div class="row">
-                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
-                        </div>
+                            <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
+
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td id="name-cell">{{$name}}</td>
+                                <td>{{$name}}</td>
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
@@ -37,19 +36,19 @@
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td id="postcode-cell">{{$user->postcodeObject->postcode}}</td>
+                                <td>{{$user[0]->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td id="suburb-cell">{{$user->postcodeObject->suburb}}</td>
+                                <td>{{$user[0]->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td id="gender-cell">{{$user->gender}}</td>
+                                <td>{{$user[0]->gender}}</td>
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td id="interested-in-cell">{{$user->interested_in}}</td>
+                                <td>{{$user[0]->interested_in}}</td>
                             </tr>
                             </tbody>
                         </table>

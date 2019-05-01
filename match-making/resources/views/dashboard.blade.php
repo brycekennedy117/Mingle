@@ -13,10 +13,32 @@
             document.getElementById("slider_valueAge").innerHTML=x;
         }
         getValue('slider').value2 = 50
+
+
+
+        function showProfile(event, $modal) {
+            var link = event.relatedTarget(),
+                name = link.data("name"),
+                dob = link.data("date_of_birth"),
+                gender = link.data("gender"),
+                interestin = link.data("interest_in"),
+                suburb = link.data("suburb");
+
+            $modal.find(".name").val(name);
+            $modal.find(".dob").val(dob);
+            $modal.find(".gender").val(gender);
+            $modal.find(".interestin").val(interestin);
+            $modal.find(".suburb").val(suburb);
+        };
+
+        $(function() {
+            $("#myModal").on('show.bs.modal', function(event) {
+                showProfile(event, $(this));
+            });
+        });
+
     </script>
     <script src="multirange.js"></script>
-
-
 
     <div class="container text-center col-md-auto">
 
@@ -66,15 +88,22 @@
 
                             @foreach ($attributes as $user)
                                 <div id="match-card" class="card m-3" style= "max-width:12rem">
+
                                     <div class="p-3">
                                         <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{$user->name}}</h5>
-                                        <p class="card-text">nal content. This content is a little bit longer.</p>
+
                                         <p>Suburb: {{$user->postcodeObject->suburb}}</p>
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
+
+                                        <button class="btn btn-md btn-success" type="button" data-toggle="modal" data-target="#myModal" data-name="{{$user->name}}" data-date_of_birth="{{$user->date_of_birth}}" data-gender="{{$user->gender}}" data-interest_in="{{$user->interested_in}}" data-suburb="{{$user->postcodeObject->suburb}}">
+                                            View profile
+                                        </button>
+
+
                                     <div class="card-footer">
                                         <form method="POST" action="{{ route('like')}}">
                                             @csrf
@@ -86,11 +115,44 @@
                                             <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
                                             <button type="submit" class="btn btn-danger">Next</button>
                                         </form>
-
                                     </div>
                                 </div>
                             @endforeach
-                         </div>
+
+
+                                <div id="myModal" class="modal fade">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+
+                                            <!-- Header -->
+                                            <div class="modal-header">
+                                                <h1>Profile</h1>
+                                            </div>
+
+                                            <!-- Body -->
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                                    </div>
+                                                    <div class="col border-top-0">
+                                                        <h1 class="name"></h1>
+                                                        <p class="dob"></p>
+                                                        <p class="gender"></p>
+                                                        <p class="interestin"></p>
+                                                        <p class="suburb"></p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal-footer modal-footer--mine">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close all</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
