@@ -15,30 +15,40 @@
         getValue('slider').value2 = 50
 
 
-
-        function showProfile(event, $modal) {
-            var link = event.relatedTarget(),
-                name = link.data("name"),
-                dob = link.data("date_of_birth"),
-                gender = link.data("gender"),
-                interestin = link.data("interest_in"),
-                suburb = link.data("suburb");
-
-            $modal.find(".name").val(name);
-            $modal.find(".dob").val(dob);
-            $modal.find(".gender").val(gender);
-            $modal.find(".interestin").val(interestin);
-            $modal.find(".suburb").val(suburb);
-        };
-
         $(function() {
-            $("#myModal").on('show.bs.modal', function(event) {
-                showProfile(event, $(this));
+            $('#myModal').on("show.bs.modal", function (e) {
+                $("#name").html($(e.relatedTarget).data('name'));
+                $("#dob").html($(e.relatedTarget).data('date_of_birth'));
+                $("#gender").html($(e.relatedTarget).data('gender'));
+                $("#interestin").html($(e.relatedTarget).data('interest_in'));
+                $("#suburb").html($(e.relatedTarget).data('suburb'));
             });
         });
 
     </script>
-    <script src="multirange.js"></script>
+
+    <!--
+    function showProfile(event, $modal) {
+    var link = event.relatedTarget(),
+    name = link.data("name"),
+    dob = link.data("date_of_birth"),
+    gender = link.data("gender"),
+    interestin = link.data("interest_in"),
+    suburb = link.data("suburb");
+
+    $modal.find("#name").val(name);
+    $modal.find(".dob").val(dob);
+    $modal.find(".gender").val(gender);
+    $modal.find(".interestin").val(interestin);
+    $modal.find(".suburb").val(suburb);
+    };
+
+    $(function() {
+    $("#").on('show.bs.modal', function(event) {
+    showProfile(event, $(this));
+    });
+    });
+    -->
 
     <div class="container text-center col-md-auto">
 
@@ -99,10 +109,48 @@
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
 
-                                        <button class="btn btn-md btn-success" type="button" data-toggle="modal" data-target="#myModal" data-name="{{$user->name}}" data-date_of_birth="{{$user->date_of_birth}}" data-gender="{{$user->gender}}" data-interest_in="{{$user->interested_in}}" data-suburb="{{$user->postcodeObject->suburb}}">
+                                        <button class="btn btn-md btn-success" type="button" data-toggle="modal"
+                                                data-target="#myModal"
+                                                data-name="{{$user->name}}"
+                                                data-date_of_birth="{{$user->date_of_birth}}"
+                                                data-gender="{{$user->gender}}"
+                                                data-interest_in="{{$user->interested_in}}"
+                                                data-suburb="{{$user->postcodeObject->suburb}}">
                                             View profile
                                         </button>
 
+                                    <div id="myModal" class="modal fade">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <!-- Header -->
+                                                <div class="modal-header">
+                                                    <h1>Profile</h1>
+                                                </div>
+
+                                                <!-- Body -->
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                                        </div>
+                                                        <div class="col border-top-0">
+                                                            <h1 id="name"></h1>
+                                                            <p id="dob"></p>
+                                                            <p id="gender"></p>
+                                                            <p id="interestin"></p>
+                                                            <p id="suburb"></p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-footer modal-footer--mine">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close all</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="card-footer">
                                         <form method="POST" action="{{ route('like')}}">
@@ -119,39 +167,6 @@
                                 </div>
                             @endforeach
 
-
-                                <div id="myModal" class="modal fade">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-
-                                            <!-- Header -->
-                                            <div class="modal-header">
-                                                <h1>Profile</h1>
-                                            </div>
-
-                                            <!-- Body -->
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
-                                                    </div>
-                                                    <div class="col border-top-0">
-                                                        <h1 class="name"></h1>
-                                                        <p class="dob"></p>
-                                                        <p class="gender"></p>
-                                                        <p class="interestin"></p>
-                                                        <p class="suburb"></p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="modal-footer modal-footer--mine">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close all</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                         </div>
                     </div>
                 </div>
