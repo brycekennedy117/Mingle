@@ -12,7 +12,7 @@
                         <div style="padding: 20px"></div>
                         <div class="row a">
                             <div class="col">
-                                <img src="{{$user[0]->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                                <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
                                 <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                                     <input type="file" name="file" class="form-control-sm border">
@@ -36,19 +36,29 @@
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td>{{$user[0]->postcodeObject->postcode}}</td>
+                                <td>{{$user->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td>{{$user[0]->postcodeObject->suburb}}</td>
+                                <td>{{$user->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>{{$user[0]->gender}}</td>
+                                @if($user->gender == 'M')
+                                    <td>Male</td>
+                                @else
+                                    <td>Female</td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td>{{$user[0]->interested_in}}</td>
+                                @if($user->interested_in == 'M')
+                                    <td>Men</td>
+                                @elseif($user->interested_in == 'F')
+                                    <td>Women</td>
+                                @else
+                                    <td>Both</td>
+                                @endif
                             </tr>
                             </tbody>
                         </table>
