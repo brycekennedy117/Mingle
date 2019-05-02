@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MingleLibrary\Models\Postcode;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
@@ -80,5 +81,13 @@ class AttributesController extends Controller
         $postcode = $request['postcode'];
         $suburbs = Postcode::all()->where('postcode', $postcode);
         return $suburbs;
+    }
+
+    public function getUserAttribute(Request $request) {
+        $attr = UserAttributes::all()->where('user_id', $request['user_id'])->first();
+        $user = $attr->user;
+        $postcode = $attr->postcodeObject;
+
+        return ['attributes' => $attr, 'user' => $user, 'postcode' => $postcode];
     }
 }

@@ -67,3 +67,18 @@ function editPostcodeButtonClicked() {
 
 }
 
+function loadUserIntoDashboardModal(user_id) {
+	console.log(user_id);
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+	$.post( '/attributes/get', data={"user_id": user_id, "_token": CSRF_TOKEN},function( data ) {
+		let user = data.user;
+		let attributes = data.attributes;
+		let postcode = data.postcode;
+		document.getElementById('modal_name').innerHTML = user.name;
+		document.getElementById('modal_dob').innerHTML = attributes.date_of_birth;
+		document.getElementById('modal_gender').innerHTML = attributes.gender;
+		document.getElementById('modal_interestin').innerHTML = attributes.interested_in;
+		document.getElementById('modal_suburb').innerHTML = postcode.suburb;
+	});
+}

@@ -6,13 +6,11 @@
         {
             document.getElementById("slider_valueDistance").innerHTML=x;
         }
-        getValue('slider').value = 50
 
         function show_value2(x)
         {
             document.getElementById("slider_valueAge").innerHTML=x;
         }
-        getValue('slider').value2 = 50
 
 
         $(function() {
@@ -97,10 +95,19 @@
                         <div class="row justify-content-center">
 
                             @foreach ($attributes as $user)
-                                <div id="match-card" class="card m-3" style= "max-width:12rem">
+                                <div id="match-card"
+                                     class="card m-3"
+                                     style= "max-width:12rem;"
+                                     onclick="loadUserIntoDashboardModal({{$user->user_id}})">
 
                                     <div class="p-3">
-                                        <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                        <img data-toggle="modal"
+                                             data-target="#myModal"
+                                             data-id="{{$user->id}}"
+                                             class="card-img-top img-thumbnail rounded-circle"
+                                             src="{{$user->image_url}}"
+                                             alt="Card-image-cap"
+                                            style="cursor:pointer"/>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{$user->name}}</h5>
@@ -108,16 +115,6 @@
                                         <p>Suburb: {{$user->postcodeObject->suburb}}</p>
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
-
-                                        <button class="btn btn-md btn-success" type="button" data-toggle="modal"
-                                                data-target="#myModal"
-                                                data-name="{{$user->name}}"
-                                                data-date_of_birth="{{$user->date_of_birth}}"
-                                                data-gender="{{$user->gender}}"
-                                                data-interest_in="{{$user->interested_in}}"
-                                                data-suburb="{{$user->postcodeObject->suburb}}">
-                                            View profile
-                                        </button>
 
                                     <div id="myModal" class="modal fade">
                                         <div class="modal-dialog modal-lg">
@@ -135,18 +132,18 @@
                                                             <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
                                                         </div>
                                                         <div class="col border-top-0">
-                                                            <h1 id="name"></h1>
-                                                            <p id="dob"></p>
-                                                            <p id="gender"></p>
-                                                            <p id="interestin"></p>
-                                                            <p id="suburb"></p>
+                                                            <h1 id="modal_name"></h1>
+                                                            <p id="modal_dob"></p>
+                                                            <p id="modal_gender"></p>
+                                                            <p id="modal_interestin"></p>
+                                                            <p id="modal_suburb"></p>
                                                         </div>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="modal-footer modal-footer--mine">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close all</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
