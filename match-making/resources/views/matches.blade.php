@@ -42,7 +42,7 @@
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-between align-items-center">
                                                 <div class="p-1">
-                                                    <button type="button" class="btn btn-primary">Message</button>
+                                                    <a href="{{"/messages?user_id=".$userAttributes->id}}" class="btn btn-primary">Message</a>
                                                 </div>
 
                                                 <div class="p-1">

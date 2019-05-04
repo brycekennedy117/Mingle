@@ -67,3 +67,18 @@ function editPostcodeButtonClicked() {
 
 }
 
+function activate(e) {
+	e.setAttribute('class', e.getAttribute('class') + " active")
+}
+function deactivate(e) {
+	e.setAttribute('class', e.getAttribute('class').replace('active', ''));
+}
+
+function redirect(url) {
+	console.log(url);
+	window.location.replace(url);
+}
+
+
+
+
