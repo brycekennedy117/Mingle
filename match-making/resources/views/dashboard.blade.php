@@ -13,40 +13,7 @@
         }
 
 
-        $(function() {
-            $('#myModal').on("show.bs.modal", function (e) {
-                $("#name").html($(e.relatedTarget).data('name'));
-                $("#dob").html($(e.relatedTarget).data('date_of_birth'));
-                $("#gender").html($(e.relatedTarget).data('gender'));
-                $("#interestin").html($(e.relatedTarget).data('interest_in'));
-                $("#suburb").html($(e.relatedTarget).data('suburb'));
-            });
-        });
-
     </script>
-
-    <!--
-    function showProfile(event, $modal) {
-    var link = event.relatedTarget(),
-    name = link.data("name"),
-    dob = link.data("date_of_birth"),
-    gender = link.data("gender"),
-    interestin = link.data("interest_in"),
-    suburb = link.data("suburb");
-
-    $modal.find("#name").val(name);
-    $modal.find(".dob").val(dob);
-    $modal.find(".gender").val(gender);
-    $modal.find(".interestin").val(interestin);
-    $modal.find(".suburb").val(suburb);
-    };
-
-    $(function() {
-    $("#").on('show.bs.modal', function(event) {
-    showProfile(event, $(this));
-    });
-    });
-    -->
 
     <div class="container text-center col-md-auto">
 
@@ -92,9 +59,10 @@
                         </div>
                     @endif
                     <div class="container">
-                        <div class="row justify-content-center">
+                    <div class="row justify-content-center">
 
-                            @foreach ($attributes as $user)
+
+                    @foreach ($attributes as $user)
                                 <div id="match-card"
                                      class="card m-3"
                                      style= "max-width:12rem;"
@@ -107,8 +75,9 @@
                                              class="card-img-top img-thumbnail rounded-circle"
                                              src="{{$user->image_url}}"
                                              alt="Card-image-cap"
-                                            style="cursor:pointer"/>
+                                             style="cursor:pointer"/>
                                     </div>
+
                                     <div class="card-body">
                                         <h5 class="card-title">{{$user->name}}</h5>
 
@@ -116,6 +85,7 @@
                                         <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                     </div>
 
+                                    <!-- Modal -->
                                     <div id="myModal" class="modal fade">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -129,14 +99,47 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" id="modal_image" alt="Card-image-cap"/>
                                                         </div>
                                                         <div class="col border-top-0">
                                                             <h1 id="modal_name"></h1>
-                                                            <p id="modal_dob"></p>
-                                                            <p id="modal_gender"></p>
-                                                            <p id="modal_interestin"></p>
-                                                            <p id="modal_suburb"></p>
+
+                                                            <table class='table table-condensed text-center'>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th>
+                                                                        <p>Age</p>
+                                                                    </th>
+                                                                    <td>
+                                                                        <p id="modal_dob" ></p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>
+                                                                        <p>Gender</p>
+                                                                    </th>
+                                                                    <td>
+                                                                        <p id="modal_gender"></p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>
+                                                                        <p>Interest</p>
+                                                                    </th>
+                                                                    <td>
+                                                                        <p id="modal_interestin"></p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>
+                                                                        <p>Location</p>
+                                                                    </th>
+                                                                    <td>
+                                                                        <p id="modal_suburb"></p>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
 
@@ -161,10 +164,11 @@
                                             <button type="submit" class="btn btn-danger">Next</button>
                                         </form>
                                     </div>
-                                </div>
-                            @endforeach
 
-                        </div>
+                                </div>
+                    @endforeach
+
+                    </div>
                     </div>
                 </div>
             </div>

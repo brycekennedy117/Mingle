@@ -75,10 +75,47 @@ function loadUserIntoDashboardModal(user_id) {
 		let user = data.user;
 		let attributes = data.attributes;
 		let postcode = data.postcode;
+
+
+		///Age calculation
+		var birth = new Date(attributes.date_of_birth);
+		var now = new Date();
+		var age = now.getFullYear() - birth.getFullYear();
+
+		if(now.getMonth() >= birth.getMonth() && now.getDate() > birth.getDate())
+		{
+			age = age--;
+		}
+
+		///Change value display of gender
+		if(attributes.gender == 'M')
+		{
+			gender = 'Male';
+		}
+		else
+		{
+			gender = 'Female';
+
+		}
+		///Change value display of interested in
+		if(attributes.interested_in == 'M')
+		{
+			interest = 'Male'
+		}
+		else if(attributes.interested_in == 'F')
+		{
+			interest = 'Female'
+		}
+		else
+		{
+			interest = 'Both'
+		}
+
+		///document.getElementById('modal_name').src = user.image_url;
 		document.getElementById('modal_name').innerHTML = user.name;
-		document.getElementById('modal_dob').innerHTML = attributes.date_of_birth;
-		document.getElementById('modal_gender').innerHTML = attributes.gender;
-		document.getElementById('modal_interestin').innerHTML = attributes.interested_in;
+		document.getElementById('modal_dob').innerHTML = age;
+		document.getElementById('modal_gender').innerHTML = gender;
+		document.getElementById('modal_interestin').innerHTML = interest;
 		document.getElementById('modal_suburb').innerHTML = postcode.suburb;
 	});
 }

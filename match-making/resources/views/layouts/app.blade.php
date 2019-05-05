@@ -69,11 +69,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('matches') }}">
-                                        Matches
-                                    </a>
+                                    <a><img src="{{Auth::user()->Attributes->image_url}}"class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;"></a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('matches') }}">
+                                        Matches
                                     </a>
                                     <a class="dropdown-item" href="{{ route('messages') }}">
                                         Messages

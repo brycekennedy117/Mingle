@@ -17,7 +17,6 @@ class UserController extends Controller
     public function index()   {
         $attributes = Auth::user()->Attributes;
 
-        echo Auth::user()->Attributes->postcodeObject;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
