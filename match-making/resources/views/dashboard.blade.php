@@ -107,36 +107,20 @@
                                                             <table class='table table-condensed text-center'>
                                                                 <tbody>
                                                                 <tr>
-                                                                    <th>
-                                                                        <p>Age</p>
-                                                                    </th>
-                                                                    <td>
-                                                                        <p id="modal_dob" ></p>
-                                                                    </td>
+                                                                    <th>Age</th>
+                                                                    <td id="modal_dob"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>
-                                                                        <p>Gender</p>
-                                                                    </th>
-                                                                    <td>
-                                                                        <p id="modal_gender"></p>
-                                                                    </td>
+                                                                    <th>Gender</th>
+                                                                    <td id="modal_gender"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>
-                                                                        <p>Interest</p>
-                                                                    </th>
-                                                                    <td>
-                                                                        <p id="modal_interestin"></p>
-                                                                    </td>
+                                                                    <th>Interest</th>
+                                                                    <td id="modal_interestin"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>
-                                                                        <p>Location</p>
-                                                                    </th>
-                                                                    <td>
-                                                                        <p id="modal_suburb"></p>
-                                                                    </td>
+                                                                    <th>Location</th>
+                                                                    <td id="modal_suburb"></td>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
