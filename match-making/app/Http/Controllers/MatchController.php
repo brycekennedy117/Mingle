@@ -103,23 +103,18 @@ class MatchController extends Controller
         $userId = Auth::id();
         $matchId = (int)$request->user_id;
 
-        $match = Match::where('user_id_1', $userId)
+        Match::where('user_id_1', $userId)
             ->where('user_id_2', $matchId)
             ->orWhere('user_id_1', $matchId)
             ->where('user_id_2', $userId)
-            ->first();
+            ->delete();
 
-        if(is_null($match))  {
-            return redirect('/matches')->withErrors('error', 'Match does not exist');
-        }
 
         Message::where('sender_id', $userId)
             ->where('receiver_id', $matchId)
             ->orWhere('sender_id', $matchId)
             ->where('receiver_id', $userId)
             ->delete();
-
-        $match->delete();
 
         return redirect('/matches')->with('success', 'Match removed');
 
