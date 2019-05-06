@@ -13,11 +13,11 @@
                         <div class="row a">
                             <div class="col">
                                 <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
-                                <form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
+                                <!--<form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                                     <input type="file" name="file" class="form-control-sm border">
                                     <input type="submit" class="btn-primary btn-group-sm">
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
