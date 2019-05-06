@@ -44,7 +44,8 @@ class DashboardController extends Controller
         $matchMaker = new MatchMaker();
         $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=40);
         foreach ($attributes as $user)  {
-            $user->name = User::find($user->user_id)->name;
+
+            $user->name = $user->user->name;
         }
 
         return view('dashboard')->with('attributes',$attributes);
