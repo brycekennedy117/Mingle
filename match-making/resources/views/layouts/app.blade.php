@@ -28,7 +28,8 @@
     <script type="text/javascript" src="{{ URL::asset('js/attributes.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/messages.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/editprofile.js') }}"></script>
-
+    {{--font awesome cdn--}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
 
@@ -69,11 +70,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('matches') }}">
-                                        Matches
-                                    </a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('matches') }}">
+                                        Matches
                                     </a>
                                     <a class="dropdown-item" href="{{ route('messages') }}">
                                         Messages
@@ -90,6 +91,8 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item"><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+
                     </ul>
                 </div>
             </div>

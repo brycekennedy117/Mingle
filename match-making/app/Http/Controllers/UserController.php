@@ -17,7 +17,6 @@ class UserController extends Controller
     public function index()   {
         $attributes = Auth::user()->Attributes;
 
-        echo Auth::user()->Attributes->postcodeObject;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
@@ -41,12 +40,12 @@ class UserController extends Controller
     }
 
     /*Edits password in user profile*/
-    public function editPassword(Request $request) {
+    public function editProfile(Request $request) {
         $current_password = $request->get('password');
         $new_password = $request->get('change-password');
         $password_confirm = $request->get('change-password-confirm');
         $attributes = Auth::user()->Attributes;
-        $attributes->postcode = $request->get('postcode');
+        $attributes->postcode = $request->get('postcode-id');
         $attributes->interested_in = $request->get('interested_in');
         $email = $request->get('email');
 

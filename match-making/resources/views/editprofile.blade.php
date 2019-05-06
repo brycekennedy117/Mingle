@@ -10,9 +10,21 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8">
                 <h1>Edit Profile</h1>
-                <form autocomplete="new-password" method="POST" action="{{ route('edit') }}">
+                <form id="attribute-form" autocomplete="new-password" method="POST" action="{{ route('edit') }}" enctype="multipart/form-data">
                     @csrf
                     <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
+                    <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
+                    <!--<form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>-->
+                    <input type="file" name="file" class="form-control-sm border">
+                    <div class="form-group row">
+                        <label for="hello-message" class="col-md-4 col-form-label text-md-right">Your intro</label>
+
+                        <div class="col-md-6">
+                            <input id="hello-message" type="text" class="form-control" name="hello-message" value="" autofocus>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
@@ -22,10 +34,45 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="postcode" class="col-md-4 col-form-label text-md-right">Postcode</label>
+                        <label for="postcode" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
 
                         <div class="col-md-6">
-                            <input id="postcode" type="number" class="form-control" name="postcode" required autofocus value="{{ Auth::user()->Attributes->postcode }}">
+                            <div class="d-flex flex-row">
+                                <input id="postcode"
+                                       type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
+                                       name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
+                                       min="1000" max="9999"
+                                       onkeyup="getSuburbsForPostcode(this)">
+                                <button onclick="editPostcodeButtonClicked()" id="postcode-edit" type="button" class="btn btn-default" aria-label="Left Align">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px"></img>
+                                </button>
+                            </div>
+                            <div class="card table-hover" id="suburb-container">
+                                <table class="table table-condensed table-hover mb-0">
+                                    <tbody  id="suburb-table">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            @if ($errors->has('postcode'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('postcode') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="suburb" class="col-md-4 col-form-label text-md-right">{{ __('Suburb') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="suburb" type="text" class="form-control{{ $errors->has('suburb') ? ' is-invalid' : '' }}" name="suburb" readonly required autofocus placeholder="Melbourne">
+
+                            @if ($errors->has('suburb'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('suburb') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 

@@ -6,49 +6,12 @@
         {
             document.getElementById("slider_valueDistance").innerHTML=x;
         }
-        getValue('slider').value = 50
 
         function show_value2(x)
         {
             document.getElementById("slider_valueAge").innerHTML=x;
         }
-        getValue('slider').value2 = 50
-
-
-        $(function() {
-            $('#myModal').on("show.bs.modal", function (e) {
-                $("#name").html($(e.relatedTarget).data('name'));
-                $("#dob").html($(e.relatedTarget).data('date_of_birth'));
-                $("#gender").html($(e.relatedTarget).data('gender'));
-                $("#interestin").html($(e.relatedTarget).data('interest_in'));
-                $("#suburb").html($(e.relatedTarget).data('suburb'));
-            });
-        });
-
     </script>
-
-    <!--
-    function showProfile(event, $modal) {
-    var link = event.relatedTarget(),
-    name = link.data("name"),
-    dob = link.data("date_of_birth"),
-    gender = link.data("gender"),
-    interestin = link.data("interest_in"),
-    suburb = link.data("suburb");
-
-    $modal.find("#name").val(name);
-    $modal.find(".dob").val(dob);
-    $modal.find(".gender").val(gender);
-    $modal.find(".interestin").val(interestin);
-    $modal.find(".suburb").val(suburb);
-    };
-
-    $(function() {
-    $("#").on('show.bs.modal', function(event) {
-    showProfile(event, $(this));
-    });
-    });
-    -->
 
     <div class="container text-center col-md-auto">
 
@@ -97,77 +60,45 @@
                         <div class="row justify-content-center">
 
                             @foreach ($attributes as $user)
-                                <div id="match-card" class="card m-3" style= "max-width:12rem">
-
+                                <div id="match-card" class="card m-3" style= "max-width:20rem">
                                     <div class="p-3">
-                                        <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                        <img height="100px" class="rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{$user->name}}</h5>
-
-                                        <p>Suburb: {{$user->postcodeObject->suburb}}</p>
-                                        <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
-                                    </div>
-
-                                        <button class="btn btn-md btn-success" type="button" data-toggle="modal"
-                                                data-target="#myModal"
-                                                data-name="{{$user->name}}"
-                                                data-date_of_birth="{{$user->date_of_birth}}"
-                                                data-gender="{{$user->gender}}"
-                                                data-interest_in="{{$user->interested_in}}"
-                                                data-suburb="{{$user->postcodeObject->suburb}}">
-                                            View profile
-                                        </button>
-
-                                    <div id="myModal" class="modal fade">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-
-                                                <!-- Header -->
-                                                <div class="modal-header">
-                                                    <h1>Profile</h1>
-                                                </div>
-
-                                                <!-- Body -->
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
-                                                        </div>
-                                                        <div class="col border-top-0">
-                                                            <h1 id="name"></h1>
-                                                            <p id="dob"></p>
-                                                            <p id="gender"></p>
-                                                            <p id="interestin"></p>
-                                                            <p id="suburb"></p>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="modal-footer modal-footer--mine">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close all</button>
-                                                </div>
-                                            </div>
+                                    <div class="card-body d-flex justify-content-between flex-column">
+                                        <div>
+                                            <h5 class="card-title">{{$user->name}}</h5>
+                                            <p class="card-text">{{$user->greeting}}</p>
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            <p>Suburb: {{$user->postcodeObject->suburb}}</p>
+                                            <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                         </div>
                                     </div>
-
                                     <div class="card-footer">
-                                        <form method="POST" action="{{ route('like')}}">
-                                            @csrf
-                                            <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
-                                            <button type="submit" class="btn btn-primary">Like</button>
-                                        </form>
-                                        <form method="POST" action="{{ route('ignore') }}">
-                                            @csrf
-                                            <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
-                                            <button type="submit" class="btn btn-danger">Next</button>
-                                        </form>
+                                        <div class="row d-flex flex-row align-items-center justify-content-center p-0" style="font-size: 30px;">
+                                            <div class="">
+                                                <form style="height: 40px" method="POST" action="{{ route('like')}}">
+                                                    @csrf
+                                                    <input id="user_id_liked" name="user_id" type="hidden" value={{$user->id}}>
+                                                    <input type="image" src="/svg/si-glyph-heart.svg" width="40px"/>
+                                                </form>
+                                            </div>
+                                            <div class="ml-5">
+                                                <form method="POST" action="{{ route('ignore') }}" style="height: 40px;">
+                                                    @csrf
+                                                    <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->id}}>
+                                                    <input type="image" src="/svg/si-glyph-button-error.svg" width="40px"/>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                             @endforeach
-
-                        </div>
+                         </div>
                     </div>
                 </div>
             </div>

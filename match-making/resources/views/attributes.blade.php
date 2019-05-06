@@ -15,7 +15,7 @@
                     </p>
 
                     <div class="card-body">
-                        <form method="POST" id="attribute-form" action="{{ route('attributes') }}">
+                        <form autofill="off" method="POST" id="attribute-form" action="{{ route('attributes') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -103,7 +103,7 @@
 
                                 <div class="col-md-6">
                                     <div class="d-flex flex-row">
-                                    <input id="postcode"
+                                    <input autocomplete="new-password" id="postcode"
                                            type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
                                            name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
                                            min="1000" max="9999"
@@ -190,8 +190,19 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="longitude" id="longitude" value="20.0">
-                            <input type="hidden" name="latitude" id="latitude" value="20.0">
+                            <div class="form-group row">
+                                <label for="greeting" class="col-md-4 col-form-label text-md-right">{{ __('Greeting Message') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea autocomplete="new-password" autofill="off" style="resize: none;" form="attribute-form" id="greeting" rows="6" type="text" class="form-control{{ $errors->has('greeting') ? ' is-invalid' : '' }}"
+                                              name="greeting" placeholder="Say something about yourself." required autofocus></textarea>
+                                        @if ($errors->has('greeting'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('greeting') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
