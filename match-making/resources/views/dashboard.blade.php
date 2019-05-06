@@ -66,7 +66,7 @@
                                 <div id="match-card"
                                      class="card m-3"
                                      style= "max-width:12rem;"
-                                     onclick="loadUserIntoDashboardModal({{$user->user_id}})">
+                                     >
 
                                     <div class="p-3">
                                         <img data-toggle="modal"
@@ -75,7 +75,8 @@
                                              class="card-img-top img-thumbnail rounded-circle"
                                              src="{{$user->image_url}}"
                                              alt="Card-image-cap"
-                                             style="cursor:pointer"/>
+                                             style="cursor:pointer"
+                                             onclick="loadUserIntoDashboardModal({{$user->user_id}})"/>
                                     </div>
 
                                     <div class="card-body">
@@ -99,7 +100,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" id="modal_image" alt="Card-image-cap"/>
+                                                            <img class="card-img-top img-thumbnail rounded-circle" src="" id="modal_image" alt="Card-image-cap"/>
                                                         </div>
                                                         <div class="col border-top-0">
                                                             <h1 id="modal_name"></h1>
