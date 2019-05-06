@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\MatchMaker;
+use App\MingleLibrary\Models\Message;
 use App\MingleLibrary\Models\UserAttributes;
 use App\User;
 use Faker\Test\Provider\Collection;
@@ -109,12 +110,18 @@ class MatchController extends Controller
             ->first();
 
         if(is_null($match))  {
-            return redirect()->back()->withErrors('error', 'Match does not exist');
+            return redirect('/matches')->withErrors('error', 'Match does not exist');
         }
+
+        Message::where('sender_id', $userId)
+            ->where('receiver_id', $matchId)
+            ->orWhere('sender_id', $matchId)
+            ->where('receiver_id', $userId)
+            ->delete();
 
         $match->delete();
 
-        return redirect()->back()->with('success', 'Match removed');
+        return redirect('/matches')->with('success', 'Match removed');
 
     }
 }
