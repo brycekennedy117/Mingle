@@ -42,6 +42,7 @@ $router->group(['middleware' => 'auth'], function() {
         'as' => 'avatar',
     ])->name('edit');
     Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
+    Route::post('/attributes/get', 'AttributesController@getUserAttribute');
 
 
     Route::post('/profile', [
