@@ -69,7 +69,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;"></a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         My Profile
                                     </a>
@@ -91,6 +90,8 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item"><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+
                     </ul>
                 </div>
             </div>
