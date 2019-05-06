@@ -20,8 +20,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Matches</div>
 
+                    <div class="card-header">Matches</div>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="container">
 
@@ -52,8 +62,8 @@
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" href="#">View profile</a>
-                                                            <a class="dropdown-item" href="#">Remove</a>
-                                                            <a class="dropdown-item" href="#">Block</a>
+                                                            <a class="dropdown-item" href="{{"/removeMatch?user_id=".$userAttributes->id}}">Remove</a>
+                                                           <a class="dropdown-item" href="#">Block</a>
                                                         </div>
                                                     </div>
                                                 </div>

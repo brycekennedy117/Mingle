@@ -93,4 +93,28 @@ class MatchController extends Controller
         }
         return redirect('/attributes');
     }
+
+    public function removeMatch(Request $request)   {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $matchId = (int)$request->user_id;
+
+        $match = Match::where('user_id_1', $userId)
+            ->where('user_id_2', $matchId)
+            ->orWhere('user_id_1', $matchId)
+            ->where('user_id_2', $userId)
+            ->first();
+
+        if(is_null($match))  {
+            return redirect()->back()->withErrors('error', 'Match does not exist');
+        }
+
+        $match->delete();
+
+        return redirect()->back()->with('success', 'Match removed');
+
+    }
 }
