@@ -11,6 +11,8 @@
         {
             document.getElementById("slider_valueAge").innerHTML=x;
         }
+
+
     </script>
 
     <div class="container text-center col-md-auto">
@@ -57,12 +59,23 @@
                         </div>
                     @endif
                     <div class="container">
-                        <div class="row justify-content-center">
+                    <div class="row justify-content-center">
 
-                            @foreach ($attributes as $user)
-                                <div id="match-card" class="card m-3" style= "max-width:20rem">
+
+                    @foreach ($attributes as $user)
+                                <div id="match-card"
+                                     class="card m-3"
+                                     style= "max-width:12rem;"
+                                     onclick="loadUserIntoDashboardModal({{$user->user_id}})">
+
                                     <div class="p-3">
-                                        <img height="100px" class="rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                        <img data-toggle="modal"
+                                             data-target="#myModal"
+                                             data-id="{{$user->id}}"
+                                             class="card-img-top img-thumbnail rounded-circle"
+                                             src="{{$user->image_url}}"
+                                             alt="Card-image-cap"
+                                             style="cursor:pointer"/>
                                     </div>
                                     <div class="card-body d-flex justify-content-between flex-column">
                                         <div>
@@ -73,6 +86,57 @@
                                         <div>
                                             <p>Suburb: {{$user->postcodeObject->suburb}}</p>
                                             <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div id="myModal" class="modal fade">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <!-- Header -->
+                                                <div class="modal-header">
+                                                    <h1>Profile</h1>
+                                                </div>
+
+                                                <!-- Body -->
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" id="modal_image" alt="Card-image-cap"/>
+                                                        </div>
+                                                        <div class="col border-top-0">
+                                                            <h1 id="modal_name"></h1>
+
+                                                            <table class='table table-condensed text-center'>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th>Age</th>
+                                                                    <td id="modal_dob"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Gender</th>
+                                                                    <td id="modal_gender"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Interest</th>
+                                                                    <td id="modal_interestin"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Location</th>
+                                                                    <td id="modal_suburb"></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-footer modal-footer--mine">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
@@ -96,9 +160,11 @@
 
 
                                     </div>
+
                                 </div>
-                            @endforeach
-                         </div>
+                    @endforeach
+
+                    </div>
                     </div>
                 </div>
             </div>
