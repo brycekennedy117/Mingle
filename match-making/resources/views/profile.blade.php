@@ -32,7 +32,7 @@
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td id="dob-cell">{{date('d M Y', strtotime($user->date_of_birth))}}</td>
+                                <td id="dob-cell">{{date('d-m-Y', strtotime($user->date_of_birth))}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
@@ -44,11 +44,21 @@
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>{{$user->gender}}</td>
+                                @if($user->gender == 'M')
+                                    <td>Male</td>
+                                @else
+                                    <td>Female</td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td>{{$user->interested_in}}</td>
+                                @if($user->interested_in == 'M')
+                                    <td>Men</td>
+                                @elseif($user->interested_in == 'F')
+                                    <td>Women</td>
+                                @else
+                                    <td>Both</td>
+                                @endif
                             </tr>
                             </tbody>
                         </table>

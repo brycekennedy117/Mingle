@@ -1,46 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8">
-                <h1>Your Messages</h1>
-                @foreach ($messages as $message)
-                    @if($message->sender_id === Auth::user()->id)
-                       <div class="card card-body bg-light" style="margin-bottom: 20px">
-                            <p>{{ $message->content }}</p>
-                            <small>
-                                {{ Auth::user()::find($message->sender_id)->name }} :
-                                {{ $message->created_at }}
-                            @if($message->sender_id === Auth::user()->id)
-                                <a href="{{route('message.delete', $message->id)}}" class="btn btn-danger float-right">Delete</a>
-                                <a href="#" class="btn btn-primary float-right" id="edit">Edit</a>
-                            @endif
-                            </small>
-                            <div class="col-md-8 offset-md-4" style="display: none;" id="edit-form">
-                                <textarea id="content" name="content" rows="1">{{ $message->content }}</textarea>
-                                <button type="submit" class="btn btn-primary">Confirm</button>
+    <div class="container" >
+        @if($errors != null && sizeof($errors) > 0)
+            {{json_encode($errors)}}
+        @else
+            <div class="container card card-body d-flex flex-column">
+                <div id='message-container' class="d-flex flex-column">
+            @if(sizeof($messages) == 0 )
+                    <div class="jumbotron"> <h1>You have no messages. Send your match a message!</h1></div>
+            @else
+                @foreach($messages as $message)
+                        @if($message->sender_id != auth()->user()->id)
+                            <div class="d-flex flex-column mt-2 mb-2">
+                                <div class="d-flex flex-row mt-2 mb-2 justify-content-start">
+                                    <div>
+                                        <img class="rounded-circle" src="{{$message->receiver->Attributes->image_url}}" style="width: 50px">
+                                    </div>
+                                    <div class="d-flex align-items-center ml-3">
+                                        {{$message->content}}
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row mt-2 mb-2 justify-content-start">
+                                    <span class="badge badge-secondary" style="">{{$message->sender->name}}</span>
+                                </div>
                             </div>
-                       </div>
-                    @endif
+                        @else
+                            <div class="d-flex flex-column mt-2 mb-2 justify-content-end">
+                                <div class="d-flex flex-row mt-2 mb-2 justify-content-end">
+                                    <div class="d-flex align-items-center ml-3 mr-3">
+                                        {{$message->content}}
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <img id="user_image" class="rounded-circle" src="{{$message->receiver->Attributes->image_url}}" style="width: 50px">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mt-2 mb-2 justify-content-end">
+                                    <span class="badge badge-primary" style="width: 50px;">You</span>
+                                </div>
+                            </div>
+                        @endif
                 @endforeach
-                @if(count($messages) == 0)
-                    <p>This is the beginning of message history.</p>
-                @endif
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-8">
-                    <form method="POST" action="{{ route('messages') }}">
+            @endif
+                </div>
+                <div class="card-footer">
+                    <form autocomplete="off" autofill="off" method="POST" action="{{route('send-message')}}">
                         @csrf
-                        <div class="col-md-8 offset-md-4">
-                            <textarea id="content" name="content" rows="1" placeholder="Enter a message"></textarea>
-                            <button type="submit" class="btn btn-primary float-right">Send</button>
+                        <div class="d-flex flex-row">
+                            <input class="mr-3" style="width: 100%" type="text" name="message-content"/>
+                            <input class="btn btn-primary" type="submit" name="message-send" value="Send"/>
+                            <input type="hidden" name="receiver-id" value="{{$receiver_id}}">
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+
+        @endif
     </div>
 @endsection

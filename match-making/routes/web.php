@@ -35,9 +35,13 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/editprofile', 'UserController@edit');
     Route::resource('messages', 'MessagesController');
     Route::get('/messages', 'MessagesController@index')->name('messages');
-    Route::post('/messages', 'MessagesController@store');
+    Route::post('/messages', 'MessagesController@store')->name('send-message');
+    Route::post('/messages/get', 'MessagesController@getMessages')->name('get-messages');
     Route::get('/', 'HomeController@index');
-    Route::post('/editprofile', 'UserController@editpassword')->name('edit');
+    Route::post('/editprofile', 'UserController@editprofile', [
+        'as' => 'avatar',
+        'uses' => 'AttributesController@showAvatar'
+    ])->name('edit');
     Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
     Route::post('/attributes/get', 'AttributesController@getUserAttribute');
 
