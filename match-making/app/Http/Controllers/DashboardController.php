@@ -33,7 +33,7 @@ class DashboardController extends Controller
         return redirect('/attributes');
     }
 
-    public function viewMatches()
+    public function viewMatches(Request $request)
     {
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes;
