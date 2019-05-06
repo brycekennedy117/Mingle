@@ -17,9 +17,14 @@ class AttributesTest extends DuskTestCase
     {
         parent::setUp();
         if ($this->user == null) {
+
+
             $this->appUrl = getenv('APP_URL', 'http://localhost:8888');
             $this->user = factory(User::class)->make();
             $this->user->save();
+        }
+        else {
+            echo "USER NOT NULL";
         }
         foreach (static::$browsers as $browser) {
             $browser->driver->manage()->deleteAllCookies();
@@ -55,7 +60,6 @@ class AttributesTest extends DuskTestCase
     }
 
     public function testPostcodeListCount() {
-
 
         $this->actingAs($this->user)->browse(function (Browser $browser) {
             $user = factory(User::class)->create();

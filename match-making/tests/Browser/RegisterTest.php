@@ -36,6 +36,7 @@ class RegisterTest extends DuskTestCase
                 ->type('password', 'password')
                 ->type('password_confirmation', 'password')
                 ->press('Register')
+                ->pause(10000)
                 ->assertUrlIs($this->appUrl.'/attributes');
         });
 

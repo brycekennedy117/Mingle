@@ -91,7 +91,13 @@
                                 </div>
                             </li>
                         @endguest
-                        <li class="nav-item"><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+                        @if(\Illuminate\Support\Facades\Auth::user() != null)
+                            @if(\Illuminate\Support\Facades\Auth::user()->Attributes != null)
+                                <li class="nav-item"><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+                            @else
+                                <li class="nav-item"><img src="https://profiles.utdallas.edu/img/default.png" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+                            @endif
+                        @endif
 
                     </ul>
                 </div>
