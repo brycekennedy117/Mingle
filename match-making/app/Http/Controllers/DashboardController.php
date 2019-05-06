@@ -28,12 +28,13 @@ class DashboardController extends Controller
     {
         $attributes = Auth::user()->Attributes;
         if ($attributes != null) {
+
             return view('dashboard');
         }
         return redirect('/attributes');
     }
 
-    public function viewMatches()
+    public function viewMatches(Request $request)
     {
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes;

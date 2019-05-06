@@ -21,34 +21,46 @@
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
-                            <button type="button" class="btn btn-success mx-auto d-block">Edit Profile</button>
+                        <div class="row">
+                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
+                        </div>
 
                         <div style="padding: 20px"></div>
                         <table class='table table-condensed table-hover text-center'>
                             <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td>{{$name}}</td>
+                                <td id="name-cell">{{$name}}</td>
                             </tr>
                             <tr>
                                 <th>Date of birth</th>
-                                <td id="dob-cell">{{date('d M Y', strtotime($user->date_of_birth))}}</td>
+                                <td id="dob-cell">{{date('d-m-Y', strtotime($user->date_of_birth))}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td>{{$user->postcodeObject->postcode}}</td>
+                                <td id="postcode-cell">{{$user->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td>{{$user->postcodeObject->suburb}}</td>
+                                <td id="suburb-cell">{{$user->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>{{$user->gender}}</td>
+                                @if($user->gender == 'M')
+                                    <td id="gender-cell">Male</td>
+                                @else
+                                    <td id="gender-cell">Female</td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                <td>{{$user->interested_in}}</td>
+                                @if($user->interested_in == 'M')
+                                    <td id="interested-in-cell">Men</td>
+                                @elseif($user->interested_in == 'F')
+                                    <td id="interested-in-cell">Women</td>
+                                @else
+                                    <td id="interested-in-cell">Both</td>
+                                @endif
                             </tr>
                             </tbody>
                         </table>
