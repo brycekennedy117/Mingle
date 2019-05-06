@@ -60,15 +60,20 @@
                         <div class="row justify-content-center">
 
                             @foreach ($attributes as $user)
-                                <div id="match-card" class="card m-3" style= "max-width:12rem">
+                                <div id="match-card" class="card m-3" style= "max-width:20rem">
                                     <div class="p-3">
-                                        <img class="card-img-top img-thumbnail rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
+                                        <img height="100px" class="rounded-circle" src="{{$user->image_url}}" alt="Card-image-cap"/>
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{$user->name}}</h5>
-                                        <p class="card-text">nal content. This content is a little bit longer.</p>
-                                        <p>Suburb: {{$user->postcodeObject->suburb}}</p>
-                                        <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
+                                    <div class="card-body d-flex justify-content-between flex-column">
+                                        <div>
+                                            <h5 class="card-title">{{$user->name}}</h5>
+                                            <p class="card-text">{{$user->greeting}}</p>
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            <p>Suburb: {{$user->postcodeObject->suburb}}</p>
+                                            <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
+                                        </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="row d-flex flex-row align-items-center justify-content-center p-0" style="font-size: 30px;">
