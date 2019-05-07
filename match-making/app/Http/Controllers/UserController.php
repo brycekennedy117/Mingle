@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -39,20 +40,38 @@ class UserController extends Controller
         return redirect('/attributes');
     }
 
-    /*Edits password in user profile*/
+    /*Edits user profile*/
     public function editProfile(Request $request) {
         $current_password = $request->get('password');
         $new_password = $request->get('change-password');
         $password_confirm = $request->get('change-password-confirm');
         $attributes = Auth::user()->Attributes;
-        $attributes->postcode = $request->get('postcode-id');
+        if ($request->get('postcode-id') != null) {
+            $attributes->postcode = $request->get('postcode-id');
+        }
         $attributes->interested_in = $request->get('interested_in');
         $email = $request->get('email');
 
         $existing = User::all()->where('email', $email);
 
+        $file = $request->file('file');
+
+        if ($file != null && $file->isValid()) {
+            $name = $file->getClientOriginalName();
+            $key = 'documents/' . $name;
+            Storage::disk('s3')->put($key, file_get_contents($file));
+            $url = Storage::disk('s3')->url('documents/' . $name);
+
+            $id = Auth::user()->id;
+
+            $attr = UserAttributes::all()
+                ->where('user_id', '==', $id)->first();
+            $attr->image_url = $url;
+            $attr->save();
+        }
+
         if(sizeof($existing) > 0 && $existing->first()->id != $attributes->user_id) {
-            return redirect("/editprofile")->with('error', 'User already exists. Couldnt change email.');
+            return redirect("/editprofile")->with('error', 'User already exists. Couldn\'t change email.');
 
         }
         else{
