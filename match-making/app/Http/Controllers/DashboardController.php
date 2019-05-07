@@ -28,6 +28,7 @@ class DashboardController extends Controller
     {
         $attributes = Auth::user()->Attributes;
         if ($attributes != null) {
+
             return view('dashboard');
         }
         return redirect('/attributes');

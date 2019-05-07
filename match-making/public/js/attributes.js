@@ -68,7 +68,6 @@ function editPostcodeButtonClicked() {
 }
 
 function loadUserIntoDashboardModal(user_id) {
-	console.log(user_id);
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 	$.post( '/attributes/get', data={"user_id": user_id, "_token": CSRF_TOKEN},function( data ) {
@@ -126,7 +125,7 @@ function redirect(url) {
 			interest = 'Both'
 		}
 
-		///document.getElementById('modal_name').src = user.image_url;
+		document.getElementById('modal_image').src = data.attributes.image_url;
 		document.getElementById('modal_name').innerHTML = user.name;
 		document.getElementById('modal_dob').innerHTML = age;
 		document.getElementById('modal_gender').innerHTML = gender;
