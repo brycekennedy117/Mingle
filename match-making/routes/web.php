@@ -40,7 +40,6 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index');
     Route::post('/editprofile', 'UserController@editprofile', [
         'as' => 'avatar',
-        'uses' => 'AttributesController@showAvatar'
     ])->name('edit');
     Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
     Route::post('/attributes/get', 'AttributesController@getUserAttribute');
