@@ -15,13 +15,18 @@
                     <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
                     <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
                     <div class="form-group row">
-                        <input type="file" name="file" class="form-control-sm border" style="margin: 0 auto;">
+                        <input type="file" name="file" class="form-control-m btn btn-default" style="margin: 0 auto;">
                     </div>
                     <div class="form-group row">
-                        <label for="hello-message" class="col-md-4 col-form-label text-md-right">Your intro</label>
+                        <label for="greeting" class="col-md-4 col-form-label text-md-right">Your greeting</label>
 
                         <div class="col-md-6">
-                            <input id="hello-message" type="text" class="form-control" name="hello-message" value="" autofocus>
+                            <div class="d-flex flex-row">
+                                <input id="greeting" type="text" class="form-control" name="greeting" value="{{$user->greeting}}" autofocus disabled>
+                                <button id="greeting-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -29,7 +34,12 @@
                         <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
+                            <div class="d-flex flex-row">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus disabled>
+                                <button id="email-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -80,17 +90,22 @@
                         <label for="interested_in" class="col-md-4 col-form-label text-md-right">{{ __('Interested in') }}</label>
 
                         <div class="col-md-6">
-                            <select name="interested_in" id="interested_in">
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
-                                <option value="MF">Both</option>
-                            </select>
+                            <div class="d-flex flex-row">
+                                <select name="interested_in" id="interested_in" class="form-control" disabled>
+                                    <option value="F">Female</option>
+                                    <option value="M">Male</option>
+                                    <option value="MF">Both</option>
+                                </select>
+                                <button onclick="" id="interested-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
 
-                            @if ($errors->has('interested_in'))
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('interested_in') }}</strong>
-                                        </span>
-                            @endif
+                                @if ($errors->has('interested_in'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('interested_in') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
 

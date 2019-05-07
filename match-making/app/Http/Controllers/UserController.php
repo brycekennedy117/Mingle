@@ -50,6 +50,7 @@ class UserController extends Controller
             $attributes->postcode = $request->get('postcode-id');
         }
         $attributes->interested_in = $request->get('interested_in');
+        $attributes->greeting = $request->get('greeting');
         $email = $request->get('email');
 
         $existing = User::all()->where('email', $email);
