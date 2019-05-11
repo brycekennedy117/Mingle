@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Blocked;
 use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\MatchMaker;
 use App\MingleLibrary\Models\Message;
@@ -118,5 +119,34 @@ class MatchController extends Controller
 
         return redirect('/matches')->with('success', 'Match removed');
 
+    }
+
+    public function addBlockUser(Request $request) {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $blockedId = (int)$request->user_id;
+
+        $blocked = new Blocked();
+        $blocked->user_id = $userId;
+        $blocked->blocked_id = $blockedId;
+        $blocked->save();
+
+        return redirect('/matches')->with('error', 'User has been blocked');
+    }
+
+    public function removeBlockUser(Request $request) {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $blockedId = (int)$request->user_id;
+
+
+
+        return redirect('/matches')->with('success', 'User has been unblocked');
     }
 }

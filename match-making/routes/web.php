@@ -25,6 +25,7 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/matches', 'MatchController@matches')->name('matches');
     Route::get('/campbell', 'MatchController@profile')->name('campbell');
     Route::get('/removeMatch', 'MatchController@removeMatch')->name('removeMatch');
+    Route::get('/addBlock', 'MatchController@addBlockUser')->name('addBlockUser');
     Route::post('/attributes', 'AttributesController@store')->name('store_attributes');
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
