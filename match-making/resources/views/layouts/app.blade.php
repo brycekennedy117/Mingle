@@ -26,7 +26,10 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ URL::asset('js/attributes.js') }}"></script>
-
+    <script type="text/javascript" src="{{ URL::asset('js/messages.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/editprofile.js') }}"></script>
+    {{--font awesome cdn--}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
 
@@ -67,11 +70,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        My Profile
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('matches') }}">
                                         Matches
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
-                                        My Profile
+                                    <a class="dropdown-item" href="{{ route('messages') }}">
+                                        Messages
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -85,6 +91,14 @@
                                 </div>
                             </li>
                         @endguest
+                        @if(\Illuminate\Support\Facades\Auth::user() != null)
+                            @if(\Illuminate\Support\Facades\Auth::user()->Attributes != null)
+                                <li class="nav-item"><img src="{{Auth::user()->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+                            @else
+                                <li class="nav-item"><img src="https://profiles.utdallas.edu/img/default.png" class="mx-auto d-block rounded-circle" style="width: 40px;height: 40px; border-radius: 50%;"></li>
+                            @endif
+                        @endif
+
                     </ul>
                 </div>
             </div>

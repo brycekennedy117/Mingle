@@ -17,9 +17,14 @@ class AttributesTest extends DuskTestCase
     {
         parent::setUp();
         if ($this->user == null) {
+
+
             $this->appUrl = getenv('APP_URL', 'http://localhost:8888');
             $this->user = factory(User::class)->make();
             $this->user->save();
+        }
+        else {
+            echo "USER NOT NULL";
         }
         foreach (static::$browsers as $browser) {
             $browser->driver->manage()->deleteAllCookies();
@@ -36,6 +41,7 @@ class AttributesTest extends DuskTestCase
                 ->pause(1000)
                 ->click('#suburb-table > .table-row')
                 ->type('date_of_birth', '07031992')
+                ->type('#greeting', "This is the greeting message")
                 ->press('Confirm')
                 ->pause(1000)
                 ->assertUrlIs($this->appUrl.'/dashboard');
@@ -43,8 +49,18 @@ class AttributesTest extends DuskTestCase
         });
     }
 
-    public function testPostcodeListCount() {
+    public function testValidAttributesRoute()
+    {
+        $this->browse(function (Browser $browser) {
+            $user = factory(User::class)->create();
+            $browser->loginAs($user->email)
+                ->visit($this->appUrl.'/attributes')
+                ->assertUrlIs($this->appUrl.'/dashboard');
 
+        });
+    }
+
+    public function testPostcodeListCount() {
 
         $this->actingAs($this->user)->browse(function (Browser $browser) {
             $user = factory(User::class)->create();
@@ -52,7 +68,6 @@ class AttributesTest extends DuskTestCase
             $postcode = Postcode::all()->where('id', $postcodeID)->first()->postcode;
             $suburbs = Postcode::all()->where('postcode', $postcode);
             $numOfSuburbs =  sizeof($suburbs);
-            echo $this->appUrl;
             $browser->loginAs($this->user->email)
                 ->visit($this->appUrl.'/attributes')
                 ->assertUrlIs($this->appUrl.'/attributes')

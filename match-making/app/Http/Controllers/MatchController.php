@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\MatchMaker;
+use App\MingleLibrary\Models\Message;
 use App\MingleLibrary\Models\UserAttributes;
 use App\User;
 use Faker\Test\Provider\Collection;
@@ -54,26 +55,16 @@ class MatchController extends Controller
         $userID = Auth::user()->id;
 
         $matches1 = Match::all(['user_id_2', 'user_id_1'])
-            ->where('user_id_1', $userID)->all();
+            ->where('user_id_1', $userID)->pluck('user_id_2');
 
         $matches2 = Match::all(['user_id_2', 'user_id_1'])
-            ->where('user_id_2', $userID)->all();
-
-
-        $attributesArray = array();
-        $attributes = null;
-        foreach($matches1 as $match) {
-            $attributes = $match->user2->Attributes;
-            array_push($attributesArray, $attributes);
-        }
-        foreach($matches2 as $match) {
-            $attributes = $match->user1->Attributes;
-            array_push($attributesArray, $attributes);
-        }
+            ->where('user_id_2', $userID)->pluck('user_id_1');
+        $matches =$matches1->merge($matches2)->unique();
+        $attributes = UserAttributes::all()->whereIn('user_id', $matches->toArray());
 
         //Paginate match page
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $itemCollection = collect($attributesArray);
+        $itemCollection = collect($attributes);
         $perPage = 10;
         $currentPageItems = $itemCollection
             ->slice(($currentPage * $perPage) - $perPage, $perPage)
@@ -102,5 +93,30 @@ class MatchController extends Controller
             return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
         }
         return redirect('/attributes');
+    }
+
+    public function removeMatch(Request $request)   {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $matchId = (int)$request->user_id;
+
+        Match::where('user_id_1', $userId)
+            ->where('user_id_2', $matchId)
+            ->orWhere('user_id_1', $matchId)
+            ->where('user_id_2', $userId)
+            ->delete();
+
+
+        Message::where('sender_id', $userId)
+            ->where('receiver_id', $matchId)
+            ->orWhere('sender_id', $matchId)
+            ->where('receiver_id', $userId)
+            ->delete();
+
+        return redirect('/matches')->with('success', 'Match removed');
+
     }
 }

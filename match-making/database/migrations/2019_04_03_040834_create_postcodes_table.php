@@ -39,7 +39,6 @@ class CreatePostcodesTable extends Migration
                 $postcode->longitude = (double)$pc[3];
                 $postcode->state = $pc[2];
                 $postcode->save();
-                echo 'Postcode\n';
             }
         }
 

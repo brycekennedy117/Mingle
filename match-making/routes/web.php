@@ -24,26 +24,32 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/attributes', 'AttributesController@index')->name('attributes');
     Route::get('/matches', 'MatchController@matches')->name('matches');
     Route::get('/campbell', 'MatchController@profile')->name('campbell');
+    Route::get('/removeMatch', 'MatchController@removeMatch')->name('removeMatch');
     Route::post('/attributes', 'AttributesController@store')->name('store_attributes');
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
     Route::get('/profile', 'UserController@index')->name('profile');
 //    test route
+    Route::post('/like', 'DashboardController@liked')->name('like');
+    Route::post('/dislike', 'DashboardController@dislike')->name('ignore');
     Route::get('/dashboard', 'DashboardController@viewMatches');
+    Route::get('/editprofile', 'UserController@edit');
+    Route::resource('messages', 'MessagesController');
+    Route::get('/messages', 'MessagesController@index')->name('messages');
+    Route::post('/messages', 'MessagesController@store')->name('send-message');
+    Route::post('/messages/get', 'MessagesController@getMessages')->name('get-messages');
     Route::get('/', 'HomeController@index');
-    Route::post('/upload', function (){
-        request()->file('file')->store(
-            'my-file',
-            's3'
-        );
-        return back();
-    });
+    Route::post('/editprofile', 'UserController@editprofile', [
+        'as' => 'avatar',
+    ])->name('edit');
+    Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
+    Route::post('/attributes/get', 'AttributesController@getUserAttribute');
 
-    Route::post('profile', [
+
+    Route::post('/profile', [
         'as' => 'avatar',
         'uses' => 'AttributesController@showAvatar'
-    ]);return back();
-
+    ]);
 });
 
 $router->group(['middleware' => 'guest'], function() {

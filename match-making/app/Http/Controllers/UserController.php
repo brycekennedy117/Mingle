@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Postcode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 //User attributes model
 use App\User;
 use App\MingleLibrary\Models\UserAttributes;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -14,52 +17,92 @@ class UserController extends Controller
     /*Displays user information*/
     public function index()   {
         $attributes = Auth::user()->Attributes;
+
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
 
         if ($attributes != null) {
-            return view('profile', ['name' => $name])->with('user',$userDetails);
+            return view('profile', ['name' => $name])->with('user',$attributes);
         }
         return redirect('/attributes');
 
     }
 
     public function edit() {
+        $attributes = Auth::user()->Attributes;
         $name = Auth::user()->name;
         $userId = Auth::id();
         $userDetails = User::find($userId)->Attributes()->get();
-        return view('/editprofile', ['name' => $name])->with('user', $userDetails);
+        if ($attributes != null) {
+            return view('/editprofile', ['name' => $name])->with('user', $attributes);
+        }
+        return redirect('/attributes');
     }
 
-    public function update(Request $request, $id) {
-
-    }
-
-    /*Edits password in user profile*/
-    public function editPassword(Request $request)   {
-        if (!(Hash::check($request->get('password'), Auth::user()->password))) {
-            // The passwords matches
-            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
-        }
-
-        if(strcmp($request->get('password'), $request->get('change-password')) == 0){
-            //Current password and new password are same
-            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
-        }
-
-        $validatedData = $request->validate([
-            'password' => 'required',
-            'new-password' => 'required|string|min:6|confirmed',
-        ]);
-
-        //Change Password
+    /*Edits user profile*/
+    public function editProfile(Request $request) {
+        $current_password = $request->get('password');
+        $new_password = $request->get('change-password');
+        $password_confirm = $request->get('change-password-confirm');
         $attributes = Auth::user()->Attributes;
-        $user = Auth::user();
-        $user->password = bcrypt($request->get('change-password'));
-        $attributes->postcode = $request->get('postcode');
-        $user->save();
+        if ($request->get('postcode-id') != null) {
+            $attributes->postcode = $request->get('postcode-id');
+        }
+        $attributes->interested_in = $request->get('interested_in');
+        $email = $request->get('email');
 
-        return redirect()->back()->with("success","Password changed successfully.");
+        $existing = User::all()->where('email', $email);
+
+        $file = $request->file('file');
+
+        if ($file != null && $file->isValid()) {
+            $name = $file->getClientOriginalName();
+            $key = 'documents/' . $name;
+            Storage::disk('s3')->put($key, file_get_contents($file));
+            $url = Storage::disk('s3')->url('documents/' . $name);
+
+            $id = Auth::user()->id;
+
+            $attr = UserAttributes::all()
+                ->where('user_id', '==', $id)->first();
+            $attr->image_url = $url;
+            $attr->save();
+        }
+
+        if(sizeof($existing) > 0 && $existing->first()->id != $attributes->user_id) {
+            return redirect("/editprofile")->with('error', 'User already exists. Couldn\'t change email.');
+
+        }
+        else{
+            Auth::user()->email = $email;
+        }
+
+        if (strlen($current_password) > 0 && strlen($new_password) == 0)
+        {
+            return redirect("/editprofile")->with('error', 'If you want to change your password, please ensure to fill out all password related fields.');
+        }
+        if (strlen($new_password) > 0 && strlen($current_password) == 0)
+        {
+            return redirect("/editprofile")->with('error', 'If you want to change your password, please ensure to fill out all password related fields.');
+        }
+        if (strlen($current_password) > 0 && strlen($new_password) > 0)
+        {
+            if (!Hash::check($request->get('password'), Auth::user()->password))
+            {
+                return redirect("/editprofile")->with('error', 'Current password was entered incorrectly.');
+            }
+            if (!($new_password === $password_confirm))
+            {
+                return redirect("/editprofile")->with('error', 'New password and confirmation do not match.');
+            }
+            if (Hash::check($request->get('password'), Auth::user()->password) && $new_password === $password_confirm)
+            {
+                Auth::user()->password = Hash::make($new_password);
+            }
+        }
+        $attributes->save();
+        Auth::user()->save();
+        return redirect("/profile");
     }
 }

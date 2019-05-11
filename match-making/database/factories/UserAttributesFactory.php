@@ -6,7 +6,7 @@ use App\MingleLibrary\Models\Postcode;
 $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker $faker) {
     $int= mt_rand(1262055681,1262055681);
     $date = date("Y-m-d H:i:s",$int);
-    $postcode = Postcode::all()->whereBetween('postcode', [3121, 3150])->random();
+    $postcode = Postcode::all()->whereBetween('postcode', [3121, 3150])->random(1)->first();
     return [
         'user_id' => 1,
         'openness' => $faker->randomFloat(2,0,1),
@@ -18,7 +18,8 @@ $factory->define(App\MingleLibrary\Models\UserAttributes::class, function (Faker
         'interested_in' => 'F',
         'date_of_birth' => $faker->date("Y-m-d H:i:s"),
         'postcode' => $postcode->id,
-        'image_url' => "https://profiles.utdallas.edu/img/default.png"
+        'image_url' => "https://profiles.utdallas.edu/img/default.png",
+        'greeting' => $faker->text("400")
     ];
 });
 

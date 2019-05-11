@@ -46,10 +46,24 @@ class User extends Authenticatable
     }
     public function matches(){
 
-        return $this->hasMany('App\MingleLibrary\Models\Matches', 'user_id_1');
+        return $this->hasMany('App\MingleLibrary\Models\Match', 'user_id_1')->orWhere('user_id_2', $this->id);
+    }
+
+    public function likes() {
+        return $this->hasMany('App\MingleLibrary\Models\Like', 'user_id_1');
+    }
+
+    public function dislikes() {
+        return $this->hasMany('App\MingleLibrary\Models\Ignored', 'user_id_1');
     }
 
     public function getID() {
         return $this->id;
     }
+
+    public function messages(){
+
+        return $this->hasMany('App\MingleLibrary\Models\Message', 'sender_id')->orWhere('receiver_id', $this->id);
+    }
+
 }

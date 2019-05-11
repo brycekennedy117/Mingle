@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MingleLibrary\Models\Postcode;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class AttributesController extends Controller
 
     public function store(Request $request)
     {
-
+        echo $request['greeting'];
 
         UserAttributes::create([
             'user_id' => Auth::user()->id,
@@ -41,7 +42,8 @@ class AttributesController extends Controller
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
-            'image_url' =>  $request['image_url'] ? $request['image_url'] : "https://profiles.utdallas.edu/img/default.png"
+            'image_url' =>  $request['image_url'] ? $request['image_url'] : "https://profiles.utdallas.edu/img/default.png",
+            'greeting' => $request['greeting'] ? $request['greeting'] : "Hello"
 
         ]);
         return redirect('dashboard');
@@ -67,18 +69,25 @@ class AttributesController extends Controller
             ->where('user_id', '==', $id)->first();
             $attr->image_url = $url;
             $attr->save();
-            echo $id." ".$url;
+
         }
 
-        #return back();
+        return redirect('/profile');
+
     }
-
-
 
 
     public function suburbs(Request $request) {
         $postcode = $request['postcode'];
         $suburbs = Postcode::all()->where('postcode', $postcode);
         return $suburbs;
+    }
+
+    public function getUserAttribute(Request $request) {
+        $attr = UserAttributes::all()->where('user_id', $request['user_id'])->first();
+        $user = $attr->user;
+        $postcode = $attr->postcodeObject;
+
+        return ['attributes' => $attr, 'user' => $user, 'postcode' => $postcode];
     }
 }

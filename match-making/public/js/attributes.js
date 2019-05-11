@@ -9,129 +9,9 @@ $( document ).ready(function() {
 		}
 	});
 });
-
-$( document ).ready(function() {
-	$("#openness").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#openness-value").text("closed off");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#openness-value").text("somewhat closed");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#openness-value").text("neither open nor closed");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#openness-value").text("somewhat open");
-		}
-		else {
-			$("#openness-value").text("an open book");
-		}
-	});
-});
-
-$( document ).ready(function() {
-	$("#conscientiousness").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#conscientiousness-value").text("very casual");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#conscientiousness-value").text("somewhat casual");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#conscientiousness-value").text("neither conscientious nor casual");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#conscientiousness-value").text("somewhat conscientious");
-		}
-		else {
-			$("#conscientiousness-value").text("very conscientious");
-		}
-	});
-});
-
-$( document ).ready(function() {
-	$("#extraversion").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#extraversion-value").text("as meek as a mouse");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#extraversion-value").text("an introvert");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#extraversion-value").text("neither an extravert nor an introvert");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#extraversion-value").text("an extravert");
-		}
-		else {
-			$("#extraversion-value").text("the life of the party");
-		}
-	});
-});
-
-$( document ).ready(function() {
-	$("#agreeableness").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#agreeableness-value").text("as stubborn as a mule");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#agreeableness-value").text("somewhat disagreeable");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#agreeableness-value").text("neither agreeable nor disagreeable");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#agreeableness-value").text("somewhat agreeable");
-		}
-		else {
-			$("#agreeableness-value").text("always willing to comply");
-		}
-	});
-});
-
-$( document ).ready(function() {
-	$("#neuroticism").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#neuroticism-value").text("paranoid");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#neuroticism-value").text("somewhat neurotic");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#neuroticism-value").text("neither neurotic nor stable");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#neuroticism-value").text("somewhat stable");
-		}
-		else {
-			$("#neuroticism-value").text("mentally robust");
-		}
-	});
-});
 $(document).ready(function() {
 	hideSuburbTableContainer();
 	hidePostcodeEditButton();
-});
-
-$( document ).ready(function() {
-	$("#neuroticism").change(function(){
-		if ($(this).val() >= 1 && $(this).val() <= 2) {
-			$("#neuroticism-value").text("paranoid");
-		}
-		else if ($(this).val() >= 3 && $(this).val() <= 4) {
-			$("#neuroticism-value").text("somewhat neurotic");
-		}
-		else if ($(this).val() >= 5 && $(this).val() <= 6) {
-			$("#neuroticism-value").text("neither neurotic nor stable");
-		}
-		else if ($(this).val() >= 7 && $(this).val() <= 8) {
-			$("#neuroticism-value").text("somewhat stable");
-		}
-		else {
-			$("#neuroticism-value").text("mentally robust");
-		}
-	});
 });
 
 function getSuburbsForPostcode(e) {
@@ -142,10 +22,11 @@ function getSuburbsForPostcode(e) {
 
 		$.post( '/attributes/suburbs', data={"postcode": postcode, "_token": CSRF_TOKEN},function( data ) {
 			$( "#suburb-table" ).empty();
-
 			for(suburb in data) {
 				let key = data;
-				$( "#suburb-table" ).append( `<tr style="cursor: pointer;" class="table-row" data-value="${suburb}" data-content="${data[suburb]['suburb']}" onclick="suburbClicked(this)"><td>${data[suburb]['suburb']}</td></tr>` );
+				console.log(suburb);
+
+				$( "#suburb-table" ).append( `<tr style="cursor: pointer;" class="table-row" data-value="${data[suburb].id}" data-content="${data[suburb]['suburb']}" onclick="suburbClicked(this)"><td>${data[suburb]['suburb']}</td></tr>` );
 			}
 			$('#suburb-container').show();
 
@@ -187,3 +68,69 @@ function editPostcodeButtonClicked() {
 
 }
 
+function loadUserIntoDashboardModal(user_id) {
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+	$.post( '/attributes/get', data={"user_id": user_id, "_token": CSRF_TOKEN},function( data ) {
+		let user = data.user;
+		let attributes = data.attributes;
+		let postcode = data.postcode;
+
+
+		///Age calculation
+		var birth = new Date(attributes.date_of_birth);
+		var now = new Date();
+		var age = now.getFullYear() - birth.getFullYear();
+
+		if(now.getMonth() >= birth.getMonth() && now.getDate() > birth.getDate())
+		{
+			age = age--;
+		}
+function activate(e) {
+	e.setAttribute('class', e.getAttribute('class') + " active")
+}
+function deactivate(e) {
+	e.setAttribute('class', e.getAttribute('class').replace('active', ''));
+}
+
+function redirect(url) {
+	console.log(url);
+	window.location.replace(url);
+}
+
+
+
+
+
+		///Change value display of gender
+		if(attributes.gender == 'M')
+		{
+			gender = 'Male';
+		}
+		else
+		{
+			gender = 'Female';
+
+		}
+		///Change value display of interested in
+		if(attributes.interested_in == 'M')
+		{
+			interest = 'Male'
+		}
+		else if(attributes.interested_in == 'F')
+		{
+			interest = 'Female'
+		}
+		else
+		{
+			interest = 'Both'
+		}
+
+		document.getElementById('modal_image').src = data.attributes.image_url;
+		document.getElementById('modal_name').innerHTML = user.name;
+		document.getElementById('modal_dob').innerHTML = age;
+		document.getElementById('modal_gender').innerHTML = gender;
+		document.getElementById('modal_interestin').innerHTML = interest;
+		document.getElementById('modal_suburb').innerHTML = postcode.suburb;
+	});
+}

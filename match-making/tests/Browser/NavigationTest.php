@@ -11,7 +11,7 @@ class NavigationTest extends DuskTestCase
 {
     private $appUrl;
     private $user = null;
-    private $dropdownLinks = ['Matches','My Profile','Logout'];
+    private $dropdownLinks = ['My Profile','Matches',"Messages", 'Logout'];
     private $landingLinks = ['LOGIN', 'REGISTER', 'HELP', 'CONTACT US'];
 
     protected function setUp(): void
@@ -53,8 +53,7 @@ class NavigationTest extends DuskTestCase
             foreach ($options as $key=>$option) {
                 array_push($menuOptions, $option->getText());
             }
-            echo "Landing";
-            echo json_encode($menuOptions);
+
             self::assertEquals($menuOptions[0], $this->landingLinks[0]);
             self::assertEquals($menuOptions[1], $this->landingLinks[1]);
             self::assertEquals($menuOptions[2], $this->landingLinks[2]);
