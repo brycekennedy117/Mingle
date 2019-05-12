@@ -29,7 +29,7 @@ class AttributesController extends Controller
 
     public function store(Request $request)
     {
-
+        echo $request['greeting'];
 
         UserAttributes::create([
             'user_id' => Auth::user()->id,
@@ -43,7 +43,7 @@ class AttributesController extends Controller
             'gender' => $request['gender'],
             'interested_in' => $request['interested_in'],
             'image_url' =>  $request['image_url'] ? $request['image_url'] : "https://profiles.utdallas.edu/img/default.png",
-            'greeting' => $request['greeting']
+            'greeting' => $request['greeting'] ? $request['greeting'] : "Hello"
 
         ]);
         return redirect('dashboard');

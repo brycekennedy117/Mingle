@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 use App\MingleLibrary\Models\Match;
 use Facebook\WebDriver\WebDriverBy;
+use App\MingleLibrary\Models\UserAttributes;
 
 class MatchPageTest extends DuskTestCase
 {
@@ -21,7 +22,7 @@ class MatchPageTest extends DuskTestCase
         parent::setUp();
         if ($this->user == null) {
             $this->appUrl = getenv('APP_URL', 'http://localhost:8888');
-            $this->user = User::all()->random(1)->first();                                                                                                                                                                                                                        ;
+            $this->user = User::all()->where('id', '=',1)->first();                                                                                                                                                                                                                        ;
         }
         foreach (static::$browsers as $browser) {
             $browser->driver->manage()->deleteAllCookies();
@@ -45,23 +46,18 @@ class MatchPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
 
             $userID = $this->user->id;
-
+            //echo $userID;
             $matches1 = Match::all(['user_id_2', 'user_id_1'])
-                ->where('user_id_1', $userID)->all();
+                ->where('user_id_1', $userID)->pluck('user_id_2');
 
             $matches2 = Match::all(['user_id_2', 'user_id_1'])
-                ->where('user_id_2', $userID)->all();
+                ->where('user_id_2', $userID)->pluck('user_id_1');
+            $matches =$matches1->merge($matches2)->unique();
+            $attributes = UserAttributes::all()->whereIn('user_id', $matches->toArray());
             $attributesArray = array();
-            $attributes = null;
-            foreach($matches1 as $match) {
-                $attributes = $match->user2->Attributes;
-                array_push($attributesArray, $attributes);
+            foreach($attributes as $attribute) {
+                array_push($attributesArray, $attribute);
             }
-            foreach($matches2 as $match) {
-                $attributes = $match->user1->Attributes;
-                array_push($attributesArray, $attributes);
-            }
-
 
             $pageItems = $browser->loginAs($this->user)->visit('/matches')
                 ->elements('.page-item');
@@ -77,6 +73,7 @@ class MatchPageTest extends DuskTestCase
                     $matchAttributes = $attributesArray[(($page*10)-10) +$index];
                     $user1PC = $this->user->Attributes->postcodeObject;
                     $user2PC = $matchAttributes->postcodeObject;
+
                     $attributeDistance = MatchController::distanceBetweenMatches($user1PC->latitude, $user1PC->longitude, $user2PC->latitude, $user2PC->longitude);
 
                     self::assertEquals($matchAttributes->user->name, $matchName, "Name displaying incorrectly in Match Page cell on page: $page / $numOfPages");
@@ -99,26 +96,23 @@ class MatchPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
 
             $userID = $this->user->id;
-
+            //echo $userID;
             $matches1 = Match::all(['user_id_2', 'user_id_1'])
-                ->where('user_id_1', $userID)->all();
+                ->where('user_id_1', $userID)->pluck('user_id_2');
 
             $matches2 = Match::all(['user_id_2', 'user_id_1'])
-                ->where('user_id_2', $userID)->all();
+                ->where('user_id_2', $userID)->pluck('user_id_1');
+            $matches =$matches1->merge($matches2)->unique();
+            $attributes = UserAttributes::all()->whereIn('user_id', $matches->toArray());
             $attributesArray = array();
-            $attributes = null;
-            foreach($matches1 as $match) {
-                $attributes = $match->user2->Attributes;
-                array_push($attributesArray, $attributes);
-            }
-            foreach($matches2 as $match) {
-                $attributes = $match->user1->Attributes;
-                array_push($attributesArray, $attributes);
+            foreach($attributes as $attribute) {
+                array_push($attributesArray, $attribute);
             }
 
             $pageItems = $browser->loginAs($this->user)->visit('/matches')
                 ->elements('.page-item');
             $expectedNumberOfPages = ceil(sizeof($attributesArray)/10);
+            echo sizeof($attributesArray);
 
             if ($expectedNumberOfPages <= 1) {
                 $numOfPageItems = sizeof($pageItems);

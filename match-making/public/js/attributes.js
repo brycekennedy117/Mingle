@@ -22,10 +22,11 @@ function getSuburbsForPostcode(e) {
 
 		$.post( '/attributes/suburbs', data={"postcode": postcode, "_token": CSRF_TOKEN},function( data ) {
 			$( "#suburb-table" ).empty();
-
 			for(suburb in data) {
 				let key = data;
-				$( "#suburb-table" ).append( `<tr style="cursor: pointer;" class="table-row" data-value="${suburb}" data-content="${data[suburb]['suburb']}" onclick="suburbClicked(this)"><td>${data[suburb]['suburb']}</td></tr>` );
+				console.log(suburb);
+
+				$( "#suburb-table" ).append( `<tr style="cursor: pointer;" class="table-row" data-value="${data[suburb].id}" data-content="${data[suburb]['suburb']}" onclick="suburbClicked(this)"><td>${data[suburb]['suburb']}</td></tr>` );
 			}
 			$('#suburb-container').show();
 

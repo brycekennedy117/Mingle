@@ -18,7 +18,7 @@ class UserAttributes extends Model
     protected $fillable = [
         'user_id', 'openness', 'conscientiousness', 'extraversion', 'agreeableness',
         'neuroticism', 'postcode', 'suburb', 'date_of_birth', 'gender', 'interested_in', 'latitude', 'longitude',
-        'image_url'
+        'image_url', 'greeting'
     ];
 
     public $primaryKey = 'id';

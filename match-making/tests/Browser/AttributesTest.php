@@ -41,6 +41,7 @@ class AttributesTest extends DuskTestCase
                 ->pause(1000)
                 ->click('#suburb-table > .table-row')
                 ->type('date_of_birth', '07031992')
+                ->type('#greeting', "This is the greeting message")
                 ->press('Confirm')
                 ->pause(1000)
                 ->assertUrlIs($this->appUrl.'/dashboard');
