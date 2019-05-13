@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard')
+
 @section('content')
     <script>
         function show_value(x)
@@ -95,7 +97,7 @@
                                     </div>
 
                                     <!-- Modal -->
-                                    <div id="myModal" class="modal fade">
+                                    <div id="myModal" class="modal fade" tabindex='-1'>
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
 

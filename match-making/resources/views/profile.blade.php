@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Profile')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -22,7 +24,7 @@
                         </div>
                         <div style="padding: 10px"></div>
                         <div class="row">
-                            <a href="/editprofile" class="btn btn-success mx-auto d-block">Edit Profile</a>
+                            <a href="/editprofile" class="btn btn-success mx-auto d-block" id="edit-profile-button">Edit Profile</a>
                         </div>
 
 

@@ -43,7 +43,7 @@ class ProfileTest extends DuskTestCase
                 ->element('#dob-cell')
                 ->getAttribute('innerHTML');
 
-            self::assertEquals($html_dob, $this->user->Attributes->date_of_birth);
+            self::assertEquals($html_dob, date('d M Y', strtotime($this->user->Attributes->date_of_birth)));
         });
     }
 
@@ -53,7 +53,7 @@ class ProfileTest extends DuskTestCase
             $html_postcode = $browser->loginAs($this->user)->visit('/profile')
                 ->element('#postcode-cell')
                 ->getAttribute('innerHTML');
-
+            echo $html_postcode;
             self::assertEquals($html_postcode, $this->user->Attributes->postcodeObject->postcode);
         });
     }
@@ -75,8 +75,13 @@ class ProfileTest extends DuskTestCase
             $html_gender = $browser->loginAs($this->user)->visit('/profile')
                 ->element('#gender-cell')
                 ->getAttribute('innerHTML');
+            if ($this->user->Attributes->gender == 'M') {
+                self::assertEquals($html_gender, "Male");
+            }
+            else {
+                self::assertEquals($html_gender, "Female");
+            }
 
-            self::assertEquals($html_gender, $this->user->Attributes->gender);
         });
     }
 
@@ -87,7 +92,15 @@ class ProfileTest extends DuskTestCase
                 ->element('#interested-in-cell')
                 ->getAttribute('innerHTML');
 
-            self::assertEquals($html_interested_in, $this->user->Attributes->interested_in);
+            if ($this->user->Attributes->interested_in == 'M') {
+                self::assertEquals($html_interested_in, "Men");
+            }
+            elseif ($this->user->Attributes->interested_in == 'F'){
+                self::assertEquals($html_interested_in, "Women");
+            }
+            else {
+                self::assertEquals($html_interested_in, "Both");
+            }
         });
     }
 
