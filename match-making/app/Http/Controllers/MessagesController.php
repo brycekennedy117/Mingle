@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MingleLibrary\Models\Match;
+use App\MingleLibrary\Models\Blocked;
 use App\MingleLibrary\Models\UserAttributes;
 use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\Models\Message;
@@ -15,6 +16,15 @@ class MessagesController extends Controller
     {
         $user = auth()->user();
         $queryUserId = Input::get('user_id');
+
+        //Blocked user
+        $blocked = Blocked::where('user_id', $user->id)
+            ->where('blocked_id', $queryUserId)
+            ->first();
+        if(!is_null($blocked))  {
+            return redirect('/dashboard');
+        }
+
         $matches = Match::all()->where('user_id_1', $user->id)->where('user_id_2', $queryUserId)->merge(Match::all()->where('user_id_2', $user->id)->where('user_id_1', $queryUserId));
         if ($queryUserId == null) {
             $userID = Auth::user()->id;
@@ -26,6 +36,16 @@ class MessagesController extends Controller
                 ->where('receiver_id', $userID)->pluck('sender_id');
             $messages =$message1->merge($message2)->unique();
             $attributes = UserAttributes::all()->whereIn('user_id', $messages->toArray());
+            //Blocked matches
+            $blocked = Blocked::all()->whereIn('blocked_id', $messages->toArray());
+
+            foreach ($attributes as $attKey => $att) {
+                foreach ($blocked as $bKey => $b) {
+                    if ($b->blocked_id == $att->user_id) {
+                        unset($attributes[$attKey]);
+                    }
+                }
+            }
 
             //Paginate match page
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -37,7 +57,6 @@ class MessagesController extends Controller
             $paginatedMatches = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
             $paginatedMatches
                 ->setPath($request->url());
-
 
             return view('user_message_list')->with('matches', $paginatedMatches)->with('items', $paginatedMatches);
         }
