@@ -54,7 +54,12 @@
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-between align-items-center">
                                                 <div class="p-1">
-                                                    <a href="{{"/messages?user_id=".$userAttributes->id}}" class="btn btn-primary">Message</a>
+                                                    @if(!$userAttributes->blocked)
+                                                        <a href="{{"/messages?user_id=".$userAttributes->id}}" class="btn btn-primary">Message</a>
+                                                    @else
+                                                        <button class="btn btn-danger" disabled>Blocked</button>
+                                                    @endif
+
                                                 </div>
 
                                                 <div class="p-1">

@@ -8,14 +8,14 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Attributes') }}</div>
-
-                    <p>
-                        Please customise these sliders to create your match criteria.
-                        You will not be able to match until this has been completed.
-                        In addition please enter the following personal details so
-                        we can match you appropriately.
-                    </p>
-
+                    <div class="d-flex p-3">
+                        <p>
+                            Please customise these sliders to create your match criteria.
+                            You will not be able to match until this has been completed.
+                            In addition please enter the following personal details so
+                            we can match you appropriately.
+                        </p>
+                    </div>
                     <div class="card-body">
                         <form autofill="off" method="POST" id="attribute-form" action="{{ route('attributes') }}">
                             @csrf

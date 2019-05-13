@@ -24,7 +24,7 @@
 
                         <div class="col-md-6">
                             <div class="d-flex flex-row">
-                                <input id="greeting" type="text" class="form-control" name="greeting" value="{{$user->greeting}}" autofocus disabled>
+                                <textarea form="attribute-form" style="resize: none;" rows="6" type="text" id="greeting" type="text" class="form-control" name="greeting" autofocus disabled>{{$user->greeting}}</textarea>
                                 <button id="greeting-edit" type="button" aria-label="Left Align" class="btn btn-default">
                                     <img src="/svg/si-glyph-edit.svg" width="20px">
                                 </button>
