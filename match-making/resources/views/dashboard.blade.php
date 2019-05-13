@@ -31,7 +31,7 @@
                     <div class="row border-bottom p-1">
 
                         <div class="col d-flex justify-content-center">
-                            <form action="/dashboard" method="post" class="range-field my-4 w-50 d-flex justify-content-center my-43" style="display:flex; flex-direction: column;">
+                            <form action="/dashboard" method="get" class="range-field my-4 w-50 d-flex justify-content-center my-43" style="display:flex; flex-direction: column;">
                                 @csrf
                                 <div class="d-flex justify-content-between">
                                     <label>Distance: <span id="slider_valueDistance">{{$distance}}</span>kms</label>
