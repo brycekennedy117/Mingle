@@ -49,9 +49,19 @@ class UserController extends Controller
         if ($request->get('postcode-id') != null) {
             $attributes->postcode = $request->get('postcode-id');
         }
-        $attributes->interested_in = $request->get('interested_in');
-        $attributes->greeting = $request->get('greeting');
-        $email = $request->get('email');
+        if ($request->get('interested_in') != null) {
+            $attributes->interested_in = $request->get('interested_in');
+        }
+        if ($request->get('greeting') != null) {
+            $attributes->greeting = $request->get('greeting');
+        }
+
+        if ($request->get('email') != null) {
+            $email = $request->get('email');
+        }
+        else {
+            $email = Auth::user()->email;
+        }
 
         $existing = User::all()->where('email', $email);
 

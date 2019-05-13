@@ -52,3 +52,13 @@ $( document ).ready(function() {
     });
 });
 
+function hidePostcodeEditProfileButton() {
+    $('#postcode-edit-profile').hide();
+    $("#postcode").prop('disabled', false);
+}
+
+$( document ).ready(function () {
+    let userInterest = $("#user-interested-in").val();
+    $("#interested_in").val(userInterest).change();
+});
+

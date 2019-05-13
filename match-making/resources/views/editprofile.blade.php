@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Profile')
+
 @section('content')
     @if(session('error'))
         <div class="alert alert-danger">
@@ -52,8 +54,12 @@
                                        type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
                                        name="postcode" value="{{$user->postcodeObject->postcode}}" autofocus pattern="^[0-9]{4}"
                                        min="1000" max="9999"
-                                       onkeyup="getSuburbsForPostcode(this)">
+                                       onkeyup="getSuburbsForPostcode(this)"
+                                       disabled>
                                 <button onclick="editPostcodeButtonClicked()" id="postcode-edit" type="button" class="btn btn-default" aria-label="Left Align">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px"></img>
+                                </button>
+                                <button onclick="hidePostcodeEditProfileButton()" id="postcode-edit-profile" type="button" class="btn btn-default" aria-label="Left Align">
                                     <img src="/svg/si-glyph-edit.svg" width="20px"></img>
                                 </button>
                             </div>
@@ -92,9 +98,9 @@
                         <div class="col-md-6">
                             <div class="d-flex flex-row">
                                 <select name="interested_in" id="interested_in" class="form-control" disabled>
-                                    <option value="F">Female</option>
-                                    <option value="M">Male</option>
-                                    <option value="MF">Both</option>
+                                    <option value="F" id="interested_in_1">Female</option>
+                                    <option value="M" id="interested_in_2">Male</option>
+                                    <option value="MF" id="interested_in_3">Both</option>
                                 </select>
                                 <button onclick="" id="interested-edit" type="button" aria-label="Left Align" class="btn btn-default">
                                     <img src="/svg/si-glyph-edit.svg" width="20px">
@@ -144,6 +150,8 @@
                             <input type="submit" value="Submit" class="btn btn-primary"/>
                         </div>
                     </div>
+
+                    <input type="hidden" id="user-interested-in" value="{{ $user->interested_in }}">
                 </form>
             </div>
         </div>
