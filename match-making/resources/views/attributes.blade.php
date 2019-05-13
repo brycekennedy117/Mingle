@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Attributes')
+
 @section('content')
     <div class="container" onload="hideSuburbTableContainer()">
         <div class="row justify-content-center">
