@@ -43,10 +43,22 @@ class DashboardController extends Controller
             return redirect('/attributes');
         }
 
-        $distance = Input::get('Distance');
-        $age = Input::get('Age');
+        $distance = $request['distance'];
+        $age = $request['age'];
+
+        if (is_null($distance)) {
+            $distance = 50;
+        }
+        if (is_null($age)) {
+            $age=30;
+            echo "AGE IS NULL";
+        }
+        else {
+            echo $age;
+        }
+
         $matchMaker = new MatchMaker();
-        $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=$distance);
+        $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=$distance, $age=$age);
         foreach ($attributes as $user)  {
 
             $user->name = $user->user->name;
