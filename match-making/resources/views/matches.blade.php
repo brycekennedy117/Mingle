@@ -51,7 +51,7 @@
                                                             Option
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">View profile</a>
+                                                            <a class="dropdown-item" href="{{"/matchedusersprofile?user_id=".$userAttributes->id}}">View profile</a>
                                                             <a class="dropdown-item" href="#">Remove</a>
                                                             <a class="dropdown-item" href="#">Block</a>
                                                         </div>

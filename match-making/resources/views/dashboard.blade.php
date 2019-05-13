@@ -35,7 +35,7 @@
                                     <input type="range" min="18" max="50" step="1" value="" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <input class="btn btn-primary" style="width:150px;" type="submit" value="Update"/>
+                                    <input class="btn btn-primary" style="width:150px;" action="" type="submit" value="Update"/>
                                 </div>
                             </form>
 
