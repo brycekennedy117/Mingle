@@ -25,7 +25,9 @@ class MatchMaker
      *
      * Returns a list of UserAttribute objects who are likely good matches with a user.
      */
-    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1, $maxDistance=20000000) {
+    function getPotentialMatches($attr, $orderBy=['score desc'], $limit=10, $page=1, $maxDistance=20000000, $age=10) {
+
+        $minimumDateForAge = date('Y-m-d', strtotime("-$age year"));
         $postcode = $attr->postcodeObject;
         $openness = $attr['openness'];
         $conscientiousness = $attr['conscientiousness'];
@@ -50,6 +52,7 @@ class MatchMaker
             ->where('user_id','!=', $attr['user_id'])
             ->where('interested_in', $attr['gender'])
             ->where('gender', $attr['interested_in'])
+            ->where('date_of_birth', '>', $minimumDateForAge)
             ->whereNotIn('user_attributes.user_id', $ignoredUsers)
             ->selectRaw("user_attributes.*, $rawWhereString as `score`, postcodes.latitude, postcodes.longitude, ".$distanceString." as distance")
             ->whereRaw($distanceString.'<'.strval($maxDistance))
