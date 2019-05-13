@@ -12,30 +12,54 @@
             document.getElementById("slider_valueAge").innerHTML=x;
         }
 
+        function value()
+        {
+            var Distance = document.getElementById("Distance");
+            var Age = document.getElementById("Age");
+            var MatchDistance = document.getElementById("MatchDistance");
+
+
+            var birth = new Date(attributes.date_of_birth);
+            var now = new Date();
+            var age = now.getFullYear() - birth.getFullYear();
+
+            if(now.getMonth() >= birth.getMonth() && now.getDate() > birth.getDate())
+            {
+                age = age--;
+            }
+
+
+
+        }
 
     </script>
+
+
+
+
 
     <div class="container text-center col-md-auto">
 
         <div class="row justify-content-center">
             <div class="container-fluid">
-                <!-- Filter -->
+                <!-- Filter function-->
 
-                <div class="container">
+                <div class="container-fluid col-md-6">
                     <h4>Filter</h4>
                     <div class="row border-bottom p-1">
+
                         <div class="col d-flex justify-content-center">
                             <form class="range-field my-4 w-50 d-flex justify-content-center my-43" style="display:flex; flex-direction: column;">
                                 <div class="d-flex justify-content-between">
-                                    <label>Distance: <span id="slider_valueDistance">25</span>kms </label>
-                                    <input type="range" min="0" max="50" step="5" value="" oninput="show_value(this.value);"/>
+                                    <label>Distance: <span id="slider_valueDistance">25</span>kms</label>
+                                    <input type="range"  min="0" max="50" step="5" value="" id="Distance" oninput="show_value(this.value);"/>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <label>Age: <span id="slider_valueAge">18</span></label>
-                                    <input type="range" min="18" max="50" step="1" value="" oninput="show_value2(this.value)"/>
+                                    <label>Age from: <span id="slider_valueAge">18</span></label>
+                                    <input type="range" min="18" max="50" step="1" value="18" id="Age" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <input class="btn btn-primary" style="width:150px;" type="submit" value="Update"/>
+                                    <input class="btn btn-primary small" type="submit" onclick="value()" value="Update"/>
                                 </div>
                             </form>
 
@@ -61,7 +85,6 @@
                     <div class="container">
                     <div class="row justify-content-center">
 
-
                     @foreach ($attributes as $user)
                                 <div id="match-card"
                                      class="card m-3"
@@ -86,7 +109,7 @@
                                         <br/>
                                         <div>
                                             <p>Suburb: {{$user->postcodeObject->suburb}}</p>
-                                            <p>Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
+                                            <p id="MatchDistance">Distance: {{\App\Http\Controllers\MatchController::distanceBetweenMatches(auth()->user()->Attributes->postcodeObject->latitude, auth()->user()->Attributes->postcodeObject->longitude, $user->postcodeObject->latitude, $user->postcodeObject->longitude)}}km</p>
                                         </div>
                                     </div>
 

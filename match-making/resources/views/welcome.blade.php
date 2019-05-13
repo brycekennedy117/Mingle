@@ -93,6 +93,17 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .transbox {
+                margin: 50px;
+                background-color: #ffffff;
+                opacity: 0.7;
+                filter: alpha(opacity=60); /* For IE8 and earlier */
+            }
+
+
+
+
         </style>
     </head>
     <body>
@@ -104,7 +115,7 @@
                     <a href="#">Help</a>
                     <a href="#">Contact Us</a>
                 </div>
-        <div class="container">
+        <div class="container transbox">
             <div class="content">
                 <div class="title m-b-md">
                     Mingle
@@ -114,9 +125,11 @@
                     Making it easy, meeting singles
                 </div>
 
+
                 <div class="links1 classname text-danger">
-                    <a href='login'>♡Let's meet up♡</a>
+                    <a href='login'>Login</a>
                 </div>
+            </div>
             </div>
         </div>
     </body>
