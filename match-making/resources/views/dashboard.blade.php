@@ -34,12 +34,12 @@
                             <form action="/dashboard" method="post" class="range-field my-4 w-50 d-flex justify-content-center my-43" style="display:flex; flex-direction: column;">
                                 @csrf
                                 <div class="d-flex justify-content-between">
-                                    <label>Distance: <span id="slider_valueDistance">25</span>kms</label>
-                                    <input type="range"  min="0" max="50" step="5" value="" name="distance" oninput="show_value(this.value);"/>
+                                    <label>Distance: <span id="slider_valueDistance">{{$distance}}</span>kms</label>
+                                    <input type="range"  min="0" max="50" step="5" value="{{$distance}}" name="distance" oninput="show_value(this.value);"/>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <label>Age from: <span id="slider_valueAge">18</span></label>
-                                    <input type="range" min="5" max="50" step="1" value="18" name="age" oninput="show_value2(this.value)"/>
+                                    <label>Age from: <span id="slider_valueAge">{{$age}}</span></label>
+                                    <input type="range" min="18" max="50" step="1" value="{{$age}}" name="age" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <input class="btn btn-primary small" type="submit" action="/dashboard" method="POST"/>

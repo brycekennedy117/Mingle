@@ -53,9 +53,6 @@ class DashboardController extends Controller
             $age=30;
             echo "AGE IS NULL";
         }
-        else {
-            echo $age;
-        }
 
         $matchMaker = new MatchMaker();
         $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=$distance, $age=$age);
@@ -64,7 +61,7 @@ class DashboardController extends Controller
             $user->name = $user->user->name;
         }
 
-        return view('dashboard')->with('attributes',$attributes);
+        return view('dashboard')->with('attributes',$attributes)->with('age', $age)->with('distance', $distance);
     }
 
 
