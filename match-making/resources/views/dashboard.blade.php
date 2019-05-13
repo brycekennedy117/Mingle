@@ -38,7 +38,7 @@
                                     <input type="range"  min="0" max="50" step="5" value="{{$distance}}" name="distance" oninput="show_value(this.value);"/>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <label>Age from: <span id="slider_valueAge">{{$age}}</span></label>
+                                    <label>Max Age: <span id="slider_valueAge">{{$age}}</span></label>
                                     <input type="range" min="18" max="50" step="1" value="{{$age}}" name="age" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
