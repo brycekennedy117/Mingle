@@ -12,26 +12,6 @@
             document.getElementById("slider_valueAge").innerHTML=x;
         }
 
-        function value()
-        {
-            var Distance = document.getElementById("Distance");
-            var Age = document.getElementById("Age");
-            var MatchDistance = document.getElementById("MatchDistance");
-
-
-            var birth = new Date(attributes.date_of_birth);
-            var now = new Date();
-            var age = now.getFullYear() - birth.getFullYear();
-
-            if(now.getMonth() >= birth.getMonth() && now.getDate() > birth.getDate())
-            {
-                age = age--;
-            }
-
-
-
-        }
-
     </script>
 
 
@@ -52,14 +32,14 @@
                             <form class="range-field my-4 w-50 d-flex justify-content-center my-43" style="display:flex; flex-direction: column;">
                                 <div class="d-flex justify-content-between">
                                     <label>Distance: <span id="slider_valueDistance">25</span>kms</label>
-                                    <input type="range"  min="0" max="50" step="5" value="" id="Distance" oninput="show_value(this.value);"/>
+                                    <input type="range"  min="0" max="50" step="5" value="" name="Distance" oninput="show_value(this.value);"/>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <label>Age from: <span id="slider_valueAge">18</span></label>
-                                    <input type="range" min="18" max="50" step="1" value="18" id="Age" oninput="show_value2(this.value)"/>
+                                    <input type="range" min="18" max="50" step="1" value="18" name="Age" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <input class="btn btn-primary small" type="submit" onclick="value()" value="Update"/>
+                                    <input class="btn btn-primary small" type="submit" action="/dashboard" method="POST"/>
                                 </div>
                             </form>
 
