@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Messages')
+
 @section('content')
     <div class="container">
         <ul class="list-group">

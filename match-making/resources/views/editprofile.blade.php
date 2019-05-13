@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Profile')
+
 @section('content')
     @if(session('error'))
         <div class="alert alert-danger">
@@ -14,14 +16,19 @@
                     @csrf
                     <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
                     <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
-                    <!--<form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>-->
-                    <input type="file" name="file" class="form-control-sm border">
                     <div class="form-group row">
-                        <label for="hello-message" class="col-md-4 col-form-label text-md-right">Your intro</label>
+                        <input type="file" name="file" class="form-control-m btn btn-default" style="margin: 0 auto;">
+                    </div>
+                    <div class="form-group row">
+                        <label for="greeting" class="col-md-4 col-form-label text-md-right">Your greeting</label>
 
                         <div class="col-md-6">
-                            <input id="hello-message" type="text" class="form-control" name="hello-message" value="" autofocus>
+                            <div class="d-flex flex-row">
+                                <textarea form="attribute-form" style="resize: none;" rows="6" type="text" id="greeting" type="text" class="form-control" name="greeting" autofocus disabled>{{$user->greeting}}</textarea>
+                                <button id="greeting-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -29,7 +36,12 @@
                         <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
+                            <div class="d-flex flex-row">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus disabled>
+                                <button id="email-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -40,10 +52,14 @@
                             <div class="d-flex flex-row">
                                 <input id="postcode"
                                        type="text" class="form-control{{ $errors->has('postcode') ? ' is-invalid' : '' }}"
-                                       name="postcode" value="{{ old('postcode') }}" required autofocus placeholder="3000" pattern="^[0-9]{4}"
+                                       name="postcode" value="{{$user->postcodeObject->postcode}}" autofocus pattern="^[0-9]{4}"
                                        min="1000" max="9999"
-                                       onkeyup="getSuburbsForPostcode(this)">
+                                       onkeyup="getSuburbsForPostcode(this)"
+                                       disabled>
                                 <button onclick="editPostcodeButtonClicked()" id="postcode-edit" type="button" class="btn btn-default" aria-label="Left Align">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px"></img>
+                                </button>
+                                <button onclick="hidePostcodeEditProfileButton()" id="postcode-edit-profile" type="button" class="btn btn-default" aria-label="Left Align">
                                     <img src="/svg/si-glyph-edit.svg" width="20px"></img>
                                 </button>
                             </div>
@@ -66,7 +82,7 @@
                         <label for="suburb" class="col-md-4 col-form-label text-md-right">{{ __('Suburb') }}</label>
 
                         <div class="col-md-6">
-                            <input id="suburb" type="text" class="form-control{{ $errors->has('suburb') ? ' is-invalid' : '' }}" name="suburb" readonly required autofocus placeholder="Melbourne">
+                            <input id="suburb" type="text" class="form-control{{ $errors->has('suburb') ? ' is-invalid' : '' }}" name="suburb" readonly autofocus value="{{$user->postcodeObject->suburb}}">
 
                             @if ($errors->has('suburb'))
                                 <span class="invalid-feedback" role="alert">
@@ -80,17 +96,22 @@
                         <label for="interested_in" class="col-md-4 col-form-label text-md-right">{{ __('Interested in') }}</label>
 
                         <div class="col-md-6">
-                            <select name="interested_in" id="interested_in">
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
-                                <option value="MF">Both</option>
-                            </select>
+                            <div class="d-flex flex-row">
+                                <select name="interested_in" id="interested_in" class="form-control" disabled>
+                                    <option value="F" id="interested_in_1">Female</option>
+                                    <option value="M" id="interested_in_2">Male</option>
+                                    <option value="MF" id="interested_in_3">Both</option>
+                                </select>
+                                <button onclick="" id="interested-edit" type="button" aria-label="Left Align" class="btn btn-default">
+                                    <img src="/svg/si-glyph-edit.svg" width="20px">
+                                </button>
 
-                            @if ($errors->has('interested_in'))
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('interested_in') }}</strong>
-                                        </span>
-                            @endif
+                                @if ($errors->has('interested_in'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('interested_in') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
@@ -129,6 +150,8 @@
                             <input type="submit" value="Submit" class="btn btn-primary"/>
                         </div>
                     </div>
+
+                    <input type="hidden" id="user-interested-in" value="{{ $user->interested_in }}">
                 </form>
             </div>
         </div>

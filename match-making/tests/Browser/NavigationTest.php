@@ -11,7 +11,7 @@ class NavigationTest extends DuskTestCase
 {
     private $appUrl;
     private $user = null;
-    private $dropdownLinks = ['Matches','My Profile',"Messages", 'Logout'];
+    private $dropdownLinks = ['My Profile','Matches',"Messages", 'Logout'];
     private $landingLinks = ['LOGIN', 'REGISTER', 'HELP', 'CONTACT US'];
 
     protected function setUp(): void

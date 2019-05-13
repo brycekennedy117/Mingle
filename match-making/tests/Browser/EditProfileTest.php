@@ -18,7 +18,7 @@ class EditProfileTest extends DuskTestCase
         parent::setUp();
         if ($this->user == null) {
             $this->appUrl = getenv('APP_URL', 'http://localhost:8888');
-            $this->user = User::all()->random(1)->first();                                                                                                                                                                                                                        ;
+            $this->user = factory(User::class)->create();
         }
         foreach (static::$browsers as $browser) {
             $browser->driver->manage()->deleteAllCookies();
@@ -48,18 +48,23 @@ class EditProfileTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $originalPostcode = $this->user->Attributes->postcode;
-
-            $browser->loginAs($this->user)->visit('/editprofile')
-                ->type('postcode', 1)
-                ->press('Submit');
+            echo $this->user;
+            $browser->loginAs($this->user)->visit('/profile')
+                ->click('#edit-profile-button')
+                ->type('#postcode', 3121)
+                ->pause(1000)
+                ->click('#suburb-table > .table-row')
+                ->press('Submit')
+                ->pause(1000);
             $this->user = User::all()->where('id', $this->user->id)->first();
-            self::assertEquals(1, $this->user->Attributes->postcode);
-            $browser->loginAs($this->user)->visit('/editprofile')
-                ->type('postcode', $originalPostcode)
-                ->press('Submit');
-            $this->user = User::all()->where('id', $this->user->id)->first();
-
-            self::assertEquals($this->user->Attributes->postcode, $originalPostcode);
+            //echo $this->user->Attributes->postcodeObject;
+            self::assertEquals(3121, $this->user->Attributes->postcodeObject->postcode);
+//            $browser->loginAs($this->user)->visit('/editprofile')
+//                ->type('postcode', $originalPostcode)
+//                ->press('Submit');
+//            $this->user = User::all()->where('id', $this->user->id)->first();
+//
+//            self::assertEquals($this->user->Attributes->postcode, $originalPostcode);
         });
     }
 

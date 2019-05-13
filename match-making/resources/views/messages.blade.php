@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Chat')
+
 @section('content')
     <div class="container" >
         @if($errors != null && sizeof($errors) > 0)
@@ -12,7 +14,7 @@
             @else
                 @foreach($messages as $message)
                         @if($message->sender_id != auth()->user()->id)
-                            <div class="d-flex flex-column mt-2 mb-2">
+                            <div class="d-flex flex-column mt-2 mb-2" style="margin-left: 75px; width: 80%">
                                 <div class="d-flex flex-row mt-2 mb-2 justify-content-start">
                                     <div>
                                         <img class="rounded-circle" src="{{$message->receiver->Attributes->image_url}}" style="width: 50px">
@@ -26,7 +28,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="d-flex flex-column mt-2 mb-2 justify-content-end">
+                            <div class="d-flex flex-column mt-2 mb-2 justify-content-end" style="margin-right: 75px;">
                                 <div class="d-flex flex-row mt-2 mb-2 justify-content-end">
                                     <div class="d-flex align-items-center ml-3 mr-3">
                                         {{$message->content}}

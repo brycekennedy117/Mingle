@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Matches')
+
 @section('content')
     <style>
         .table-row{
@@ -20,8 +22,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Matches</div>
 
+                    <div class="card-header">Matches</div>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="container">
 
@@ -42,7 +54,12 @@
                                         <div class="d-flex justify-content-start">
                                             <div class="p-3 d-flex justify-content-between align-items-center">
                                                 <div class="p-1">
-                                                    <a href="{{"/messages?user_id=".$userAttributes->id}}" class="btn btn-primary">Message</a>
+                                                    @if(!$userAttributes->blocked)
+                                                        <a href="{{"/messages?user_id=".$userAttributes->id}}" class="btn btn-primary">Message</a>
+                                                    @else
+                                                        <button class="btn btn-danger" disabled>Blocked</button>
+                                                    @endif
+
                                                 </div>
 
                                                 <div class="p-1">
@@ -52,8 +69,12 @@
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" href="{{"/matchedusersprofile?user_id=".$userAttributes->user_id}}">View profile</a>
-                                                            <a class="dropdown-item" href="#">Remove</a>
-                                                            <a class="dropdown-item" href="#">Block</a>
+                                                            <a class="dropdown-item" href="{{"/removeMatch?user_id=".$userAttributes->id}}">Remove</a>
+                                                            @if ($userAttributes->blocked)
+                                                                <a class="dropdown-item" href="{{"/removeBlock?user_id=".$userAttributes->id}}">Unblock</a>
+                                                            @else
+                                                                <a class="dropdown-item" href="{{"/addBlock?user_id=".$userAttributes->id}}">Block</a>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
