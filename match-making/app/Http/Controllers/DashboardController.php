@@ -51,7 +51,6 @@ class DashboardController extends Controller
         }
         if (is_null($age)) {
             $age=30;
-            echo "AGE IS NULL";
         }
 
         $matchMaker = new MatchMaker();
