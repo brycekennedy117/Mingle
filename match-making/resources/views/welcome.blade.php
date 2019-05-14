@@ -112,8 +112,6 @@
                 <div class="top-right links classname">
                     <a href="login">Login</a>
                     <a href="register">Register</a>
-                    <a href="#">Help</a>
-                    <a href="#">Contact Us</a>
                 </div>
         <div class="container transbox">
             <div class="content">
