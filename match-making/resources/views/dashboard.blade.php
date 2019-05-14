@@ -67,7 +67,7 @@
                     @foreach ($attributes as $user)
                                 <div id="match-card"
                                      class="card m-3"
-                                     style= "max-width:12rem;"
+                                     style= "max-width:20rem;"
                                      >
 
                                     <div class="p-3">
@@ -77,7 +77,7 @@
                                              class="card-img-top img-thumbnail rounded-circle"
                                              src="{{$user->image_url}}"
                                              alt="Card-image-cap"
-                                             style="cursor:pointer"
+                                             style="cursor:pointer; max-width: 10rem;"
                                              onclick="loadUserIntoDashboardModal({{$user->user_id}})"/>
                                     </div>
                                     <div class="card-body d-flex justify-content-between flex-column">
