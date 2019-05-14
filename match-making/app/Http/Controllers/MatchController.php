@@ -99,6 +99,7 @@ class MatchController extends Controller
             $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
         }
 
+
         if (auth()->user()->Attributes != null) {
             return view('matches', ['currentUserLocate' => $currentUserLocation],
                 ['items' => $paginatedMatches])

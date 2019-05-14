@@ -68,7 +68,7 @@
                                                             Option
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">View profile</a>
+                                                            <a class="dropdown-item" href="{{"/matchedusersprofile?user_id=".$userAttributes->user_id}}">View profile</a>
                                                             <a class="dropdown-item" href="{{"/removeMatch?user_id=".$userAttributes->id}}">Remove</a>
                                                             @if ($userAttributes->blocked)
                                                                 <a class="dropdown-item" href="{{"/removeBlock?user_id=".$userAttributes->id}}">Unblock</a>

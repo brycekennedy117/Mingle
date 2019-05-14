@@ -42,7 +42,8 @@
                                     <input type="range" min="18" max="50" step="1" value="{{$age}}" name="age" oninput="show_value2(this.value)"/>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <input class="btn btn-primary small" type="submit" action="/dashboard" method="POST"/>
+                                    <input class="btn btn-primary" style="width:150px;" action="" type="submit" value="Update"/>
+
                                 </div>
                             </form>
 
