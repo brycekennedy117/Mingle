@@ -1,31 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8">
                 <div class="card">
+                    @foreach($attributes as $userProfile)
                     <div class="card-header">
-                        <h1>{{$name}}'s Profile</h1>
+                        <h1>{{$userProfile->name}}'s Profile</h1>
                     </div>
                     <div class="container">
                         <div style="padding: 20px"></div>
                         <div class="row a">
                             <div class="col">
-                                <img src="{{$user->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
-                                <!--<form action="{{route('avatar')}}" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                                    <input type="file" name="file" class="form-control-sm border">
-                                    <input type="submit" class="btn-primary btn-group-sm">
-                                </form> -->
+                                <img src="{{$userProfile->Attributes->image_url}}" class="mx-auto d-block rounded-circle" style="width: 150px;height: 150px;border-radius: 50%;">
                             </div>
                         </div>
                         <div style="padding: 10px"></div>
-                        <div class="row">
-                            <a href="/editprofile" class="btn btn-success mx-auto d-block" id="edit-profile-button">Edit Profile</a>
-                        </div>
 
 
                         <div style="padding: 20px"></div>
@@ -33,23 +24,23 @@
                             <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td id="name-cell">{{$name}}</td>
+                                <td id="name-cell">{{$userProfile->name}}</td>
                             </tr>
                             <tr>
-                                <th>Date of birth</th>
-                                <td id="dob-cell">{{date('d M Y', strtotime($user->date_of_birth))}}</td>
+                                <th>Age</th>
+                                <td id="dob-cell">{{\App\Http\Controllers\MatchedUserProfile::calculateAge($userProfile->Attributes->date_of_birth)}}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td id="postcode-cell">{{$user->postcodeObject->postcode}}</td>
+                                <td id="postcode-cell">{{$userProfile->Attributes->postcodeObject->postcode}}</td>
                             </tr>
                             <tr>
                                 <th>Suburb</th>
-                                <td id="suburb-cell">{{$user->postcodeObject->suburb}}</td>
+                                <td id="suburb-cell">{{$userProfile->Attributes->postcodeObject->suburb}}</td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                @if($user->gender == 'M')
+                                @if($userProfile->gender == 'M')
                                     <td id="gender-cell">Male</td>
                                 @else
                                     <td id="gender-cell">Female</td>
@@ -57,9 +48,9 @@
                             </tr>
                             <tr>
                                 <th>Interested in</th>
-                                @if($user->interested_in == 'M')
+                                @if($userProfile->interested_in == 'M')
                                     <td id="interested-in-cell">Men</td>
-                                @elseif($user->interested_in == 'F')
+                                @elseif($userProfile->interested_in == 'F')
                                     <td id="interested-in-cell">Women</td>
                                 @else
                                     <td id="interested-in-cell">Both</td>
@@ -67,6 +58,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        @endforeach
                     </div>
                 </div>
             </div>

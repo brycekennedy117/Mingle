@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
 use function Sodium\library_version_major;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+
     }
+
 }
 

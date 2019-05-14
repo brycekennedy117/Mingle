@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MingleLibrary\Models\Blocked;
 use App\MingleLibrary\Models\Match;
 use App\MingleLibrary\MatchMaker;
 use App\MingleLibrary\Models\Message;
@@ -61,6 +62,15 @@ class MatchController extends Controller
             ->where('user_id_2', $userID)->pluck('user_id_1');
         $matches =$matches1->merge($matches2)->unique();
         $attributes = UserAttributes::all()->whereIn('user_id', $matches->toArray());
+        $blocked = Blocked::all()->whereIn('blocked_id', $matches->toArray());
+
+        foreach ($attributes as $attKey => $att) {
+            foreach ($blocked as $bKey => $b) {
+                if ($b->blocked_id == $att->user_id) {
+                    $att->blocked = true;
+                }
+            }
+        }
 
         //Paginate match page
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -89,8 +99,11 @@ class MatchController extends Controller
             $currentUserLocation = array('lat' => $getRangeXcurrentUser, 'long' => $getRangeYcurrentUser);
         }
 
+
         if (auth()->user()->Attributes != null) {
-            return view('matches', ['currentUserLocate' => $currentUserLocation], ['items' => $paginatedMatches])->with('matches', $paginatedMatches);
+            return view('matches', ['currentUserLocate' => $currentUserLocation],
+                ['items' => $paginatedMatches])
+                ->with('matches', $paginatedMatches);
         }
         return redirect('/attributes');
     }
@@ -118,5 +131,44 @@ class MatchController extends Controller
 
         return redirect('/matches')->with('success', 'Match removed');
 
+    }
+
+    public function addBlockUser(Request $request) {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $blockedId = (int)$request->user_id;
+
+        $blockedUser = Blocked::where('user_id', $userId)
+            ->where('blocked_id', $blockedId)
+            ->first();
+
+        if (!is_null($blockedUser)) {
+            return redirect('/matches')->with('error', 'User has already been blocked');
+        }
+
+        $blocked = new Blocked();
+        $blocked->user_id = $userId;
+        $blocked->blocked_id = $blockedId;
+        $blocked->save();
+
+        return redirect('/matches')->with('error', 'User has been blocked');
+    }
+
+    public function removeBlockUser(Request $request) {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $blockedId = (int)$request->user_id;
+
+        Blocked::where('user_id', $userId)
+            ->where('blocked_id', $blockedId)
+            ->delete();
+
+        return redirect('/matches')->with('success', 'User has been unblocked');
     }
 }

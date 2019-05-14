@@ -25,6 +25,8 @@ $router->group(['middleware' => 'auth'], function() {
     Route::get('/matches', 'MatchController@matches')->name('matches');
     Route::get('/campbell', 'MatchController@profile')->name('campbell');
     Route::get('/removeMatch', 'MatchController@removeMatch')->name('removeMatch');
+    Route::get('/addBlock', 'MatchController@addBlockUser');
+    Route::get('/removeBlock', 'MatchController@removeBlockUser');
     Route::post('/attributes', 'AttributesController@store')->name('store_attributes');
     Route::post('/attributes/suburbs', 'AttributesController@suburbs');
     Route::get('matches/{profile}', 'MatchController@profile')->name('profile');
@@ -44,6 +46,7 @@ $router->group(['middleware' => 'auth'], function() {
     ])->name('edit');
     Route::get('message/{id}/delete', ['uses' => 'MessagesController@delete', 'as' => 'message.delete']);
     Route::post('/attributes/get', 'AttributesController@getUserAttribute');
+    Route::get('/matchedusersprofile', 'MatchedUserProfile@index');
 
 
     Route::post('/profile', [
