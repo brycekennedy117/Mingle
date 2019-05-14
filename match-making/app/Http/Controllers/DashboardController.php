@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\MingleLibrary\MatchMaker;
 use App\User;
 use App\MingleLibrary\Models\Ignored;
+use Illuminate\Support\Facades\Input;
 
 class DashboardController extends Controller
 {
@@ -42,15 +43,26 @@ class DashboardController extends Controller
             return redirect('/attributes');
         }
 
+        $distance = $request['distance'];
+        $age = $request['age'];
+
+        if (is_null($distance)) {
+            $distance = 50;
+        }
+        if (is_null($age)) {
+            $age=30;
+        }
+
         $matchMaker = new MatchMaker();
-        $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=40);
+        $attributes =  $matchMaker->getPotentialMatches($userDetails, $orderBy=['score desc'], $limit=10, 1, $maxDistance=$distance, $age=$age);
         foreach ($attributes as $user)  {
 
             $user->name = $user->user->name;
         }
 
-        return view('dashboard')->with('attributes',$attributes);
+        return view('dashboard')->with('attributes',$attributes)->with('age', $age)->with('distance', $distance);
     }
+
 
     public function liked(Request $request)
     {
