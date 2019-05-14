@@ -17,7 +17,7 @@
                             <div class="d-flex flex-column mt-2 mb-2" style="margin-left: 75px; width: 80%">
                                 <div class="d-flex flex-row mt-2 mb-2 justify-content-start">
                                     <div>
-                                        <img class="rounded-circle" src="{{$message->receiver->Attributes->image_url}}" style="width: 50px">
+                                        <img class="rounded-circle" src="{{$message->sender->Attributes->image_url}}" style="width: 50px">
                                     </div>
                                     <div class="d-flex align-items-center ml-3">
                                         {{$message->content}}
@@ -34,7 +34,7 @@
                                         {{$message->content}}
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <img id="user_image" class="rounded-circle" src="{{$message->receiver->Attributes->image_url}}" style="width: 50px">
+                                        <img id="user_image" class="rounded-circle" src="{{$message->sender->Attributes->image_url}}" style="width: 50px">
                                     </div>
                                 </div>
 
