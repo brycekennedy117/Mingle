@@ -116,7 +116,7 @@ class DashboardController extends Controller
 
 
         //Return a success message
-        return redirect('/dashboard')->with('success', 'User liked');
+        return redirect('/dashboard')->with('success', User::all()->where('id', $matchId)->first()->name.' has been liked');
 
     }
 
