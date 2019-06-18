@@ -62,7 +62,7 @@ class MatchController extends Controller
             ->where('user_id_2', $userID)->pluck('user_id_1');
         $matches =$matches1->merge($matches2)->unique();
         $attributes = UserAttributes::all()->whereIn('user_id', $matches->toArray());
-        $blocked = Blocked::all()->whereIn('blocked_id', $matches->toArray());
+        $blocked = Blocked::all()->where('user_id', $userID)->whereIn('blocked_id', $matches->toArray());
 
         foreach ($attributes as $attKey => $att) {
             foreach ($blocked as $bKey => $b) {
@@ -129,7 +129,7 @@ class MatchController extends Controller
             ->where('receiver_id', $userId)
             ->delete();
 
-        return redirect('/matches')->with('success', 'Match removed');
+        return redirect('/matches')->with('success',  User::all()->where('id', $matchId)->first()->name.' has been removed as a match.');
 
     }
 
@@ -146,7 +146,7 @@ class MatchController extends Controller
             ->first();
 
         if (!is_null($blockedUser)) {
-            return redirect('/matches')->with('error', 'User has already been blocked');
+            return redirect('/matches')->with('error', User::all()->where('id', $blockedId)->first()->name.' has already been blocked');
         }
 
         $blocked = new Blocked();
@@ -154,7 +154,7 @@ class MatchController extends Controller
         $blocked->blocked_id = $blockedId;
         $blocked->save();
 
-        return redirect('/matches')->with('error', 'User has been blocked');
+        return redirect('/matches')->with('error',  User::all()->where('id', $blockedId)->first()->name.' has been blocked');
     }
 
     public function removeBlockUser(Request $request) {
@@ -169,6 +169,6 @@ class MatchController extends Controller
             ->where('blocked_id', $blockedId)
             ->delete();
 
-        return redirect('/matches')->with('success', 'User has been unblocked');
+        return redirect('/matches')->with('success',  User::all()->where('id', $blockedId)->first()->name.' has been unblocked');
     }
 }

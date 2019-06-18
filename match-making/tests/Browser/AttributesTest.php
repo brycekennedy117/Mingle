@@ -17,8 +17,6 @@ class AttributesTest extends DuskTestCase
     {
         parent::setUp();
         if ($this->user == null) {
-
-
             $this->appUrl = getenv('APP_URL', 'http://localhost:8888');
             $this->user = factory(User::class)->make();
             $this->user->save();
