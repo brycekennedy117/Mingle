@@ -289,7 +289,7 @@
                                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="gender" id="gender">
+                                    <select name="gender" id="gender" class="form-control">
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                     </select>
@@ -306,7 +306,7 @@
                                 <label for="interested_in" class="col-md-4 col-form-label text-md-right">{{ __('Interested in') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="interested_in" id="interested_in">
+                                    <select name="interested_in" id="interested_in" class="form-control" required>
                                         <option value="F">Female</option>
                                         <option value="M">Male</option>
                                         <option value="MF">Both</option>
