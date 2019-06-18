@@ -136,31 +136,31 @@ function redirect(url) {
 }
 
 $( document ).ready(function() {
-	$("#attribute-form").submit(function(e) {
-		if ($("#suburb").val() === '') {
-			e.preventDefault();
-		}
-	});
+    $("#attribute-form").submit(function(e) {
+        if ($("#suburb").val() === '') {
+            e.preventDefault();
+        }
+    });
 });
 
 $( document ).ready(function() {
-	$("#attribute-form").submit(function(e) {
-		let d = new Date();
-		let month = d.getMonth()+1;
-		let day = d.getDate();
-		let year = d.getFullYear();
-		let date = $("#date_of_birth").val();
-		let dateCols = date.split("-");
+    $("#attribute-form").submit(function(e) {
+        let d = new Date();
+        let month = d.getMonth()+1;
+        let day = d.getDate();
+        let year = d.getFullYear();
+        let date = $("#date_of_birth").val();
+        let dateCols = date.split("-");
 
-		// if current year is less than input year
-		if (year < dateCols[0]) {
-			e.preventDefault();
-		}
+        // if current year is less than input year
+        if (year < dateCols[0]) {
+            e.preventDefault();
+        }
 
-		// prevent if the person's input dob means they would be younger than 18
-		if (year - dateCols[0] < 18 || (year - dateCols[0] === 18 && month - dateCols[1] < 0)
-			|| (year - dateCols[0] === 18 && month - dateCols[1] === 0 && day - dateCols[2] < 0)) {
-			e.preventDefault();
-		}
-	});
+        // prevent if the person's input dob means they would be younger than 18
+        if (year - dateCols[0] < 18 || (year - dateCols[0] === 18 && month - dateCols[1] < 0)
+            || (year - dateCols[0] === 18 && month - dateCols[1] === 0 && day - dateCols[2] < 0)) {
+            e.preventDefault();
+        }
+    });
 });
