@@ -77,6 +77,7 @@ function loadUserIntoDashboardModal(user_id) {
 		let postcode = data.postcode;
 
 
+
 		///Age calculation
 		var birth = new Date(attributes.date_of_birth);
 		var now = new Date();
@@ -86,6 +87,8 @@ function loadUserIntoDashboardModal(user_id) {
 		{
 			age = age--;
 		}
+
+
 function activate(e) {
 	e.setAttribute('class', e.getAttribute('class') + " active")
 }
@@ -99,9 +102,6 @@ function redirect(url) {
 }
 
 
-
-
-
 		///Change value display of gender
 		if(attributes.gender == 'M')
 		{
@@ -112,14 +112,15 @@ function redirect(url) {
 			gender = 'Female';
 
 		}
+
 		///Change value display of interested in
 		if(attributes.interested_in == 'M')
 		{
-			interest = 'Male'
+			interest = 'Men'
 		}
 		else if(attributes.interested_in == 'F')
 		{
-			interest = 'Female'
+			interest = 'Women'
 		}
 		else
 		{
