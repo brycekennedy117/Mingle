@@ -41,9 +41,16 @@
                                 @foreach($matches as $userAttributes)
                                     <div id="match-container" class="container-fluid d-flex flex-row justify-content-between border-bottom">
                                         <div class="d-flex justify-content-start">
-                                            <div class="p-3 d-flex justify-content-center align-items-center">
+                                            <div class="p-3">
+                                                <img data-toggle="modal"
+                                                     data-target="#myModal"
+                                                     data-id="{{$userAttributes->user->id}}"
+                                                     class="card-img-top img-thumbnail rounded-circle"
+                                                     src="{{$userAttributes->image_url}}"
+                                                     alt="Card-image-cap"
+                                                     style="cursor:pointer; max-width: 10rem;"
+                                                     onclick="loadUserIntoDashboardModal({{$userAttributes->user->id}})"/>
 
-                                                <img src='{{$userAttributes->image_url}}' class="rounded-circle img-thumbnail" width="100px"/>
                                             </div>
                                             <div class="p3 d-flex justify-content-center flex-column">
                                                 <a class="font-weight-bold"><h3 id="match-name">{{$userAttributes->user->name}}</h3></a>
@@ -68,7 +75,6 @@
                                                             Option
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="{{"/matchedusersprofile?user_id=".$userAttributes->user_id}}">View profile</a>
                                                             <a class="dropdown-item" href="{{"/removeMatch?user_id=".$userAttributes->id}}">Remove</a>
                                                             @if ($userAttributes->blocked)
                                                                 <a class="dropdown-item" href="{{"/removeBlock?user_id=".$userAttributes->id}}">Unblock</a>
@@ -87,6 +93,56 @@
                                     You have no matches!
                                 </div>
                             @endif
+                            <!-- Modal -->
+                                <div id="myModal" class="modal fade" tabindex='-1'>
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+
+                                            <!-- Header -->
+                                            <div class="modal-header">
+                                                <h1>Profile</h1>
+                                            </div>
+
+                                            <!-- Body -->
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img class="card-img-top img-thumbnail rounded-circle" src="" id="modal_image" alt="Card-image-cap"/>
+                                                    </div>
+                                                    <div class="col border-top-0">
+                                                        <h1 id="modal_name"></h1>
+
+                                                        <table class='table table-condensed text-center'>
+                                                            <tbody>
+                                                            <tr>
+                                                                <th>Age</th>
+                                                                <td id="modal_dob"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Gender</th>
+                                                                <td id="modal_gender"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Interest</th>
+                                                                <td id="modal_interestin"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Location</th>
+                                                                <td id="modal_suburb"></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal-footer modal-footer--mine">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <div class="row justify-content-center">{{ $items->links() }}</div>
