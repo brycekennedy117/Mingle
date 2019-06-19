@@ -14,6 +14,10 @@
             document.getElementById("slider_valueAge").innerHTML=x;
         }
 
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
     </script>
 
 
@@ -153,14 +157,18 @@
                                                 <form style="height: 40px" method="POST" action="{{ route('like')}}">
                                                     @csrf
                                                     <input id="user_id_liked" name="user_id" type="hidden" value={{$user->user_id}}>
-                                                    <input type="image" src="/svg/si-glyph-heart.svg" width="40px"/>
+                                                    <input type="image" data-toggle="tooltip"
+                                                           title="Click to like this user. When they have liked you back, you will receive a match!"
+                                                           src="/svg/si-glyph-heart.svg" width="40px"/>
                                                 </form>
                                             </div>
                                             <div class="ml-5">
                                                 <form method="POST" action="{{ route('ignore') }}" style="height: 40px;">
                                                     @csrf
                                                     <input id="user_id_ignored" name="user_id" type="hidden" value={{$user->user_id}}>
-                                                    <input type="image" src="/svg/si-glyph-button-error.svg" width="40px"/>
+                                                    <input type="image" data-toggle="tooltip"
+                                                           title="Click to ignore this user. They will stop appearing from your searches."
+                                                           src="/svg/si-glyph-button-error.svg" width="40px"/>
                                                 </form>
                                             </div>
                                         </div>
