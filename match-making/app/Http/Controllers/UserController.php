@@ -63,6 +63,12 @@ class UserController extends Controller
             $email = Auth::user()->email;
         }
 
+        $attributes->openness = $request['openness']/10 ;
+        $attributes->extraversion = $request['extraversion']/10;
+        $attributes->neuroticism = $request['neuroticism']/10;
+        $attributes->conscientiousness = $request['conscientiousness']/10;
+        $attributes->agreeableness = $request['agreeableness']/10;
+
         $existing = User::all()->where('email', $email);
 
         $file = $request->file('file');
@@ -88,6 +94,7 @@ class UserController extends Controller
         else{
             Auth::user()->email = $email;
         }
+
 
         if (strlen($current_password) > 0 && strlen($new_password) == 0)
         {
