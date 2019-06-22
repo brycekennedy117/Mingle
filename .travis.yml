@@ -38,7 +38,7 @@ deploy:
   app: Mingle 2019
   env: mingle-pp-2019
   on:
-    repo: brycekennedy117/PP1-Matchmaking
+    repo: brycekennedy117/Mingle
   bucket_name: elasticbeanstalk-us-east-2-112626369674
   bucket_path: Mingle 2019/
   skip_cleanup: true
