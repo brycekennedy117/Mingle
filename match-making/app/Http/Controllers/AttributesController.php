@@ -29,7 +29,6 @@ class AttributesController extends Controller
 
     public function store(Request $request)
     {
-        echo $request['greeting'];
 
         UserAttributes::create([
             'user_id' => Auth::user()->id,
