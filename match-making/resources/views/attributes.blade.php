@@ -21,11 +21,11 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="openness" class="col-md-4 col-form-label text-md-right">{{ __('Openness') }}</label><small><a href="#" data-toggle="modal" data-target="#opennessModal">What's this?</a></small>
+                                <label for="openness" class="col-md-4 col-form-label text-md-right">{{ __('Openness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10" list="ticks">
-                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <input id="openness" type="range" class="form-control{{ $errors->has('openness') ? ' is-invalid' : '' }}" name="openness" value="5" required autofocus min="1" max="10" list="ticks" style="display: inline; width: 80%;"><small><a href="#" data-toggle="modal" data-target="#opennessModal">What's this?</a></small>
+                                    <span>Low- 0%</span><span style="margin-left: 40%">High- 100%</span>
                                     <datalist id="ticks">
                                         <option value="1">
                                         <option value="5">
@@ -67,11 +67,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="conscientiousness" class="col-md-4 col-form-label text-md-right">{{ __('Conscientiousness') }}</label><small><a href="#" data-toggle="modal" data-target="#conscientiousnessModal">What's this?</a></small>
+                                <label for="conscientiousness" class="col-md-4 col-form-label text-md-right">{{ __('Conscientiousness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10" list="ticks">
-                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <input id="conscientiousness" type="range" class="form-control{{ $errors->has('conscientiousness') ? ' is-invalid' : '' }}" name="conscientiousness" value="5" required autofocus min="1" max="10" list="ticks" style="display: inline; width: 80%;"><small><a href="#" data-toggle="modal" data-target="#conscientiousnessModal">What's this?</a></small>
+                                    <span>Low- 0%</span><span style="margin-left: 40%">High- 100%</span>
 
                                     @if ($errors->has('conscientiousness'))
                                         <span class="invalid-feedback" role="alert">
@@ -108,11 +108,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="extraversion" class="col-md-4 col-form-label text-md-right">{{ __('Extraversion') }}</label><small><a href="#" data-toggle="modal" data-target="#extraversionModal">What's this?</a></small>
+                                <label for="extraversion" class="col-md-4 col-form-label text-md-right">{{ __('Extraversion') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10" list="ticks">
-                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <input id="extraversion" type="range" class="form-control{{ $errors->has('extraversion') ? ' is-invalid' : '' }}" name="extraversion" value="5" required autofocus min="1" max="10" list="ticks" style="display: inline; width: 80%;"><small><a href="#" data-toggle="modal" data-target="#extraversionModal">What's this?</a></small>
+                                    <span>Low- 0%</span><span style="margin-left: 40%">High- 100%</span>
 
                                 @if ($errors->has('extraversion'))
                                         <span class="invalid-feedback" role="alert">
@@ -149,11 +149,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="agreeableness" class="col-md-4 col-form-label text-md-right">{{ __('Agreeableness') }}</label><small><a href="#" data-toggle="modal" data-target="#agreeablenessModal">What's this?</a></small>
+                                <label for="agreeableness" class="col-md-4 col-form-label text-md-right">{{ __('Agreeableness') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10" list="ticks">
-                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <input id="agreeableness" type="range" class="form-control{{ $errors->has('agreeableness') ? ' is-invalid' : '' }}" name="agreeableness" value="5" required autofocus min="1" max="10" list="ticks" style="display: inline; width: 80%;"><small><a href="#" data-toggle="modal" data-target="#agreeablenessModal">What's this?</a></small>
+                                    <span>Low- 0%</span><span style="margin-left: 40%">High- 100%</span>
 
                                 @if ($errors->has('agreeableness'))
                                         <span class="invalid-feedback" role="alert">
@@ -190,11 +190,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="neuroticism" class="col-md-4 col-form-label text-md-right">{{ __('Neuroticism') }}</label><small><a href="#" data-toggle="modal" data-target="#neuroticismModal">What's this?</a></small>
+                                <label for="neuroticism" class="col-md-4 col-form-label text-md-right">{{ __('Neuroticism') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10" list="ticks">
-                                    <span>Low- 0%</span><span class="float-right">High- 100%</span>
+                                    <input id="neuroticism" type="range" class="form-control{{ $errors->has('neuroticism') ? ' is-invalid' : '' }}" name="neuroticism" value="5" required autofocus min="1" max="10" list="ticks" style="display: inline; width: 80%;"><small><a href="#" data-toggle="modal" data-target="#neuroticismModal">What's this?</a></small>
+                                    <span>Low- 0%</span><span style="margin-left: 40%">High- 100%</span>
 
                                 @if ($errors->has('neuroticism'))
                                         <span class="invalid-feedback" role="alert">
@@ -289,7 +289,7 @@
                                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="gender" id="gender">
+                                    <select name="gender" id="gender" class="form-control">
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                     </select>
@@ -306,7 +306,7 @@
                                 <label for="interested_in" class="col-md-4 col-form-label text-md-right">{{ __('Interested in') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="interested_in" id="interested_in">
+                                    <select name="interested_in" id="interested_in" class="form-control" required>
                                         <option value="F">Female</option>
                                         <option value="M">Male</option>
                                         <option value="MF">Both</option>

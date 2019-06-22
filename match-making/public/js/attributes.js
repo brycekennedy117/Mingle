@@ -12,7 +12,18 @@ $( document ).ready(function() {
 $(document).ready(function() {
 	hideSuburbTableContainer();
 	hidePostcodeEditButton();
+	$('#attribute-form').submit(function() {
+		if ($('#postcode-id').length == 0) {
+			alert('Please select a suburb from the list given.');
+
+			return false;
+		}
+		return true
+
+	});
 });
+
+
 
 function getSuburbsForPostcode(e) {
 	let postcode = e.value;
