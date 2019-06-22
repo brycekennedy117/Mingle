@@ -71,6 +71,10 @@ class DashboardController extends Controller
             'user_id' => 'required|integer'
         ]);
 
+        //Set settings for slider
+        $distance = $request['distance'];
+        $age = $request['age'];
+
         //Get user ids
         $userId = Auth::id();
         $matchId = (int)$request->user_id;
@@ -78,7 +82,7 @@ class DashboardController extends Controller
         //Check if user exists, if not return error
         $findUser = User::find($matchId);
         if($findUser == null)   {
-            return redirect()->back()->with('error', 'User does not exist');
+            return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('error', 'User does not exist')->with('age', $age)->with('distance', $distance);
         }
 
         //Get all records for user likes
@@ -100,13 +104,14 @@ class DashboardController extends Controller
                     $match->user_id_2 = $matchId;
                     $match->save();
 
-                    return redirect('/dashboard')->with('success', 'Congratulations. You have successfully matched with '.User::all()->where('id', $matchId)->first()->name);
+                    return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('success', 'Congratulations. You have successfully matched with '.User::all()->where('id', $matchId)->first()->name)
+                        ->with('age', $age)->with('distance', $distance);
                 }
             }
         }
 
         if (sizeof(Like::all()->where('user_id_1', $userId)->where('user_id_2', $matchId)) > 0) {
-            return redirect()->back()->with('error', User::all()->where('id', $matchId)->first()->name." has already been liked.");
+            return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('error', User::all()->where('id', $matchId)->first()->name." has already been liked.");
         }
        //Create new like record
         $newLike = new Like();
@@ -116,7 +121,7 @@ class DashboardController extends Controller
 
 
         //Return a success message
-        return redirect('/dashboard')->with('success', 'User liked');
+        return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('success', User::all()->where('id', $matchId)->first()->name.' has been liked');
 
     }
 
@@ -127,6 +132,10 @@ class DashboardController extends Controller
             'user_id' => 'required|integer'
         ]);
 
+        //Set settings for slider
+        $distance = $request['distance'];
+        $age = $request['age'];
+
         //Get user ids
         $userId = Auth::id();
         $matchId = (int)$request->user_id;
@@ -134,7 +143,8 @@ class DashboardController extends Controller
         //Check if user exists, if not return error
         $findUser = User::find($matchId);
         if($findUser == null)   {
-            return redirect()->back()->with('error', 'User does not exist');
+            return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('error', 'User does not exist')
+                ->with('age', $age)->with('distance', $distance);
         }
 
         //Create new ignored record
@@ -143,7 +153,8 @@ class DashboardController extends Controller
         $ignored->user_id_2 = $matchId;
         $ignored->save();
 
-        return redirect()->back()->with('success', 'User ignored');
+        return redirect('/dashboard?age='.$age.'&distance='.$distance)->with('success', 'User ignored')
+            ->with('age', $age)->with('distance', $distance);
 
     }
 

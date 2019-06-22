@@ -12,7 +12,18 @@ $( document ).ready(function() {
 $(document).ready(function() {
 	hideSuburbTableContainer();
 	hidePostcodeEditButton();
+	$('#attribute-form').submit(function() {
+		if ($('#postcode-id').length == 0) {
+			alert('Please select a suburb from the list given.');
+
+			return false;
+		}
+		return true
+
+	});
 });
+
+
 
 function getSuburbsForPostcode(e) {
 	let postcode = e.value;
@@ -77,6 +88,7 @@ function loadUserIntoDashboardModal(user_id) {
 		let postcode = data.postcode;
 
 
+
 		///Age calculation
 		var birth = new Date(attributes.date_of_birth);
 		var now = new Date();
@@ -86,6 +98,8 @@ function loadUserIntoDashboardModal(user_id) {
 		{
 			age = age--;
 		}
+
+
 function activate(e) {
 	e.setAttribute('class', e.getAttribute('class') + " active")
 }
@@ -99,9 +113,6 @@ function redirect(url) {
 }
 
 
-
-
-
 		///Change value display of gender
 		if(attributes.gender == 'M')
 		{
@@ -112,14 +123,15 @@ function redirect(url) {
 			gender = 'Female';
 
 		}
+
 		///Change value display of interested in
 		if(attributes.interested_in == 'M')
 		{
-			interest = 'Male'
+			interest = 'Men'
 		}
 		else if(attributes.interested_in == 'F')
 		{
-			interest = 'Female'
+			interest = 'Women'
 		}
 		else
 		{
@@ -133,4 +145,36 @@ function redirect(url) {
 		document.getElementById('modal_interestin').innerHTML = interest;
 		document.getElementById('modal_suburb').innerHTML = postcode.suburb;
 	});
+
 }
+
+$( document ).ready(function() {
+    $("#attribute-form").submit(function(e) {
+        if ($("#suburb").val() === '') {
+            e.preventDefault();
+        }
+    });
+});
+
+$( document ).ready(function() {
+    $("#attribute-form").submit(function(e) {
+        let d = new Date();
+        let month = d.getMonth()+1;
+        let day = d.getDate();
+        let year = d.getFullYear();
+        let date = $("#date_of_birth").val();
+        let dateCols = date.split("-");
+
+        // if current year is less than input year
+        if (year < dateCols[0]) {
+            e.preventDefault();
+        }
+
+        // prevent if the person's input dob means they would be younger than 18
+        if (year - dateCols[0] < 18 || (year - dateCols[0] === 18 && month - dateCols[1] < 0)
+            || (year - dateCols[0] === 18 && month - dateCols[1] === 0 && day - dateCols[2] < 0)) {
+            e.preventDefault();
+        }
+    });
+});
+
